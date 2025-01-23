@@ -69,11 +69,15 @@ public class BaseFragmentViewModel extends ViewModel {
     public void handleException(Throwable throwable){
         if (throwable instanceof HttpException) {
             HttpException httpException = (HttpException) throwable;
+            if(httpException.code() >= 500){
+                showErrorMessage(application.getString(R.string.server_error));
+                return;
+            }
             try {
                 ResponseWrapper responseWrapper = ApiModelUtils.fromJson(httpException.response().errorBody().string(), ResponseWrapper.class);
                 showErrorMessage(responseWrapper.getMessage());
             }catch (Throwable error){
-                Timber.e(error);
+                Timber.d(error);
             }
         }else {
             showErrorMessage(application.getString(R.string.network_error));

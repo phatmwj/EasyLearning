@@ -15,5 +15,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="current_location">Current Location</string>
+    <string name="server_error">server error</string>
 
 </resources>
