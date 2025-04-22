@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="tpp.profixer.customer.data.model.api.response.Course" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_margin="@dimen/_3sdp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/banner"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_3sdp">
+                <TextView
+                    style="@style/title_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:text="@{item.name}"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
+                <TextView
+                    style="@style/default_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Bởi " + item.expert.account.fullName}'
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+                <RatingBar
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:numStars="5"
+                    android:stepSize="0.1"
+                    android:isIndicator="true"
+                    android:progressBackgroundTint="@color/gray"
+                    android:progressTint="@color/yellow"
+                    android:secondaryProgressTint="@android:color/transparent"
+                    android:rating="@{item.averageStar}"/>
+                <TextView
+                    style="@style/default_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{"Thời gian " + item.getTimeStudy() + " - " + item.totalLesson +" Bài giảng" }'
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/title_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        text_currency="@{item.getMoney()}"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/app_color"/>
+                    <TextView
+                        style="@style/small_text_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        text_currency="@{item.price}"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+                    <TextView
+                        style="@style/small_text_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text='@{item.soldQuantity + "đã học"}'
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:gravity="end"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

@@ -17,9 +17,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://ww-user-api.developteam.net\""
+        buildConfigField "String", "BASE_URL", "\"https://api-easy.edward.io.vn\""
         buildConfigField "String", "UPDATE_URL", "\"https://update.digibes.de/qrlive/qrcode_random.txt\""
-        buildConfigField "String", "MEDIA_URL", "\"https://org-media-template.developteam.net\""
+        buildConfigField "String", "MEDIA_URL", "\"https://el.edward.io.vn/static/media\""
         buildConfigField "String", "WS_URL", "\"wss://socket.phatluu.net/ws\""
         buildConfigField "String", "GOOGLE_MAP_URL", "\"https://maps.googleapis.com/maps/api\""
         buildConfigField "String", "BANK_URL", "\"https://api.vietqr.io\""

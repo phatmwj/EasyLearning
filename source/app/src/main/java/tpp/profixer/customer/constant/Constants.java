@@ -11,6 +11,10 @@ public class Constants {
     public static final String DATE_FORMAT_APP = "dd/MM/yyyy HH:mm:ss";
     public static final String TIMEZONE_SERVER = "UTC";
 
+    //currency
+    public static final String CURRENCY_CODE = "VND";
+    public static final String CURRENCY_SYMBOL = "₫";
+
     //default app
     public static final String APP = "CLIENT_APP";
     public static final String LANG = "vi";

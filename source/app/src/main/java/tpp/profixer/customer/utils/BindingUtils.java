@@ -2,6 +2,7 @@ package tpp.profixer.customer.utils;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
@@ -22,7 +23,7 @@ public final class BindingUtils {
             return;
         }
         Glide.with(view.getContext())
-                .load(BuildConfig.MEDIA_URL+ "/v1/file/download" + url)
+                .load(BuildConfig.MEDIA_URL + url)
                 .into(view);
     }
 
@@ -47,5 +48,10 @@ public final class BindingUtils {
             return;
         }
         view.setVisibility(View.GONE);
+    }
+
+    @BindingAdapter("text_currency")
+    public static void formatCurrency(TextView textView, Integer price) {
+        textView.setText(NumberUtils.formatCurrency(price));
     }
 }

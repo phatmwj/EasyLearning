@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
@@ -18,11 +19,13 @@ import tpp.profixer.customer.data.model.app.Image;
 import tpp.profixer.customer.databinding.FragmentHomeBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.fragment.home.adapter.CategoryAdapter;
 import tpp.profixer.customer.ui.fragment.home.adapter.ImageAdapter;
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>{
     private List<Image> images = new ArrayList<>();
     private ImageAdapter imageAdapter;
+    private CategoryAdapter categoryAdapter;
     @Override
     public int getBindingVariable() {
         return BR.vm;
@@ -52,16 +55,32 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         getImages();
         imageAdapter = new ImageAdapter(getContext(), images);
         binding.viewPager2.setAdapter(imageAdapter);
         binding.circelIndicator3.setViewPager(binding.viewPager2);
+
+        getCategoryCourse();
+
+        viewModel.categoryCourses.observe(this, categoryCourses -> {
+            categoryAdapter.setData(categoryCourses);
+        });
+
+        viewModel.getCategoryCourse();
     }
 
     private void getImages(){
         images.add(new Image(R.drawable.banner));
         images.add(new Image(R.drawable.banner));
         images.add(new Image(R.drawable.banner));
+    }
+
+    private void getCategoryCourse(){
+        categoryAdapter = new CategoryAdapter(getContext(), new ArrayList<>());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        binding.rvCategoryCourse.setLayoutManager(linearLayoutManager);
+        binding.rvCategoryCourse.setAdapter(categoryAdapter);
     }
 
 
