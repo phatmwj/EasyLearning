@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:boxBackgroundMode="outline"
+            app:shapeAppearanceOverlay="@style/Rounded"
+            app:expandedHintEnabled="false"
+            app:hintEnabled="false"
+            app:boxStrokeColor="#CCADADAD"
+            app:boxBackgroundColor="@color/black"
+            app:boxStrokeWidthFocused="@dimen/_1sdp"
+            app:boxStrokeWidth="0dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#CCADADAD"
+            app:hintAnimationEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:ellipsize="end"
+                android:focusable="true"
+                style="@style/information_edit_text"
+                android:importantForAccessibility="yes"
+                android:inputType="textPassword"
+                android:text=""
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:boxBackgroundMode="outline"
+            app:shapeAppearanceOverlay="@style/Rounded"
+            app:expandedHintEnabled="false"
+            app:hintEnabled="false"
+            app:boxStrokeColor="#CCADADAD"
+            app:boxBackgroundColor="@color/black"
+            app:boxStrokeWidthFocused="@dimen/_1sdp"
+            app:boxStrokeWidth="0dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#CCADADAD"
+            app:hintAnimationEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:ellipsize="end"
+                android:focusable="true"
+                style="@style/information_edit_text"
+                android:importantForAccessibility="yes"
+                android:inputType="textPassword"
+                android:text=""
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</layout>

@@ -252,7 +252,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        LocationListener.super.onStatusChanged(provider, status, extras);
+//        LocationListener.super.onStatusChanged(provider, status, extras);
     }
 
     @Override

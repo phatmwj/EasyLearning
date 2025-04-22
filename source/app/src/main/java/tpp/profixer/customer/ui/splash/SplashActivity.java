@@ -69,7 +69,7 @@ public class SplashActivity extends BaseActivity<ActivityMainBinding, SplashView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        checkLocationPermission();
+        navigateToHome();
     }
 
     private void checkLocationPermission(){
@@ -86,7 +86,7 @@ public class SplashActivity extends BaseActivity<ActivityMainBinding, SplashView
     }
 
     private void navigateToHome(){
-        Intent intent = new Intent(this, MapActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

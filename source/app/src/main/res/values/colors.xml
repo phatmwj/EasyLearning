@@ -10,5 +10,7 @@
     <color name="primary_color">#0D72FF</color>
     <color name="secondary_color">#ffffff</color>
     <!-- -->
+    <color name="app_color">#34B1FD</color>
+    <color name="gray">#7C7C7C</color>
 
 </resources>
