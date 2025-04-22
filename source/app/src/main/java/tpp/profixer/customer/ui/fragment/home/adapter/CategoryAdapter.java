@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import lombok.Setter;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
+import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.databinding.ItemCagoryCoursesBinding;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
@@ -18,6 +20,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<CategoryCourse> data;
 
     private LayoutInflater layoutInflater;
+
+    @Setter
+    private CategoryListener listener;
+
+    public interface CategoryListener{
+        void onItemClick(CategoryCourse categoryCourse);
+        void onCourseClick(Course course);
+    }
 
     public CategoryAdapter(Context context, List<CategoryCourse> data) {
         this.context = context;
@@ -53,6 +63,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         public CategoryViewHolder(@NonNull ItemCagoryCoursesBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.layoutHeader.setOnClickListener(v -> {
+                if(listener != null){
+                    listener.onItemClick(data.get(position));
+                }
+            });
         }
 
         public void onBind(int position){
@@ -62,6 +77,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             CourseAdapter adapter = new CourseAdapter(context, data.get(position).getCourses());
             binding.rvCourse.setLayoutManager(layoutManager);
             binding.rvCourse.setAdapter(adapter);
+            adapter.setListener(course -> {
+                if(listener != null){
+                    listener.onCourseClick(course);
+                }
+            });
             binding.executePendingBindings();
         }
     }

@@ -17,4 +17,10 @@ public class Expert {
     private Ward ward;
     private District district;
     private Province province;
+    private String identification;
+    private Integer ordering;
+    private Boolean isOutstanding;
+    private Integer totalCourse;
+    private Integer totalLessonTime;
+    private Integer totalStudent;
 }

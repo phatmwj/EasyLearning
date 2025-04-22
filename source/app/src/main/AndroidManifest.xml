@@ -59,6 +59,10 @@
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".ui.course.CourseActivity"
+            android:exported="true">
+        </activity>
 
         <activity
             android:name=".ui.splash.SplashActivity"

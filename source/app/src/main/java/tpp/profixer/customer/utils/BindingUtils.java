@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter;
 import com.bumptech.glide.Glide;
 
 import tpp.profixer.customer.BuildConfig;
+import tpp.profixer.customer.R;
 
 public final class BindingUtils {
     @BindingAdapter("image_url")
@@ -23,7 +24,9 @@ public final class BindingUtils {
             return;
         }
         Glide.with(view.getContext())
-                .load(BuildConfig.MEDIA_URL + url)
+                .load(BuildConfig.MEDIA_URL+"/v1/file/download" + url)
+                .error(R.drawable.banner)
+                .placeholder(R.drawable.banner)
                 .into(view);
     }
 
@@ -52,6 +55,10 @@ public final class BindingUtils {
 
     @BindingAdapter("text_currency")
     public static void formatCurrency(TextView textView, Integer price) {
+        if(price == null){
+            textView.setText("");
+            return;
+        }
         textView.setText(NumberUtils.formatCurrency(price));
     }
 }

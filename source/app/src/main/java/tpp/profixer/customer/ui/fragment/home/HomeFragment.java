@@ -1,6 +1,7 @@
 package tpp.profixer.customer.ui.fragment.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,10 +16,13 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator3;
 import tpp.profixer.customer.BR;
 import tpp.profixer.customer.R;
+import tpp.profixer.customer.data.model.api.response.CategoryCourse;
+import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.app.Image;
 import tpp.profixer.customer.databinding.FragmentHomeBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.course.CourseActivity;
 import tpp.profixer.customer.ui.fragment.home.adapter.CategoryAdapter;
 import tpp.profixer.customer.ui.fragment.home.adapter.ImageAdapter;
 
@@ -81,6 +85,19 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rvCategoryCourse.setLayoutManager(linearLayoutManager);
         binding.rvCategoryCourse.setAdapter(categoryAdapter);
+        categoryAdapter.setListener(new CategoryAdapter.CategoryListener() {
+            @Override
+            public void onItemClick(CategoryCourse categoryCourse) {
+
+            }
+
+            @Override
+            public void onCourseClick(Course course) {
+                Intent it = new Intent(getContext(), CourseActivity.class);
+                it.putExtra("course_id", course.getId());
+                startActivity(it);
+            }
+        });
     }
 
 

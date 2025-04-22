@@ -1,6 +1,7 @@
 package tpp.profixer.customer.ui.fragment.home.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import lombok.Setter;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.databinding.ItemCourseBinding;
 import tpp.profixer.customer.utils.ScreenUtils;
@@ -18,11 +20,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     private List<Course> data;
 
     private LayoutInflater layoutInflater;
+    @Setter
+    private CourseListener listener;
 
     public CourseAdapter(Context context, List<Course> data) {
         this.context = context;
         this.data = data;
         layoutInflater = LayoutInflater.from(context);
+    }
+
+    public interface CourseListener{
+        void onCourseClick(Course course);
     }
 
     @NonNull
@@ -51,11 +59,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         public CourseViewHolder(@NonNull ItemCourseBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(v -> {
+                if(listener != null){
+                    listener.onCourseClick(data.get(position));
+                }
+            });
         }
 
         public void onBind(int position){
             this.position = position;
             binding.setItem(data.get(position));
+            binding.oldMoney.setPaintFlags(binding.oldMoney.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             binding.executePendingBindings();
         }
     }

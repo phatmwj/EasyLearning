@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_70sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/banner"/>
+                image_url="@{item.banner}"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,28 +37,51 @@
                     style="@style/default_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"Bởi " + item.expert.account.fullName}'
+                    android:text='@{item.expert.account.fullName}'
                     android:maxLines="1"
                     android:ellipsize="end"/>
-                <RatingBar
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:numStars="5"
-                    android:stepSize="0.1"
-                    android:isIndicator="true"
-                    android:progressBackgroundTint="@color/gray"
-                    android:progressTint="@color/yellow"
-                    android:secondaryProgressTint="@android:color/transparent"
-                    android:rating="@{item.averageStar}"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/default_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{String.valueOf(item.averageStar)}'
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/yellow"/>
+                    <RatingBar
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:isIndicator="true"
+                        android:progressBackgroundTint="@color/gray"
+                        android:progressTint="@color/yellow"
+                        android:secondaryProgressTint="@android:color/transparent"
+                        android:rating="@{item.averageStar}"/>
+                    <TextView
+                        style="@style/default_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:text='@{"(" + item.totalReview + ")"}'
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+                </LinearLayout>
                 <TextView
                     style="@style/default_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{"Thời gian " + item.getTimeStudy() + " - " + item.totalLesson +" Bài giảng" }'
+                    android:text='@{item.getTimeStudy() + " - " + item.totalLesson +" Bài giảng" }'
                     android:maxLines="1"
-                    android:ellipsize="end"/>
+                    android:ellipsize="end"
+                    android:drawableStart="@drawable/ic_time"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,6 +95,7 @@
                         android:ellipsize="end"
                         android:textColor="@color/app_color"/>
                     <TextView
+                        android:id="@+id/old_money"
                         style="@style/small_text_style"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -80,16 +104,16 @@
                         text_currency="@{item.price}"
                         android:maxLines="1"
                         android:ellipsize="end"/>
-                    <TextView
-                        style="@style/small_text_style"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text='@{item.soldQuantity + "đã học"}'
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:gravity="end"/>
                 </LinearLayout>
+                <TextView
+                    style="@style/small_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text='@{item.soldQuantity + " đã bán"}'
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="end"/>
             </LinearLayout>
 
 

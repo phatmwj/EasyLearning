@@ -28,6 +28,8 @@ public class Course {
     private Boolean isSellerCourse;
     private Field field;
     private Expert expert;
+    private Boolean isProcessing;
+    private Version version;
 
     @SuppressLint("DefaultLocale")
     public String getTimeStudy(){
