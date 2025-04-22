@@ -182,4 +182,6 @@ dependencies {
     implementation "com.tinder.scarlet:stream-adapter-coroutines:$scarletVersion"
     implementation "com.tinder.scarlet:stream-adapter-rxjava2:$scarletVersion"
 
+    implementation 'me.relex:circleindicator:2.1.6'
+
 }
