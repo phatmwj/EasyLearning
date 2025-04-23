@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="item"
+            type="tpp.profixer.customer.data.model.api.response.Lesson" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_5sdp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp" />
+        <TextView
+            style="@style/regular_text_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_14ssp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="@{item.name}"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/gray"
+            />
+    </LinearLayout>
+</layout>

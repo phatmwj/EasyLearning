@@ -23,10 +23,12 @@
             bind:a ="@{a}"/>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:layout_weight="1">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -43,7 +45,8 @@
                 </androidx.cardview.widget.CardView>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/_7sdp">
                     <TextView
@@ -53,7 +56,7 @@
                         android:text="@{vm.course.name}"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        android:textSize="@dimen/_15ssp"/>
+                        android:textSize="@dimen/_17ssp"/>
                     <TextView
                         style="@style/regular_text_style"
                         android:layout_width="wrap_content"
@@ -222,6 +225,26 @@
                         </RelativeLayout>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:text="Nội dung bài học"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#424242"
+                            />
+                        <tpp.profixer.customer.ui.fragment.home.view.NonScrollExpandableListView
+                            android:id="@+id/exlv_lesson"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:divider="@android:color/transparent"/>
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>

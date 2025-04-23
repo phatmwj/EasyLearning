@@ -2,6 +2,8 @@ package tpp.profixer.customer.data.model.api.response;
 
 import android.annotation.SuppressLint;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,7 @@ public class Course {
     private Expert expert;
     private Boolean isProcessing;
     private Version version;
+    private List<Lesson> lessons;
 
     @SuppressLint("DefaultLocale")
     public String getTimeStudy(){
