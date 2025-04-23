@@ -27,6 +27,7 @@ public class CourseViewModel extends BaseViewModel {
     public MutableLiveData<List<Review>> reviewList = new MutableLiveData<>();
     public Integer pageReview = 0;
     public Integer sizeReview = 5;
+    public MutableLiveData<List<Course>> relatedCourses = new MutableLiveData<>();
     public CourseViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
     }
@@ -122,6 +123,41 @@ public class CourseViewModel extends BaseViewModel {
                             hideLoading();
                         }, throwable -> {
                             reviewList.setValue(new ArrayList<>());
+                            hideLoading();
+                            handleException(throwable);
+                            Timber.e(throwable);
+                        }));
+    }
+
+    public void getRelatedCourses(Long courseId, Long categoryId){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().getRelatedCourses(categoryId, courseId, 0, 5)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            if(response.isResult() && response.getData() != null && response.getData().getContent() != null){
+                                relatedCourses.setValue(response.getData().getContent());
+                            }else {
+                                relatedCourses.setValue(new ArrayList<>());
+                                Timber.e(response.getMessage());
+                            }
+                            hideLoading();
+                        }, throwable -> {
+                            relatedCourses.setValue(new ArrayList<>());
                             hideLoading();
                             handleException(throwable);
                             Timber.e(throwable);

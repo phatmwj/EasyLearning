@@ -16,6 +16,7 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator3;
 import tpp.profixer.customer.BR;
 import tpp.profixer.customer.R;
+import tpp.profixer.customer.data.model.api.response.Category;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.app.Image;
@@ -92,9 +93,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
             }
 
             @Override
-            public void onCourseClick(Course course) {
+            public void onCourseClick(Course course, Category category) {
                 Intent it = new Intent(getContext(), CourseActivity.class);
                 it.putExtra("course_id", course.getId());
+                it.putExtra("category_id", category.getId());
                 startActivity(it);
             }
         });

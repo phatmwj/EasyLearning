@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import lombok.Setter;
+import tpp.profixer.customer.data.model.api.response.Category;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.databinding.ItemCagoryCoursesBinding;
@@ -26,7 +27,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public interface CategoryListener{
         void onItemClick(CategoryCourse categoryCourse);
-        void onCourseClick(Course course);
+        void onCourseClick(Course course, Category category);
     }
 
     public CategoryAdapter(Context context, List<CategoryCourse> data) {
@@ -79,7 +80,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             binding.rvCourse.setAdapter(adapter);
             adapter.setListener(course -> {
                 if(listener != null){
-                    listener.onCourseClick(course);
+                    listener.onCourseClick(course, data.get(position).getCategory());
                 }
             });
             binding.executePendingBindings();

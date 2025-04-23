@@ -1,5 +1,6 @@
 package tpp.profixer.customer.ui.course;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +17,14 @@ import java.util.List;
 
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.model.api.response.AmountReview;
+import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.CustomLesson;
 import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
 import tpp.profixer.customer.databinding.ActivityCourseBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
+import tpp.profixer.customer.ui.course.adapter.Course2Adapter;
 import tpp.profixer.customer.ui.course.adapter.LessonAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewStarAdapter;
@@ -32,6 +35,9 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
     private ReviewStarAdapter reviewStarAdapter;
     private List<AmountReview> amountReviews = new ArrayList<>();
     private ReviewAdapter reviewAdapter;
+    private Course2Adapter course2Adapter;
+    private Long categoryId;
+    private Long courseId;
 
     @Override
     public int getLayoutId() {
@@ -55,8 +61,10 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         setLayoutLessons();
         setLayoutReviewStar();
         setLayoutReviewList();
+        setLayoutRelatedCourses();
 
-        Long courseId = getIntent().getLongExtra("course_id", 0);
+        courseId = getIntent().getLongExtra("course_id", 0);
+        categoryId = getIntent().getLongExtra("category_id", 0);
 
         viewBinding.oldMoney.setPaintFlags(viewBinding.oldMoney.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -83,11 +91,14 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         viewModel.reviewList.observe(this, reviews -> {
             reviewAdapter.setData(reviews);
         });
+        viewModel.relatedCourses.observe(this, relatedCourses -> {
+            course2Adapter.setData(relatedCourses);
+        });
 
         viewModel.getCourseDetails(courseId);
         viewModel.getReviewStar(courseId);
         viewModel.getReviewList(courseId);
-
+        viewModel.getRelatedCourses(courseId, categoryId);
     }
 
     private void setLayoutLessons(){
@@ -142,6 +153,22 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         viewBinding.rvReview.setLayoutManager(layoutManager);
         viewBinding.rvReview.setAdapter(reviewAdapter);
+    }
+
+    private void setLayoutRelatedCourses(){
+        course2Adapter = new Course2Adapter(this, new ArrayList<>());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        viewBinding.rvRelatedCourse.setLayoutManager(layoutManager);
+        viewBinding.rvRelatedCourse.setAdapter(course2Adapter);
+        course2Adapter.setListener(new Course2Adapter.CourseListener() {
+            @Override
+            public void onCourseClick(Course course) {
+                Intent it = new Intent(CourseActivity.this, CourseActivity.class);
+                it.putExtra("course_id", course.getId());
+                it.putExtra("category_id", categoryId);
+                startActivity(it);
+            }
+        });
     }
 
 }

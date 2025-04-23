@@ -27,4 +27,7 @@ public interface ApiService {
     @GET("/v1/review/list-reviews/{course_id}")
     @Headers({"IgnoreAuth: 1"})
     Observable<ResponseWrapper<ResponseListObj<Review>>> getReviewList(@Path("course_id") Long courseId, @Query("page") Integer page, @Query("size") Integer size);
+    @GET("/v1/course/client-list")
+    @Headers({"IgnoreAuth: 1"})
+    Observable<ResponseWrapper<ResponseListObj<Course>>> getRelatedCourses(@Query("categoryIds") Long categoryId, @Query("ignoreId") Long ignoreId, @Query("page") Integer page, @Query("size") Integer size);
 }
