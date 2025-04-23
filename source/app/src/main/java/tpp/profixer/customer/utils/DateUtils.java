@@ -27,4 +27,22 @@ public class DateUtils {
         return null;
     }
 
+    public static String convertTimeFromUtcToLocalString(String dateString){
+        if(dateString == null){
+            return null;
+        }
+        SimpleDateFormat inputFormat = new SimpleDateFormat(Constants.DATE_FORMAT_SERVER);
+        inputFormat.setTimeZone(TimeZone.getTimeZone(Constants.TIMEZONE_SERVER));
+        SimpleDateFormat outputFormat = new SimpleDateFormat(Constants.DATE_FORMAT_APP);
+        outputFormat.setTimeZone(TimeZone.getDefault());
+        try {
+            Date utcDate = inputFormat.parse(dateString);
+            String localDateString = outputFormat.format(utcDate);
+            return localDateString;
+        } catch (ParseException e) {
+            Timber.e(e);
+        }
+        return null;
+    }
+
 }

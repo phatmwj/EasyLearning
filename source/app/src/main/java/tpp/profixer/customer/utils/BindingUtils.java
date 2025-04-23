@@ -61,4 +61,13 @@ public final class BindingUtils {
         }
         textView.setText(NumberUtils.formatCurrency(price));
     }
+
+    @BindingAdapter("text_datetime")
+    public static void formatCurrency(TextView textView, String datetime) {
+        if(datetime == null){
+            textView.setText("");
+            return;
+        }
+        textView.setText(DateUtils.convertTimeFromUtcToLocalString(datetime));
+    }
 }

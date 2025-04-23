@@ -8,6 +8,7 @@ import android.widget.ExpandableListView;
 import androidx.annotation.Nullable;
 import androidx.databinding.Observable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,6 +23,7 @@ import tpp.profixer.customer.databinding.ActivityCourseBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.course.adapter.LessonAdapter;
+import tpp.profixer.customer.ui.course.adapter.ReviewAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewStarAdapter;
 
 public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseViewModel> {
@@ -29,6 +31,7 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
     private List<CustomLesson> customLessons = new ArrayList<>();
     private ReviewStarAdapter reviewStarAdapter;
     private List<AmountReview> amountReviews = new ArrayList<>();
+    private ReviewAdapter reviewAdapter;
 
     @Override
     public int getLayoutId() {
@@ -51,6 +54,7 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
 
         setLayoutLessons();
         setLayoutReviewStar();
+        setLayoutReviewList();
 
         Long courseId = getIntent().getLongExtra("course_id", 0);
 
@@ -76,9 +80,13 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                 }
             }
         });
+        viewModel.reviewList.observe(this, reviews -> {
+            reviewAdapter.setData(reviews);
+        });
 
         viewModel.getCourseDetails(courseId);
         viewModel.getReviewStar(courseId);
+        viewModel.getReviewList(courseId);
 
     }
 
@@ -127,6 +135,13 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
     private void setLayoutReviewStar(){
         reviewStarAdapter = new ReviewStarAdapter(this, amountReviews, 0);
         viewBinding.lvReviewStar.setAdapter(reviewStarAdapter);
+    }
+
+    private void setLayoutReviewList(){
+        reviewAdapter = new ReviewAdapter(this, new ArrayList<>());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        viewBinding.rvReview.setLayoutManager(layoutManager);
+        viewBinding.rvReview.setAdapter(reviewAdapter);
     }
 
 }

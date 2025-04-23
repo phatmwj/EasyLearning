@@ -9,6 +9,7 @@ import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
+import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
 
 public interface ApiService {
@@ -23,4 +24,7 @@ public interface ApiService {
     @GET("/v1/review/star/{course_id}")
     @Headers({"IgnoreAuth: 1"})
     Observable<ResponseWrapper<ReviewStar>> getReviewStar(@Path("course_id") Long courseId);
+    @GET("/v1/review/list-reviews/{course_id}")
+    @Headers({"IgnoreAuth: 1"})
+    Observable<ResponseWrapper<ResponseListObj<Review>>> getReviewList(@Path("course_id") Long courseId, @Query("page") Integer page, @Query("size") Integer size);
 }

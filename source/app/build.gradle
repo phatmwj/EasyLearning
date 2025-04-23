@@ -183,5 +183,7 @@ dependencies {
     implementation "com.tinder.scarlet:stream-adapter-rxjava2:$scarletVersion"
 
     implementation 'me.relex:circleindicator:2.1.6'
+    //Circle Image
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
 }
