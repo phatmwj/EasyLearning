@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="item"
+            type="tpp.profixer.customer.data.model.api.response.AmountReview" />
+        <variable
+            name="totalReview"
+            type="java.lang.Integer" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="@dimen/_1sdp">
+        <ProgressBar
+            android:id="@+id/simpleProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_7sdp"
+            android:layout_weight="1"
+            android:max="@{totalReview}"
+            android:progress="@{item.amount}"
+            android:progressDrawable="@drawable/progress_bar_custom"
+            />
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            android:progressBackgroundTint="@color/gray"
+            android:progressTint="@color/yellow"
+            android:secondaryProgressTint="@android:color/transparent"
+            android:rating="@{item.star.floatValue()}"/>
+<!--        +"% ("+item.amount+"/"+totalReview+")"-->
+        <TextView
+            style="@style/regular_text_style"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text='@{String.valueOf(Math.round(item.amount.floatValue()/totalReview.floatValue()*100L)) +"%"}'
+            android:textColor="@color/gray"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center" />
+    </LinearLayout>
+</layout>

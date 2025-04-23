@@ -14,16 +14,22 @@ import java.util.Comparator;
 import java.util.List;
 
 import tpp.profixer.customer.R;
+import tpp.profixer.customer.data.model.api.response.AmountReview;
 import tpp.profixer.customer.data.model.api.response.CustomLesson;
 import tpp.profixer.customer.data.model.api.response.Lesson;
+import tpp.profixer.customer.data.model.api.response.ReviewStar;
 import tpp.profixer.customer.databinding.ActivityCourseBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.course.adapter.LessonAdapter;
+import tpp.profixer.customer.ui.course.adapter.ReviewStarAdapter;
 
 public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseViewModel> {
     private LessonAdapter lessonAdapter;
     private List<CustomLesson> customLessons = new ArrayList<>();
+    private ReviewStarAdapter reviewStarAdapter;
+    private List<AmountReview> amountReviews = new ArrayList<>();
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_course;
@@ -44,6 +50,7 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         super.onCreate(savedInstanceState);
 
         setLayoutLessons();
+        setLayoutReviewStar();
 
         Long courseId = getIntent().getLongExtra("course_id", 0);
 
@@ -56,7 +63,22 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             }
         });
 
+        viewModel.reviewStar.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                ReviewStar reviewStar = viewModel.reviewStar.get();
+                if(reviewStar != null && reviewStar.getAmountReview() != null){
+                    reviewStarAdapter.setTotalReview(reviewStar.getTotal());
+                    amountReviews.clear();
+                    amountReviews.addAll(reviewStar.getAmountReview());
+                    amountReviews.sort(Comparator.comparingInt(AmountReview::getStar));
+                    reviewStarAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
         viewModel.getCourseDetails(courseId);
+        viewModel.getReviewStar(courseId);
 
     }
 
@@ -101,4 +123,10 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             viewBinding.exlvLesson.expandGroup(0);
         }
     }
+
+    private void setLayoutReviewStar(){
+        reviewStarAdapter = new ReviewStarAdapter(this, amountReviews, 0);
+        viewBinding.lvReviewStar.setAdapter(reviewStarAdapter);
+    }
+
 }
