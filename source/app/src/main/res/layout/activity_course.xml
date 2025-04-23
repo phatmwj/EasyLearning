@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include
-            android:id="@+id/layout_header"
+            android:id="@+id/ui_header"
             layout="@layout/layout_header_title"
             bind:a ="@{a}"/>
         <androidx.core.widget.NestedScrollView

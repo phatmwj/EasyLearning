@@ -101,6 +101,11 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         viewModel.getRelatedCourses(courseId, categoryId);
     }
 
+    @Override
+    public boolean showHeader() {
+        return true;
+    }
+
     private void setLayoutLessons(){
         lessonAdapter = new LessonAdapter(this, customLessons);
         viewBinding.exlvLesson.setAdapter(lessonAdapter);

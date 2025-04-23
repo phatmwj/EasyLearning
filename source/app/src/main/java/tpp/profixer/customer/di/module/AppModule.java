@@ -2,12 +2,7 @@ package tpp.profixer.customer.di.module;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Environment;
-
-import androidx.annotation.NonNull;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,9 +21,6 @@ import tpp.profixer.customer.di.qualifier.ApiInfo;
 import tpp.profixer.customer.di.qualifier.DatabaseInfo;
 import tpp.profixer.customer.di.qualifier.PreferenceInfo;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -38,7 +30,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import timber.log.Timber;
 
 @Module
 public class AppModule {

@@ -2,6 +2,7 @@ package tpp.profixer.customer.data.remote;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.Base64;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -39,8 +40,20 @@ public class AuthInterceptor implements Interceptor {
             return chain.proceed(newRequest.build());
         }
 
-
         Request.Builder newRequest = chain.request().newBuilder();
+
+        String isBasic = chain.request().header("BasicAuth");
+        if (isBasic != null && isBasic.equals("1")) {
+            String username = "abc_client";
+            String password = "abc123";
+            String base = username + ":" + password;
+            newRequest = chain.request().newBuilder();
+            newRequest.removeHeader("BasicAuth");
+            newRequest.addHeader("Authorization", "Basic " + Base64.encodeToString(base.getBytes(), Base64.NO_WRAP));
+
+            return chain.proceed(newRequest.build());
+        }
+
         String isSearchLocation = chain.request().header("isSearchLocation");
         if(isSearchLocation != null && isSearchLocation.equals("1")){
             HttpUrl url = chain.request().url();

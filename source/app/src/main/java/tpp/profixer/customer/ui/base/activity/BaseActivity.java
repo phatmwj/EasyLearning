@@ -37,9 +37,11 @@ import tpp.profixer.customer.R;
 import tpp.profixer.customer.constant.Constants;
 import tpp.profixer.customer.data.socket.KittyRealtimeEvent;
 import tpp.profixer.customer.data.socket.dto.Message;
+import tpp.profixer.customer.databinding.LayoutHeaderTitleBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.di.component.DaggerActivityComponent;
 import tpp.profixer.customer.di.module.ActivityModule;
+import tpp.profixer.customer.ui.login.LoginActivity;
 import tpp.profixer.customer.utils.DialogUtils;
 
 import javax.inject.Inject;
@@ -81,6 +83,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         super.onCreate(savedInstanceState);
         performDataBinding();
         updateCurrentActivity();
+        setLayoutHeader();
 
         viewModel.setToken(token);
         viewModel.setDeviceId(deviceId);
@@ -274,5 +277,29 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     public void onLocationChanged(@NonNull Location location) {
         Timber.tag("Location").d("Location: %s", location);
         this.location = location;
+    }
+
+    //
+    LayoutHeaderTitleBinding headerBinding;
+    private void setLayoutHeader(){
+        Timber.e("LOGIN2");
+        if(showHeader()){
+            headerBinding = DataBindingUtil.getBinding(viewBinding.getRoot().findViewById(R.id.ui_header));
+            if(headerBinding != null){
+                Timber.e("LOGIN1");
+                headerBinding.login.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Timber.e("LOGIN");
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+    }
+
+    public boolean showHeader(){
+        return false;
     }
 }

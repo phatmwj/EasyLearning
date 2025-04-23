@@ -12,6 +12,7 @@ import tpp.profixer.customer.di.scope.ActivityScope;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.course.CourseViewModel;
 import tpp.profixer.customer.ui.home.HomeViewModel;
+import tpp.profixer.customer.ui.login.LoginViewModel;
 import tpp.profixer.customer.ui.map.MapViewModel;
 import tpp.profixer.customer.ui.splash.SplashViewModel;
 import tpp.profixer.customer.utils.GetInfo;
@@ -75,6 +76,14 @@ public class ActivityModule {
         Supplier<CourseViewModel> supplier = () -> new CourseViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<CourseViewModel> factory = new ViewModelProviderFactory<>(CourseViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(CourseViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    LoginViewModel provideLoginViewModel(Repository repository, Context application) {
+        Supplier<LoginViewModel> supplier = () -> new LoginViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<LoginViewModel> factory = new ViewModelProviderFactory<>(LoginViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(LoginViewModel.class);
     }
 
 }

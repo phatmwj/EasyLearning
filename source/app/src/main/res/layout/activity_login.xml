@@ -1,71 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="vm"
+            type="tpp.profixer.customer.ui.login.LoginViewModel" />
 
+        <variable
+            name="a"
+            type="tpp.profixer.customer.ui.login.LoginActivity" />
+
+        <import type="android.text.TextUtils" />
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/_10sdp">
-        <com.google.android.material.textfield.TextInputLayout
+        android:onClick="@{() -> a.hideKeyboard()}">
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"/>
+        <RelativeLayout
+            android:id="@+id/layout_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            app:boxBackgroundMode="outline"
-            app:shapeAppearanceOverlay="@style/Rounded"
-            app:expandedHintEnabled="false"
-            app:hintEnabled="false"
-            app:boxStrokeColor="#CCADADAD"
-            app:boxBackgroundColor="@color/black"
-            app:boxStrokeWidthFocused="@dimen/_1sdp"
-            app:boxStrokeWidth="0dp"
-            app:endIconMode="password_toggle"
-            app:endIconTint="#CCADADAD"
-            app:hintAnimationEnabled="true">
+            android:orientation="vertical"
+            android:onClick="@{() -> a.hideKeyboard()}"
+            android:paddingHorizontal="@dimen/_7sdp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <ScrollView
+                android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:ellipsize="end"
-                android:focusable="true"
-                style="@style/information_edit_text"
-                android:importantForAccessibility="yes"
-                android:inputType="textPassword"
-                android:text=""
-                android:maxLines="1"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/layout_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_centerInParent="true"
+                        android:onClick="@{() -> a.hideKeyboard()}">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            app:boxBackgroundMode="outline"
-            app:shapeAppearanceOverlay="@style/Rounded"
-            app:expandedHintEnabled="false"
-            app:hintEnabled="false"
-            app:boxStrokeColor="#CCADADAD"
-            app:boxBackgroundColor="@color/black"
-            app:boxStrokeWidthFocused="@dimen/_1sdp"
-            app:boxStrokeWidth="0dp"
-            app:endIconMode="password_toggle"
-            app:endIconTint="#CCADADAD"
-            app:hintAnimationEnabled="true">
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đăng nhập vào Life Uni"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            android:textSize="@dimen/_20ssp"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:ellipsize="end"
-                android:focusable="true"
-                style="@style/information_edit_text"
-                android:importantForAccessibility="yes"
-                android:inputType="textPassword"
-                android:text=""
-                android:maxLines="1"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_70sdp">
+                            <TextView
+                                android:id="@+id/tv_username"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Số điện thoại/Email"
+                                style="@style/label_edit_text"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" *"
+                                android:textColor="@color/red"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="@dimen/_12ssp"/>
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/edit_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_36sdp"
+                            style="@style/app_edit_text"
+                            android:hint="Nhập số điện thoại hoặc email"
+                            android:text="@={vm.request.phone}"
+                            android:focusable="true"
+                            android:paddingEnd="@dimen/_7sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:maxLength="20"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp">
+                            <TextView
+                                android:id="@+id/tv_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mật khẩu"
+                                style="@style/label_edit_text"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" *"
+                                android:textColor="@color/red"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="@dimen/_12ssp"
+                                />
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:id="@+id/layout_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_email"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            >
+
+                            <EditText
+                                android:id="@+id/edit_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_36sdp"
+                                style="@style/app_edit_text"
+                                android:hint="Nhập mật khẩu"
+                                android:inputType="textPassword"
+                                android:text="@={vm.request.password}"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingEnd="@dimen/_40sdp"
+                                android:layout_marginTop="0dp"
+                                />
+
+                            <RelativeLayout
+                                android:layout_width="@dimen/_35sdp"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_gravity="end|center_vertical"
+                                android:onClick="@{(v)-> vm.showPassword()}"
+                                >
+                                <ImageView
+                                    android:id="@+id/img_show_password"
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:src="@{ vm.isShowPassword ? @drawable/ic_eye_off : @drawable/ic_eye, default = @drawable/ic_eye}"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginEnd="@dimen/_12sdp"
+                                    app:tint="@color/gray"
+                                    />
+                            </RelativeLayout>
+                        </FrameLayout>
+
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:id="@+id/btn_signin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:background="@drawable/bg_button_filled"
+                            android:gravity="center"
+                            android:onClick="@{()-> a.hideKeyboard() | vm.doLogin()}"
+                            android:text="Đăng nhập"
+                            android:textColor="#FFFFFF"
+                            android:textSize="@dimen/_14ssp"
+                            android:paddingVertical="@dimen/_10sdp"/>
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:id="@+id/tv_forgot_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bạn quên mật khẩu?"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/_12ssp"
+                            android:paddingVertical="@dimen/_8sdp"
+                            android:layout_gravity="end"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="@dimen/_10sdp"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/medium_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bạn chưa có tài khoản?"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_12ssp"
+                                android:textColor="#424242"/>
+                            <TextView
+                                style="@style/bold_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" Đăng kí"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_12ssp"
+                                android:textColor="@color/app_color"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
     </LinearLayout>
 </layout>
