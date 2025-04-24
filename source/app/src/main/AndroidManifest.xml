@@ -50,6 +50,12 @@
         android:windowSoftInputMode="adjustResize|stateHidden">
 
         <activity
+            android:name=".ui.lesson.LessonActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+        <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">

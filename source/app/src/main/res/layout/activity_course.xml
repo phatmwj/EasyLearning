@@ -10,7 +10,6 @@
         <variable
             name="a"
             type="tpp.profixer.customer.ui.course.CourseActivity" />
-        <import type="android.view.View"/>
     </data>
 
     <LinearLayout

@@ -16,6 +16,7 @@ import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Expert;
+import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.LoginResponse;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
@@ -45,4 +46,7 @@ public interface ApiService {
 
     @GET("/v1/student/profile")
     Observable<ResponseWrapper<Expert>> getProfile(@Query("studentId") Long studentId);
+
+    @GET("/v1/lesson/lesson-detail/{lesson_id}")
+    Observable<ResponseWrapper<Lesson>> getLessonDetails(@Path("studentId") Long lessonId);
 }

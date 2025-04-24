@@ -17,4 +17,8 @@ public class Lesson {
     private Integer videoDuration;
     private Integer state;
     private Boolean isPreview;
+    private String thumbnail;
+    private String videoUrl;
+    private Integer secondProgress;
+    private Course course;
 }

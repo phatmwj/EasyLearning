@@ -29,6 +29,7 @@ import tpp.profixer.customer.ui.course.adapter.Course2Adapter;
 import tpp.profixer.customer.ui.course.adapter.LessonAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewStarAdapter;
+import tpp.profixer.customer.ui.lesson.LessonActivity;
 
 public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseViewModel> {
     private LessonAdapter lessonAdapter;
@@ -204,6 +205,8 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             case 1:
                 break;
             case 2:
+                Intent it = new Intent(this, LessonActivity.class);
+                startActivity(it);
                 break;
             default:
                 break;
