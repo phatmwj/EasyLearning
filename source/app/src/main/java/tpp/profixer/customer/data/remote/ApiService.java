@@ -37,7 +37,7 @@ public interface ApiService {
     @GET("/v1/course/client-list")
     Observable<ResponseWrapper<ResponseListObj<Course>>> getRelatedCourses(@Query("categoryIds") Long categoryId, @Query("ignoreId") Long ignoreId, @Query("page") Integer page, @Query("size") Integer size);
 
-    @GET("/v1/cart-item/create")
+    @POST("/v1/cart-item/create")
     Observable<ResponseWrapper> addToCart(@Body RequestCourse request);
 
     @GET("/v1/cart-item/list")

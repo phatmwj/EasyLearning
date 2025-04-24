@@ -35,12 +35,14 @@ import tpp.profixer.customer.BR;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.constant.Constants;
+import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.socket.KittyRealtimeEvent;
 import tpp.profixer.customer.data.socket.dto.Message;
 import tpp.profixer.customer.databinding.LayoutHeaderTitleBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.di.component.DaggerActivityComponent;
 import tpp.profixer.customer.di.module.ActivityModule;
+import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.login.LoginActivity;
 import tpp.profixer.customer.utils.DialogUtils;
 
@@ -126,7 +128,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
         //
         setLayoutHeader();
-        viewModel.getCart();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -292,7 +293,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
             if(headerBinding != null){
                 ProFixerApplication mvvmApplication = (ProFixerApplication) application;
                 viewModel.cartInfo.observe(mvvmApplication.getCurrentActivity(), cart -> {
+                    handleCart(cart);
                     headerBinding.setCountItemCart(cart.getContent().getCartItems() != null ? cart.getContent().getCartItems().size() : 0);
+
                 });
                 headerBinding.login.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -308,5 +311,24 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     public boolean showHeader(){
         return false;
+    }
+
+    public void handleCart(CartInfo cartInfo){
+
+    }
+
+    //
+    public void confirmLogin(){
+        ConfirmDialog confirmDialog = new ConfirmDialog(this);
+        confirmDialog.title.set("Vui lòng đăng nhập để tiếp tục");
+        confirmDialog.titleRightButton.set("Đăng nhập");
+        confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void confirm() {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        confirmDialog.show();
     }
 }

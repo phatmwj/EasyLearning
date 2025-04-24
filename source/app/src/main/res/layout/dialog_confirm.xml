@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="d"
+            type="tpp.profixer.customer.ui.dialog.ConfirmDialog" />
+        <import type="android.view.View" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="0dp"
+            android:layout_margin="@dimen/_12sdp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/medium_text_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{d.title}"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:onClick="@{()->d.dismiss()}"
+                        android:id="@+id/btn_cancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_button_cancel"
+                        android:paddingVertical="@dimen/_7sdp"
+                        android:text="Hủy"
+                        android:gravity="center"
+                        android:textColor="#F23030"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:layout_marginVertical="@dimen/_1sdp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_10sdp" />
+
+                    <LinearLayout
+                        android:onClick="@{()-> d.listener.confirm()}"
+                        android:id="@+id/btn_signout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_button_filled"
+                        android:layout_marginVertical="@dimen/_1sdp"
+                        android:paddingVertical="@dimen/_7sdp"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <ImageView
+                            view_visibility="@{d.iconRightButton != null}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_15sdp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@{d.titleRightButton}"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

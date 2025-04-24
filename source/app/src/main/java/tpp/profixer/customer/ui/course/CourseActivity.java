@@ -17,6 +17,7 @@ import java.util.List;
 
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.model.api.response.AmountReview;
+import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.CustomLesson;
 import tpp.profixer.customer.data.model.api.response.Lesson;
@@ -36,8 +37,6 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
     private List<AmountReview> amountReviews = new ArrayList<>();
     private ReviewAdapter reviewAdapter;
     private Course2Adapter course2Adapter;
-    private Long categoryId;
-    private Long courseId;
 
     @Override
     public int getLayoutId() {
@@ -63,8 +62,8 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         setLayoutReviewList();
         setLayoutRelatedCourses();
 
-        courseId = getIntent().getLongExtra("course_id", 0);
-        categoryId = getIntent().getLongExtra("category_id", 0);
+        viewModel.courseId = getIntent().getLongExtra("course_id", 0);
+        viewModel.categoryId = getIntent().getLongExtra("category_id", 0);
 
         viewBinding.oldMoney.setPaintFlags(viewBinding.oldMoney.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -95,15 +94,29 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             course2Adapter.setData(relatedCourses);
         });
 
-        viewModel.getCourseDetails(courseId);
-        viewModel.getReviewStar(courseId);
-        viewModel.getReviewList(courseId);
-        viewModel.getRelatedCourses(courseId, categoryId);
+        viewModel.getCourseDetails(viewModel.courseId);
+        viewModel.getReviewStar(viewModel.courseId);
+        viewModel.getReviewList(viewModel.courseId);
+        viewModel.getRelatedCourses(viewModel.courseId, viewModel.categoryId);
+        viewModel.getCart();
     }
 
     @Override
     public boolean showHeader() {
         return true;
+    }
+
+    @Override
+    public void handleCart(CartInfo cartInfo) {
+        super.handleCart(cartInfo);
+        if(cartInfo.getTotalElements() != null && cartInfo.getTotalElements() != 0){
+            for(int i = 0; i < cartInfo.getContent().getCartItems().size(); i++){
+                if(cartInfo.getContent().getCartItems().get(i).getCourse().getId().equals(viewModel.courseId)){
+                    viewModel.courseState.set(1);
+                    break;
+                }
+            }
+        }
     }
 
     private void setLayoutLessons(){
@@ -170,10 +183,28 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             public void onCourseClick(Course course) {
                 Intent it = new Intent(CourseActivity.this, CourseActivity.class);
                 it.putExtra("course_id", course.getId());
-                it.putExtra("category_id", categoryId);
+                it.putExtra("category_id", viewModel.categoryId);
                 startActivity(it);
             }
         });
+    }
+
+    public void handleButtonCart(){
+        if(token == null || token.isEmpty() || token.equals("NULL")){
+            confirmLogin();
+            return;
+        }
+        switch (viewModel.courseState.get()){
+            case 0:
+                viewModel.addToCart();
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
 
 }

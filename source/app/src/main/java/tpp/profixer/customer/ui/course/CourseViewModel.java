@@ -14,6 +14,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
+import tpp.profixer.customer.data.model.api.request.RequestCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
@@ -23,6 +24,11 @@ import tpp.profixer.customer.utils.NetworkUtils;
 public class CourseViewModel extends BaseViewModel {
 
     public ObservableField<Course> course = new ObservableField<>();
+    public Long categoryId;
+    public Long courseId;
+
+    //0: ko 1: trong gio hang, 2: đã mua
+    public ObservableField<Integer> courseState = new ObservableField<>(0);
     public ObservableField<ReviewStar> reviewStar = new ObservableField<>();
     public MutableLiveData<List<Review>> reviewList = new MutableLiveData<>();
     public Integer pageReview = 0;
@@ -161,6 +167,39 @@ public class CourseViewModel extends BaseViewModel {
                             hideLoading();
                             handleException(throwable);
                             Timber.e(throwable);
+                        }));
+    }
+
+    public void addToCart(){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().addToCart(new RequestCourse(courseId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            if(response.isResult()){
+                                showSuccessMessage(response.getMessage());
+                                getCart();
+                            }else {
+                                showErrorMessage(response.getMessage());
+                            }
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
                         }));
     }
 }
