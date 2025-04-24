@@ -4,6 +4,11 @@ import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.HttpException;
 import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
@@ -16,6 +21,7 @@ import tpp.profixer.customer.data.model.other.ToastMessage;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import lombok.Getter;
 import lombok.Setter;
+import tpp.profixer.customer.utils.NetworkUtils;
 
 public class BaseViewModel extends ViewModel {
     protected final ObservableBoolean mIsLoading = new ObservableBoolean();
@@ -86,5 +92,39 @@ public class BaseViewModel extends ViewModel {
         }else {
             showErrorMessage(application.getString(R.string.network_error));
         }
+    }
+
+    public void getProfile (){
+        Long userId = repository.getSharedPreferences().getUserId();
+        if(userId == null || userId == -1){
+            return;
+        }
+        showLoading();
+        compositeDisposable.add(repository.getApiService().getProfile(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            if(response.isResult() && response.getData() != null){
+                                repository.getRoomService().userDao().insert(response.getData().getAccount().convertToEntity());
+                            }
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                        }));
     }
 }

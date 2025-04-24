@@ -119,12 +119,12 @@ public class AppPreferencesService implements PreferencesService {
     }
 
     @Override
-    public String getUserId() {
-        return mPrefs.getString(KEY_USER_ID, null);
+    public Long getUserId() {
+        return mPrefs.getLong(KEY_USER_ID, -1);
     }
 
     @Override
-    public void setUserId(String userId) {
-        mPrefs.edit().putString(KEY_USER_ID, userId).apply();
+    public void setUserId(Long userId) {
+        mPrefs.edit().putLong(KEY_USER_ID, userId).apply();
     }
 }

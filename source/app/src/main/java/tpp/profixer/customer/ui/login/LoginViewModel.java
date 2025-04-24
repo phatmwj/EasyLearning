@@ -50,6 +50,8 @@ public class LoginViewModel extends BaseViewModel {
                         response -> {
                             hideLoading();
                             repository.getSharedPreferences().setToken(response.getAccess_token());
+                            repository.getSharedPreferences().setUserId(response.getUser_id());
+                            getProfile();
                             showSuccessMessage("Đăng nhập thành công");
                         }, throwable -> {
                             hideLoading();

@@ -2,7 +2,6 @@ package tpp.profixer.customer.data.local.room.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -11,29 +10,25 @@ import tpp.profixer.customer.data.model.room.UserEntity;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Single;
-
 @Dao
 public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable insert(UserEntity UserEntity);
-
+    void insert(UserEntity UserEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable insertAll(List<UserEntity> userEntities);
+    void insertAll(List<UserEntity> userEntities);
 
-    @Query("SELECT * FROM `user`")
-    Single<List<UserEntity>> loadAll();
+    @Query("SELECT * FROM user")
+    List<UserEntity> loadAll();
 
-    @Query("SELECT * FROM `user` ORDER BY user_id")
+    @Query("SELECT * FROM user")
     LiveData<List<UserEntity>> loadAllToLiveData();
 
-    @Query("SELECT * FROM `user` WHERE user_id=:id")
+    @Query("SELECT * FROM user WHERE id=:id")
     LiveData<UserEntity> findById(long id);
 
-    @Delete
-    Completable delete(UserEntity UserEntity);
+    @Query("delete FROM user")
+    void delete();
 
 }

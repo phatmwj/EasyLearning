@@ -43,7 +43,7 @@ public interface PreferencesService {
 
     <T> T getObjectVal(String key, Class<T> mModelClass);
 
-    String getUserId();
+    Long getUserId();
 
-    void setUserId(String userId);
+    void setUserId(Long userId);
 }

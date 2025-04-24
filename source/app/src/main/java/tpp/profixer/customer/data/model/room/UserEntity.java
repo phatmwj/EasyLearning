@@ -4,31 +4,21 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
-@EqualsAndHashCode(callSuper = false)
-@Data
-@Entity(tableName = "user"
-//        ,foreignKeys = @ForeignKey(entity = OrderEntity.class,parentColumns = "id",childColumns = "user_id",onDelete = CASCADE)
-)
+@Getter
+@Setter
+@Entity(tableName = "user")
 public class UserEntity {
     @PrimaryKey
-    @ColumnInfo(name = "user_id")
-    private long userId;
-
+    @NonNull
+    private Long id;
+    @ColumnInfo(name = "full_name")
     private String fullName;
-
-    private String phone;
-
     private String avatar;
-
-    private String address;
-
-    private double averageRating;
-
-    private String bankCard;
-
-    private String identificationCard;
-
+    private Integer kind;
+    private String phone;
+    private String email;
 }

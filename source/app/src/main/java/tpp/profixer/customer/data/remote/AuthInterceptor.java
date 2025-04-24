@@ -90,7 +90,7 @@ public class AuthInterceptor implements Interceptor {
 
         //Add Authentication
         String token = appPreferences.getToken();
-        if (token != null && !token.equals("")) {
+        if (token != null && !token.equals("") && token != "NULL") {
             newRequest.addHeader("Authorization", "Bearer " + token);
         }
 
