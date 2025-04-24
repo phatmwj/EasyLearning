@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -11,6 +12,9 @@
         <variable
             name="isBack"
             type="boolean" />
+        <variable
+            name="countItemCart"
+            type="java.lang.Integer" />
 
     </data>
 
@@ -69,17 +73,37 @@
                 android:layout_marginVertical="@dimen/_7sdp"/>
 
 
-            <RelativeLayout
+            <FrameLayout
                 android:id="@+id/layout_other"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:paddingVertical="@dimen/_10sdp">
+                android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/img_other"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"/>
-            </RelativeLayout>
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_cart"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/red"
+                    app:cardCornerRadius="@dimen/_16sdp"
+                    android:layout_gravity="bottom|end"
+                    app:cardElevation="0dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:text="@{String.valueOf(countItemCart)}"/>
+                </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
 
         </LinearLayout>
     </RelativeLayout>

@@ -83,10 +83,10 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         super.onCreate(savedInstanceState);
         performDataBinding();
         updateCurrentActivity();
-        setLayoutHeader();
 
         viewModel.setToken(token);
         viewModel.setDeviceId(deviceId);
+
         viewModel.mIsLoading.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
 
             @Override
@@ -108,6 +108,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
                 changeProgressBarMsg(progressBarMsg);
             }
         });
+
         filterGlobalApplication = new IntentFilter();
         filterGlobalApplication.addAction(Constants.ACTION_EXPIRED_TOKEN);
         globalApplicationReceiver = new BroadcastReceiver() {
@@ -122,6 +123,10 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
                 }
             }
         };
+
+        //
+        setLayoutHeader();
+        viewModel.getCart();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -282,19 +287,21 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     //
     LayoutHeaderTitleBinding headerBinding;
     private void setLayoutHeader(){
-        Timber.e("LOGIN2");
         if(showHeader()){
             headerBinding = DataBindingUtil.getBinding(viewBinding.getRoot().findViewById(R.id.ui_header));
             if(headerBinding != null){
-                Timber.e("LOGIN1");
+                ProFixerApplication mvvmApplication = (ProFixerApplication) application;
+                viewModel.cartInfo.observe(mvvmApplication.getCurrentActivity(), cart -> {
+                    headerBinding.setCountItemCart(cart.getContent().getCartItems() != null ? cart.getContent().getCartItems().size() : 0);
+                });
                 headerBinding.login.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Timber.e("LOGIN");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                     }
                 });
+                headerBinding.executePendingBindings();
             }
         }
     }

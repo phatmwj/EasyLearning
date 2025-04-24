@@ -12,6 +12,7 @@ import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.data.model.api.request.RequestCourse;
+import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Expert;
@@ -40,7 +41,7 @@ public interface ApiService {
     Observable<ResponseWrapper> addToCart(@Body RequestCourse request);
 
     @GET("/v1/cart-item/list")
-    Observable<ResponseWrapper<Cart>> getCart(@Query("studentId") Long studentId);
+    Observable<ResponseWrapper<CartInfo>> getCart(@Query("studentId") Long studentId);
 
     @GET("/v1/student/profile")
     Observable<ResponseWrapper<Expert>> getProfile(@Query("studentId") Long studentId);

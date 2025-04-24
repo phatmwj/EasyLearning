@@ -16,6 +16,8 @@ import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.data.model.api.ApiModelUtils;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
+import tpp.profixer.customer.data.model.api.response.Cart;
+import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.model.other.ToastMessage;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -35,6 +37,8 @@ public class BaseViewModel extends ViewModel {
     protected String token;
     @Setter
     protected String deviceId;
+
+    public MutableLiveData<CartInfo> cartInfo = new MutableLiveData<>();
 
     public BaseViewModel(Repository repository, ProFixerApplication application) {
         this.repository = repository;
@@ -121,6 +125,40 @@ public class BaseViewModel extends ViewModel {
                             hideLoading();
                             if(response.isResult() && response.getData() != null){
                                 repository.getRoomService().userDao().insert(response.getData().getAccount().convertToEntity());
+                            }
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                        }));
+    }
+
+    public void getCart(){
+        Long userId = repository.getSharedPreferences().getUserId();
+        if(userId == null || userId == -1 || token == null || token.equals("NULL")){
+            return;
+        }
+//        showLoading();
+        compositeDisposable.add(repository.getApiService().getCart(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            if(response.isResult() && response.getData() != null){
+                                cartInfo.setValue(response.getData());
                             }
                         }, throwable -> {
                             hideLoading();
