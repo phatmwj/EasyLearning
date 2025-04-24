@@ -50,7 +50,7 @@ public final class BindingUtils {
             view.setVisibility(View.GONE);
             return;
         }
-        view.setVisibility(View.GONE);
+        view.setVisibility(View.VISIBLE);
     }
 
     @BindingAdapter("text_currency")

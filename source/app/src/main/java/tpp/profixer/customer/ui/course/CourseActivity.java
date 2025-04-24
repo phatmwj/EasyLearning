@@ -71,6 +71,9 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 loadLessonData(viewModel.course.get().getLessons());
+                if(viewModel.course.get().getIsBuy()){
+                    viewModel.courseState.set(2);
+                }
             }
         });
 

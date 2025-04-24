@@ -31,6 +31,7 @@ public class Course {
     private Field field;
     private Expert expert;
     private Boolean isProcessing;
+    private Boolean isBuy;
     private Version version;
     private List<Lesson> lessons;
 
