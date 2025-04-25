@@ -20,6 +20,7 @@ import tpp.profixer.customer.ui.cart.adapter.CartAdapter;
 import tpp.profixer.customer.ui.course.CourseActivity;
 import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.fragment.home.adapter.CourseAdapter;
+import tpp.profixer.customer.ui.home.HomeActivity;
 import tpp.profixer.customer.ui.login.LoginActivity;
 
 public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewModel> {
@@ -136,5 +137,11 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
             }
         });
         confirmDialog.show();
+    }
+
+    public void navigateToHome(){
+        Intent it = new Intent(getApplicationContext(), HomeActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(it);
     }
 }

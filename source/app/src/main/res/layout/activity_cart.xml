@@ -23,12 +23,13 @@
             bind:title='@{"Giỏ hàng"}'/>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true">
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    view_visibility="@{vm.cartInfoF.totalElements > 0}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -188,6 +189,63 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    view_visibility="@{vm.cartInfoF.totalElements == 0}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_delete"
+                        app:tint="@color/grey_light"
+                        android:layout_marginBottom="@dimen/_5sdp"/>
+                    <TextView
+                        style="@style/medium_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_14ssp"
+                        android:text="Giỏ hàng trống"
+                        android:textColor="#424242"
+                        />
+                    <TextView
+                        style="@style/regular_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:text="Hãy khám phá các khóa học"
+                        android:textColor="@color/gray"
+                        />
+                    <RelativeLayout
+                        android:onClick="@{()-> a.navigateToHome()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:paddingHorizontal="@dimen/_25sdp"
+                        android:background="@drawable/bg_button_filled"
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true">
+                            <TextView
+                                style="@style/medium_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_14ssp"
+                                android:text="Khám phá ngay"
+                                android:layout_gravity="center_vertical"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
             </FrameLayout>
 
         </androidx.core.widget.NestedScrollView>
