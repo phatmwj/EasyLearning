@@ -1,6 +1,5 @@
 package tpp.profixer.customer.ui.home;
 
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -61,6 +60,8 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         gpsObserver = new GPSObserver(new Handler(), this);
         gpsObserver.onChange(gpsObserver.isGPSEnabled(this));
 
+        viewModel.getCart();
+
     }
 
     @Override
@@ -117,6 +118,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         activeFragment = homeFragment;
     }
     public void replaceFragmentProfile(){
+        viewModel.title.set("Tài khoản");
         if(profileFragment == null){
             profileFragment = new ProfileFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -160,4 +162,8 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         super.onBackPressed();
     }
 
+    @Override
+    public boolean showHeader() {
+        return true;
+    }
 }

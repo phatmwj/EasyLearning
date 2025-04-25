@@ -102,7 +102,6 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         viewModel.getReviewStar(viewModel.courseId);
         viewModel.getReviewList(viewModel.courseId);
         viewModel.getRelatedCourses(viewModel.courseId, viewModel.categoryId);
-        viewModel.getCart();
     }
 
     @Override
@@ -113,6 +112,10 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
     @Override
     public void handleCart(CartInfo cartInfo) {
         super.handleCart(cartInfo);
+        if(viewModel.course.get() != null &&viewModel.course.get().getIsBuy()){
+            viewModel.courseState.set(2);
+            return;
+        }
         if(cartInfo.getTotalElements() != null && cartInfo.getTotalElements() != 0){
             for(int i = 0; i < cartInfo.getContent().getCartItems().size(); i++){
                 if(cartInfo.getContent().getCartItems().get(i).getCourse().getId().equals(viewModel.courseId)){
@@ -120,6 +123,8 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                     break;
                 }
             }
+        }else {
+            viewModel.courseState.set(0);
         }
     }
 

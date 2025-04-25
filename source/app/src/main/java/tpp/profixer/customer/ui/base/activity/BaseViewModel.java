@@ -1,6 +1,7 @@
 package tpp.profixer.customer.ui.base.activity;
 
 import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -39,6 +40,7 @@ public class BaseViewModel extends ViewModel {
     protected String deviceId;
 
     public MutableLiveData<CartInfo> cartInfo = new MutableLiveData<>();
+    public ObservableField<Boolean> isLogin = new ObservableField<>();
 
     public BaseViewModel(Repository repository, ProFixerApplication application) {
         this.repository = repository;
@@ -158,6 +160,7 @@ public class BaseViewModel extends ViewModel {
                         response -> {
                             hideLoading();
                             if(response.isResult() && response.getData() != null){
+                                ProFixerApplication.cartInfo = response.getData();
                                 cartInfo.setValue(response.getData());
                             }
                         }, throwable -> {

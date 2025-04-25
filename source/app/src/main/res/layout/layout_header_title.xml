@@ -10,8 +10,11 @@
             name="a"
             type="androidx.appcompat.app.AppCompatActivity" />
         <variable
-            name="isBack"
+            name="back"
             type="boolean" />
+        <variable
+            name="isLogin"
+            type="java.lang.Boolean" />
         <variable
             name="countItemCart"
             type="java.lang.Integer" />
@@ -20,17 +23,17 @@
     <LinearLayout
         android:id="@+id/layout_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <RelativeLayout
+            view_visibility="@{!back}"
             android:id="@+id/layout_back"
             android:onClick="@{()->a.onBackPressed()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="@dimen/_5sdp"
-            >
+            android:padding="@dimen/_5sdp">
             <ImageView
                 android:id="@+id/button_back"
                 android:layout_width="@dimen/_18sdp"
@@ -45,6 +48,7 @@
             android:id="@+id/tv_header_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
             android:layout_weight="1"
             android:text="@{title}"
             android:textSize="@dimen/_17ssp"
@@ -52,6 +56,7 @@
             android:maxLines="2"
             android:ellipsize="end"/>
         <TextView
+            view_visibility="@{isLogin == null || !isLogin}"
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -64,6 +69,7 @@
 
 
         <FrameLayout
+            view_visibility="@{isLogin != null &amp;&amp; isLogin}"
             android:id="@+id/layout_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

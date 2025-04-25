@@ -88,6 +88,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         updateCurrentActivity();
 
         viewModel.setToken(token);
+        viewModel.isLogin.set(token != null && !token.equals("NULL"));
         viewModel.setDeviceId(deviceId);
 
         viewModel.mIsLoading.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
@@ -129,6 +130,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
         //
         setLayoutHeader();
+        if(ProFixerApplication.cartInfo != null){
+            viewModel.cartInfo.setValue(ProFixerApplication.cartInfo);
+        }
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -149,6 +153,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(globalApplicationReceiver, filterGlobalApplication);
         updateCurrentActivity();
+        if(ProFixerApplication.cartInfo != null){
+            viewModel.cartInfo.setValue(ProFixerApplication.cartInfo);
+        }
     }
 
     @Override
@@ -292,6 +299,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         if(showHeader()){
             headerBinding = DataBindingUtil.getBinding(viewBinding.getRoot().findViewById(R.id.ui_header));
             if(headerBinding != null){
+                headerBinding.setIsLogin(viewModel.isLogin.get());
                 ProFixerApplication mvvmApplication = (ProFixerApplication) application;
                 viewModel.cartInfo.observe(mvvmApplication.getCurrentActivity(), cart -> {
                     handleCart(cart);

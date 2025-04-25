@@ -31,6 +31,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import tpp.profixer.customer.data.model.api.ApiModelUtils;
+import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.socket.Command;
 import tpp.profixer.customer.data.socket.KittyRealtimeEvent;
 import tpp.profixer.customer.data.socket.KittyService;
@@ -65,6 +66,9 @@ public class ProFixerApplication extends Application implements LifecycleEventOb
     private KittyService kittyService;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     Disposable disposableSocket;
+
+    //local data
+    public static CartInfo cartInfo;
 
     @Override
     public void onCreate() {
