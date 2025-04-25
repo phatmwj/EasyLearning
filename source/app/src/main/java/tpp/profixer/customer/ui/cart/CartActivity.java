@@ -18,7 +18,9 @@ import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.cart.adapter.CartAdapter;
 import tpp.profixer.customer.ui.course.CourseActivity;
+import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.fragment.home.adapter.CourseAdapter;
+import tpp.profixer.customer.ui.login.LoginActivity;
 
 public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewModel> {
     private CartAdapter cartAdapter;
@@ -50,9 +52,15 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
                 if(cartInfo.getContent().getCartItems() != null){
                     List<Long> categoryIds = new ArrayList<>();
                     List<Long> courseIds = new ArrayList<>();
+                    int price = 0;
+                    int oldPrice = 0;
                     for(CartItem cartItem : cartInfo.getContent().getCartItems()){
                         courseIds.add(cartItem.getCourse().getId());
+                        price = price + cartItem.getCourse().getMoney();
+                        oldPrice = oldPrice + cartItem.getCourse().getPrice();
                     }
+                    viewModel.price.set(price);
+                    viewModel.oldPrice.set(oldPrice);
                     categoryIds.add(7050199255187456L);
                     viewModel.getRelatedCourses(courseIds, categoryIds);
                 }
@@ -81,7 +89,7 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
 
             @Override
             public void onItemDelete(CartItem cartItem) {
-
+                confirmDelete(cartItem.getId());
             }
         });
     }
@@ -100,5 +108,33 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
                 startActivity(it);
             }
         });
+    }
+
+    public void confirmDelete(Long cartItemId){
+        ConfirmDialog confirmDialog = new ConfirmDialog(this);
+        confirmDialog.title.set("Bạn muốn xóa khóa học ra khỏi giỏ hàng?");
+        confirmDialog.titleRightButton.set("Xóa");
+        confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void confirm() {
+                confirmDialog.dismiss();
+                viewModel.deleteCartItem(cartItemId);
+            }
+        });
+        confirmDialog.show();
+    }
+
+    public void confirmDeleteAll(){
+        ConfirmDialog confirmDialog = new ConfirmDialog(this);
+        confirmDialog.title.set("Bạn muốn xóa tất cả khóa học?");
+        confirmDialog.titleRightButton.set("Xóa");
+        confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void confirm() {
+                confirmDialog.dismiss();
+                viewModel.deleteAllCartItem();
+            }
+        });
+        confirmDialog.show();
     }
 }

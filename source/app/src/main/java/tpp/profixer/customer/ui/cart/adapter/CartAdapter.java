@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.chauthai.swipereveallayout.ViewBinderHelper;
+
 import java.util.List;
 
 import lombok.Setter;
@@ -17,7 +19,7 @@ import tpp.profixer.customer.databinding.ItemCartBinding;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private Context context;
     private List<CartItem> data;
-
+    private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private LayoutInflater layoutInflater;
     @Setter
     private CartListener listener;
@@ -69,12 +71,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             binding.layoutDelete.setOnClickListener(v -> {
                 if(listener != null){
                     listener.onItemDelete(data.get(position));
+                    viewBinderHelper.closeLayout(String.valueOf(data.get(position).getId()));
                 }
             });
         }
 
         public void onBind(int position){
             this.position = position;
+            viewBinderHelper.bind(binding.swipeRevealLayout, String.valueOf(data.get(position).getId()));
             binding.setItem(data.get(position).getCourse());
             binding.oldMoney.setPaintFlags(binding.oldMoney.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             binding.executePendingBindings();

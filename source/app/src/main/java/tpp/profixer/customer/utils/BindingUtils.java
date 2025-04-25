@@ -1,5 +1,6 @@
 package tpp.profixer.customer.utils;
 
+import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,5 +70,12 @@ public final class BindingUtils {
             return;
         }
         textView.setText(DateUtils.convertTimeFromUtcToLocalString(datetime));
+    }
+
+    @BindingAdapter("text_line_horizontal")
+    public static void formatTextLineHorizontal(TextView textView, boolean a) {
+        if(a){
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
     }
 }

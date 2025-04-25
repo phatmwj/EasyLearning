@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -51,4 +52,10 @@ public interface ApiService {
 
     @GET("/v1/lesson/lesson-detail/{lesson_id}")
     Observable<ResponseWrapper<Lesson>> getLessonDetails(@Path("studentId") Long lessonId);
+
+    @DELETE("/v1/cart-item/delete/{cart_item_id}")
+    Observable<ResponseWrapper> deleteCartItem(@Path("cart_item_id") Long cartItemId);
+
+    @DELETE("/v1/cart-item/delete-all")
+    Observable<ResponseWrapper> deleteAllCartItem();
 }
