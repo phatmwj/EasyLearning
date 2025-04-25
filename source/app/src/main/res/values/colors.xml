@@ -14,4 +14,7 @@
     <color name="gray">#7C7C7C</color>
     <color name="yellow">#ffe979</color>
     <color name="red">#E80B24</color>
+    <color name="text">#424242</color>
+    <color name="grey_light">#C0C0C0</color>
+    <color name="red_light">#FFDCDD</color>
 </resources>

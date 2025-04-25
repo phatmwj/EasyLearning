@@ -41,16 +41,14 @@
         </RelativeLayout>
 
         <TextView
-            style="@style/title_text_style"
+            style="@style/regular_text_style"
             android:id="@+id/tv_header_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{title, default=hahah}"
-            android:layout_toEndOf="@id/layout_back"
-            android:layout_toStartOf="@id/layout_other"
-            android:textSize="@dimen/_16ssp"
-            android:textColor="@color/white"
+            android:text="@{title}"
+            android:textSize="@dimen/_17ssp"
+            android:textColor="#424242"
             android:maxLines="2"
             android:ellipsize="end"/>
         <TextView
@@ -66,7 +64,7 @@
 
 
         <FrameLayout
-            android:id="@+id/layout_other"
+            android:id="@+id/layout_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView

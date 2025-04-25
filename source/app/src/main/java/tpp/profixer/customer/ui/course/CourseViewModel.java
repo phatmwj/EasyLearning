@@ -136,8 +136,12 @@ public class CourseViewModel extends BaseViewModel {
     }
 
     public void getRelatedCourses(Long courseId, Long categoryId){
+        List<Long> categoryIds = new ArrayList<>();
+        List<Long> courseIds = new ArrayList<>();
+        courseIds.add(courseId);
+        categoryIds.add(categoryId);
         showLoading();
-        compositeDisposable.add(repository.getApiService().getRelatedCourses(categoryId, courseId, 0, 5)
+        compositeDisposable.add(repository.getApiService().getRelatedCourses(categoryIds, courseIds, 0, 5)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->

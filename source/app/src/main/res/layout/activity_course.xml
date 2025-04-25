@@ -137,6 +137,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/_18ssp"/>
                         <TextView
+                            view_visibility="@{vm.course.saleOff != null &amp;&amp; vm.course.saleOff >= 0}"
                             android:id="@+id/old_money"
                             style="@style/small_text_style"
                             android:layout_width="0dp"

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="tpp.profixer.customer.ui.cart.CartViewModel" />
+        <variable
+            name="a"
+            type="tpp.profixer.customer.ui.cart.CartActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"
+            bind:title='@{"Giỏ hàng"}'/>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/_7sdp">
+                            <TextView
+                                style="@style/bold_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_14ssp"
+                                android:text="@{String.valueOf(vm.cartInfoF.totalElements)}"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="#424242"
+                                />
+                            <TextView
+                                style="@style/bold_text_style"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/_14ssp"
+                                android:text=" khóa học trong giỏ hàng"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="#424242"
+                                />
+                            <TextView
+                                style="@style/medium_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_12ssp"
+                                android:text="Xóa tất cả"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="@color/red"
+                                android:background="@drawable/bg_button_cancel"
+                                android:paddingHorizontal="@dimen/_5sdp"
+                                android:paddingVertical="@dimen/_2sdp"
+                                />
+                        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:clipToPadding="false"
+                            android:id="@+id/rv_cart"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:text="Có thể bạn thích?"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#424242"
+                            android:paddingHorizontal="@dimen/_7sdp"
+                            />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:paddingHorizontal="@dimen/_3sdp"
+                            android:clipToPadding="false"
+                            android:id="@+id/rv_related_course"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

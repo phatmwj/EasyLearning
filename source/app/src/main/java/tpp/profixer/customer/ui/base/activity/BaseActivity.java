@@ -42,6 +42,7 @@ import tpp.profixer.customer.databinding.LayoutHeaderTitleBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.di.component.DaggerActivityComponent;
 import tpp.profixer.customer.di.module.ActivityModule;
+import tpp.profixer.customer.ui.cart.CartActivity;
 import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.login.LoginActivity;
 import tpp.profixer.customer.utils.DialogUtils;
@@ -301,6 +302,13 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                headerBinding.layoutCart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                         startActivity(intent);
                     }
                 });

@@ -48,7 +48,11 @@
         android:supportsRtl="true"
         android:theme="@style/App.Theme"
         android:windowSoftInputMode="adjustResize|stateHidden">
-
+        <activity
+            android:name=".ui.cart.CartActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".ui.lesson.LessonActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"

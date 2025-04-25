@@ -95,6 +95,7 @@
                         android:ellipsize="end"
                         android:textColor="@color/app_color"/>
                     <TextView
+                        view_visibility="@{item.saleOff != null &amp;&amp; item.saleOff >= 0}"
                         android:id="@+id/old_money"
                         style="@style/small_text_style"
                         android:layout_width="0dp"

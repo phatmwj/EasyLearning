@@ -29,6 +29,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         layoutInflater = LayoutInflater.from(context);
     }
 
+    public void setData(List<Course> relatedCourses) {
+        this.data = relatedCourses;
+        notifyDataSetChanged();
+    }
+
     public interface CourseListener{
         void onCourseClick(Course course);
     }

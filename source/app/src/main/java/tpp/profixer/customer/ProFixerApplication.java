@@ -90,7 +90,7 @@ public class ProFixerApplication extends Application implements LifecycleEventOb
                 .apply();
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        createSocket();
+//        createSocket();
 
     }
 

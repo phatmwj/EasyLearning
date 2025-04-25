@@ -1,5 +1,7 @@
 package tpp.profixer.customer.data.remote;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -36,7 +38,7 @@ public interface ApiService {
     @GET("/v1/review/list-reviews/{course_id}")
     Observable<ResponseWrapper<ResponseListObj<Review>>> getReviewList(@Path("course_id") Long courseId, @Query("page") Integer page, @Query("size") Integer size);
     @GET("/v1/course/client-list")
-    Observable<ResponseWrapper<ResponseListObj<Course>>> getRelatedCourses(@Query("categoryIds") Long categoryId, @Query("ignoreId") Long ignoreId, @Query("page") Integer page, @Query("size") Integer size);
+    Observable<ResponseWrapper<ResponseListObj<Course>>> getRelatedCourses(@Query("categoryIds") List<Long> categoryId, @Query("ignoreId") List<Long> ignoreId, @Query("page") Integer page, @Query("size") Integer size);
 
     @POST("/v1/cart-item/create")
     Observable<ResponseWrapper> addToCart(@Body RequestCourse request);
