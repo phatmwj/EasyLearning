@@ -1,5 +1,6 @@
 package tpp.profixer.customer.ui.fragment.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import tpp.profixer.customer.databinding.FragmentProfileBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
 import tpp.profixer.customer.ui.fragment.profile.adapter.AccountAdapter;
+import tpp.profixer.customer.ui.login.LoginActivity;
 
 public class ProfileFragment extends BaseFragment<FragmentProfileBinding, ProfileFragmentViewModel> {
     private AccountAdapter accountAdapter;
@@ -107,6 +109,11 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
                 }
             }
         });
+    }
+
+    public void navigateToLogin(){
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
     }
 
 }

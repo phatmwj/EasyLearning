@@ -54,7 +54,7 @@ public class LoginViewModel extends BaseViewModel {
                             getProfile();
                             getCart();
                             isLogin.set(true);
-//                            application.getCurrentActivity().finish();
+                            application.getCurrentActivity().finish();
                             showSuccessMessage("Đăng nhập thành công");
                         }, throwable -> {
                             hideLoading();

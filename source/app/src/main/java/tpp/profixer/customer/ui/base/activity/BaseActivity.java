@@ -131,15 +131,15 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         };
 
         //
-        viewModel.isLogin.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if(headerBinding != null){
-                    headerBinding.setIsLogin(viewModel.isLogin.get());
-                    headerBinding.executePendingBindings();
-                }
-            }
-        });
+//        viewModel.isLogin.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+//            @Override
+//            public void onPropertyChanged(Observable sender, int propertyId) {
+//                if(headerBinding != null){
+//                    headerBinding.setIsLogin(viewModel.isLogin.get());
+//                    headerBinding.executePendingBindings();
+//                }
+//            }
+//        });
         setLayoutHeader();
         if(ProFixerApplication.cartInfo != null){
             viewModel.cartInfo.setValue(ProFixerApplication.cartInfo);
@@ -313,7 +313,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         if(showHeader()){
             headerBinding = DataBindingUtil.getBinding(viewBinding.getRoot().findViewById(R.id.ui_header));
             if(headerBinding != null){
-                headerBinding.setIsLogin(viewModel.isLogin.get());
                 ProFixerApplication mvvmApplication = (ProFixerApplication) application;
                 viewModel.cartInfo.observe(mvvmApplication.getCurrentActivity(), cart -> {
                     handleCart(cart);

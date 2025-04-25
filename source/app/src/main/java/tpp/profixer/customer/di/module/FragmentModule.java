@@ -19,6 +19,7 @@ import tpp.profixer.customer.ui.fragment.home.HomeFragmentViewModel;
 import tpp.profixer.customer.ui.fragment.income.IncomeFragmentViewModel;
 import tpp.profixer.customer.ui.fragment.notification.NotificationFragmentViewModel;
 import tpp.profixer.customer.ui.fragment.profile.ProfileFragmentViewModel;
+import tpp.profixer.customer.ui.fragment.study.StudyFragmentViewModel;
 
 @Module
 public class FragmentModule {
@@ -66,6 +67,14 @@ public class FragmentModule {
         Supplier<NotificationFragmentViewModel> supplier = () -> new NotificationFragmentViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<NotificationFragmentViewModel> factory = new ViewModelProviderFactory<>(NotificationFragmentViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(NotificationFragmentViewModel.class);
+    }
+
+    @Provides
+    @FragmentScope
+    StudyFragmentViewModel provideStudyFragmentViewModel(Repository repository, Context application){
+        Supplier<StudyFragmentViewModel> supplier = () -> new StudyFragmentViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<StudyFragmentViewModel> factory = new ViewModelProviderFactory<>(StudyFragmentViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(StudyFragmentViewModel.class);
     }
 
 }

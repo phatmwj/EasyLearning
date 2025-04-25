@@ -10,13 +10,19 @@
             name="a"
             type="androidx.appcompat.app.AppCompatActivity" />
         <variable
-            name="back"
+            name="dontback"
             type="boolean" />
         <variable
             name="isLogin"
             type="java.lang.Boolean" />
         <variable
             name="donLoginBtn"
+            type="boolean" />
+        <variable
+            name="stringSearch"
+            type="String" />
+        <variable
+            name="isSearch"
             type="boolean" />
         <variable
             name="countItemCart"
@@ -30,7 +36,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <RelativeLayout
-            view_visibility="@{!back}"
+            view_visibility="@{!dontback}"
             android:id="@+id/layout_back"
             android:onClick="@{()->a.onBackPressed()}"
             android:layout_width="wrap_content"
@@ -47,6 +53,7 @@
         </RelativeLayout>
 
         <TextView
+            view_visibility="@{!isSearch}"
             style="@style/regular_text_style"
             android:id="@+id/tv_header_title"
             android:layout_width="0dp"
@@ -58,19 +65,61 @@
             android:textColor="@color/black"
             android:maxLines="2"
             android:ellipsize="end"/>
+        <LinearLayout
+            view_visibility="@{isSearch}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_default">
+            <ImageView
+                android:onClick="@{()->a.onBackPressed()}"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="match_parent"
+                android:src="@{stringSearch != null &amp;&amp; !stringSearch.empty ? @drawable/ic_icon_delete : @drawable/ic_edittext_search}"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:padding="@dimen/_7sdp"/>
+            <EditText
+                style="@style/app_edit_text_search"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_9sdp"
+                android:inputType="text"
+                android:background="@android:color/transparent"
+                android:focusable="true"
+                android:imeOptions="actionDone"
+                android:text="@{stringSearch}"
+                android:hint="Tìm kiếm"
+                android:textColorHint="@color/gray"
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/menu_list_search_bar_img"
+                android:padding="@dimen/_7sdp"/>
+        </LinearLayout>
+
         <TextView
-            view_visibility="@{(isLogin == null || !isLogin) &amp;&amp; !donLoginBtn}"
             android:id="@+id/login"
+            style="@style/bold_text_style"
+            view_visibility="@{(isLogin == null || !isLogin) &amp;&amp; !donLoginBtn}"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_7sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:textAllCaps="true"
-            android:text="Đăng nhập"
             android:gravity="center"
-            style="@style/medium_text_style"
+            android:text="Đăng nhập"
+            android:textAllCaps="true"
             android:textColor="@color/app_color"
-            android:textSize="@dimen/_12ssp"
-            android:layout_marginVertical="@dimen/_7sdp"/>
+            android:textSize="@dimen/_10ssp" />
 
 
         <FrameLayout

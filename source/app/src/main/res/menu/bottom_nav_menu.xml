@@ -2,23 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:title="@string/title_home"
+        android:title="Trang chủ"
         android:icon="@drawable/ic_icon_home"
         />
     <item
         android:id="@+id/income"
-        android:title="@string/title_income"
-        android:icon="@drawable/ic_icon_income"
+        android:title="Tìm kiếm"
+        android:icon="@drawable/ic_edittext_search"
+        android:iconTint="#979696"
+        />
+    <item
+        android:id="@+id/study"
+        android:title="Học tập"
+        android:icon="@drawable/ic_video"
+        android:iconTint="#979696"
         />
 
     <item
         android:id="@+id/notification"
-        android:title="@string/title_notification"
+        android:title="Thông báo"
         android:icon="@drawable/ic_icon_notification"
         />
 
     <item
         android:id="@+id/account"
-        android:title="@string/title_account"
+        android:title="Tài khoản"
         android:icon="@drawable/ic_icon_account"/>
 </menu>

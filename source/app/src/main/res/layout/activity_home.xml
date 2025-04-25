@@ -40,7 +40,10 @@
             layout="@layout/layout_header_title"
             bind:a ="@{a}"
             bind:title="@{vm.title}"
-            bind:back="@{Boolean.TRUE}"/>
+            bind:dontback="@{Boolean.TRUE}"
+            bind:isLogin="@{vm.isLogin}"
+            bind:donLoginBtn="@{vm.loginButton}"
+            bind:isSearch="@{vm.isSearch}"/>
 
         <FrameLayout
             android:id="@+id/frameLayout"

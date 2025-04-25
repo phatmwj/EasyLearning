@@ -22,6 +22,7 @@ import tpp.profixer.customer.ui.fragment.home.HomeFragment;
 import tpp.profixer.customer.ui.fragment.income.IncomeFragment;
 import tpp.profixer.customer.ui.fragment.notification.NotificationFragment;
 import tpp.profixer.customer.ui.fragment.profile.ProfileFragment;
+import tpp.profixer.customer.ui.fragment.study.StudyFragment;
 import tpp.profixer.customer.utils.GPSObserver;
 
 public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewModel> implements NavigationBarView.OnItemSelectedListener{
@@ -32,6 +33,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     private IncomeFragment incomeFragment;
     private ProfileFragment profileFragment;
     private NotificationFragment notificationFragment;
+    private StudyFragment studyFragment;
     private GPSObserver gpsObserver;
 
     @Override
@@ -101,11 +103,33 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
             case R.id.notification:
                 replaceFragmentNotification();
                 return true;
+            case R.id.study:
+                replaceFragmentStudy();
+                return true;
         }
         return false;
     }
-
+    public void replaceFragmentStudy(){
+        viewModel.title.set("Khóa học của bạn");
+        viewModel.loginButton.set(true);
+        viewModel.textSearch.set("");
+        viewModel.isSearch.set(false);
+        if(studyFragment == null){
+            studyFragment = new StudyFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.frameLayout, studyFragment, "home fragment").hide(activeFragment).commit();
+        }
+        else{
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.hide(activeFragment).show(studyFragment).commit();
+        }
+        activeFragment = studyFragment;
+    }
     public void replaceFragmentHome(){
+        viewModel.title.set("");
+        viewModel.loginButton.set(false);
+        viewModel.textSearch.set("");
+        viewModel.isSearch.set(false);
         if(homeFragment == null){
             homeFragment = new HomeFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -119,6 +143,9 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     }
     public void replaceFragmentProfile(){
         viewModel.title.set("Tài khoản");
+        viewModel.loginButton.set(true);
+        viewModel.textSearch.set("");
+        viewModel.isSearch.set(false);
         if(profileFragment == null){
             profileFragment = new ProfileFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -132,6 +159,10 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     }
 
     public void replaceFragmentIncome(){
+        viewModel.title.set("");
+        viewModel.loginButton.set(true);
+//        viewModel.textSearch.set("");
+        viewModel.isSearch.set(true);
         if(incomeFragment == null){
             incomeFragment = new IncomeFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -145,6 +176,10 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     }
 
     public void replaceFragmentNotification(){
+        viewModel.title.set("Thông báo");
+        viewModel.loginButton.set(true);
+        viewModel.textSearch.set("");
+        viewModel.isSearch.set(false);
         if(notificationFragment == null){
             notificationFragment = new NotificationFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
