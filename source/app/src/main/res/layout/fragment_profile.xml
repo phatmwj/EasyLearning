@@ -12,8 +12,105 @@
             type="tpp.profixer.customer.ui.fragment.profile.ProfileFragmentViewModel" />
 
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/_20sdp"
+                android:orientation="vertical">
+                <LinearLayout
+                    view_visibility="@{vm.profile != null}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:background="@drawable/bg_oval"
+                        android:padding="@dimen/_1sdp"
+                        android:backgroundTint="@color/app_color"
+                        image_url="@{vm.profile.avatar}"/>
+                    <TextView
+                        style="@style/medium_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_16ssp"
+                        android:text="@{vm.profile.fullName}"
+                        android:textColor="#424242"
+                        />
+                    <TextView
+                        style="@style/regular_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:text="@{vm.profile.email}"
+                        android:textColor="#424242"
+                        />
+                </LinearLayout>
+                <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                    view_visibility="@{vm.profile != null}"
+                    android:id="@+id/lv_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:paddingHorizontal="@dimen/_7sdp"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:backgroundTint="@color/white"
+                    android:background="@drawable/bg_button_filled"
+                    android:elevation="@dimen/_4sdp"
+                    android:divider="@color/grey_light"
+                    android:dividerHeight="@dimen/_1sdp"
+                    />
+                <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                    android:id="@+id/lv_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_7sdp"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:backgroundTint="@color/white"
+                    android:background="@drawable/bg_button_filled"
+                    android:elevation="@dimen/_4sdp"
+                    android:divider="@color/grey_light"
+                    android:dividerHeight="@dimen/_1sdp"
+                    />
+                <TextView
+                    view_visibility="@{vm.profile == null}"
+                    android:onClick="@{()-> vm.logout()}"
+                    style="@style/medium_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_12ssp"
+                    android:text="Đăng nhập"
+                    android:textAllCaps="true"
+                    android:textColor="@color/app_color"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bg_button_outline"
+                    />
+                <TextView
+                    view_visibility="@{vm.profile != null}"
+                    android:onClick="@{()-> vm.logout()}"
+                    style="@style/medium_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_12ssp"
+                    android:text="Đăng xuất"
+                    android:textColor="@color/red"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/_10sdp"
+                    />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 </layout>

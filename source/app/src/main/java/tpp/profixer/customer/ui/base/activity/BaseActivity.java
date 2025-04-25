@@ -63,6 +63,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     @Named("access_token")
     @Inject
     protected String token;
+    protected Long userId;
 
     @Named("device_id")
     @Inject
@@ -88,6 +89,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         updateCurrentActivity();
 
         viewModel.setToken(token);
+        userId = viewModel.repository.getSharedPreferences().getUserId();
         viewModel.isLogin.set(token != null && !token.equals("NULL"));
         viewModel.setDeviceId(deviceId);
 
@@ -129,6 +131,15 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         };
 
         //
+        viewModel.isLogin.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if(headerBinding != null){
+                    headerBinding.setIsLogin(viewModel.isLogin.get());
+                    headerBinding.executePendingBindings();
+                }
+            }
+        });
         setLayoutHeader();
         if(ProFixerApplication.cartInfo != null){
             viewModel.cartInfo.setValue(ProFixerApplication.cartInfo);
@@ -156,6 +167,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         if(ProFixerApplication.cartInfo != null){
             viewModel.cartInfo.setValue(ProFixerApplication.cartInfo);
         }
+        userId = viewModel.repository.getSharedPreferences().getUserId();
+        token = viewModel.repository.getSharedPreferences().getToken();
+        viewModel.isLogin.set(token != null && !token.equals("NULL"));
     }
 
     @Override
@@ -341,10 +355,15 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
             @Override
             public void confirm() {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                confirmDialog.dismiss();
+                navigateToLogin();
             }
         });
         confirmDialog.show();
+    }
+
+    public void navigateToLogin(){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

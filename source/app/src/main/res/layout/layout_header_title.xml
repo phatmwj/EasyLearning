@@ -16,6 +16,9 @@
             name="isLogin"
             type="java.lang.Boolean" />
         <variable
+            name="donLoginBtn"
+            type="boolean" />
+        <variable
             name="countItemCart"
             type="java.lang.Integer" />
 
@@ -52,14 +55,16 @@
             android:layout_weight="1"
             android:text="@{title}"
             android:textSize="@dimen/_17ssp"
-            android:textColor="#424242"
+            android:textColor="@color/black"
             android:maxLines="2"
             android:ellipsize="end"/>
         <TextView
-            view_visibility="@{isLogin == null || !isLogin}"
+            view_visibility="@{(isLogin == null || !isLogin) &amp;&amp; !donLoginBtn}"
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textAllCaps="true"
             android:text="Đăng nhập"
             android:gravity="center"
             style="@style/medium_text_style"

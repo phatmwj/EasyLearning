@@ -2,6 +2,7 @@ package tpp.profixer.customer.di.component;
 
 import tpp.profixer.customer.di.module.ActivityModule;
 import tpp.profixer.customer.di.scope.ActivityScope;
+import tpp.profixer.customer.ui.account.AccountActivity;
 import tpp.profixer.customer.ui.cart.CartActivity;
 import tpp.profixer.customer.ui.course.CourseActivity;
 import tpp.profixer.customer.ui.home.HomeActivity;
@@ -26,5 +27,7 @@ public interface ActivityComponent {
     void inject(LessonActivity lessonActivity);
 
     void inject(CartActivity cartActivity);
+
+    void inject(AccountActivity accountActivity);
 }
 

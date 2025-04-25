@@ -9,6 +9,7 @@ import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.ViewModelProviderFactory;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.di.scope.ActivityScope;
+import tpp.profixer.customer.ui.account.AccountViewModel;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.cart.CartViewModel;
 import tpp.profixer.customer.ui.course.CourseViewModel;
@@ -102,6 +103,14 @@ public class ActivityModule {
         Supplier<CartViewModel> supplier = () -> new CartViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<CartViewModel> factory = new ViewModelProviderFactory<>(CartViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(CartViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    AccountViewModel provideAccountViewModel(Repository repository, Context application) {
+        Supplier<AccountViewModel> supplier = () -> new AccountViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<AccountViewModel> factory = new ViewModelProviderFactory<>(AccountViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(AccountViewModel.class);
     }
 
 }
