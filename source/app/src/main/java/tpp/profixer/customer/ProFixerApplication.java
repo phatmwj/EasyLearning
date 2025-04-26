@@ -20,6 +20,8 @@ import com.tinder.scarlet.messageadapter.gson.GsonMessageAdapter;
 import com.tinder.scarlet.retry.ExponentialWithJitterBackoffStrategy;
 import com.tinder.scarlet.streamadapter.rxjava2.RxJava2StreamAdapterFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +34,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import tpp.profixer.customer.data.model.api.ApiModelUtils;
 import tpp.profixer.customer.data.model.api.response.CartInfo;
+import tpp.profixer.customer.data.model.api.response.Category;
 import tpp.profixer.customer.data.socket.Command;
 import tpp.profixer.customer.data.socket.KittyRealtimeEvent;
 import tpp.profixer.customer.data.socket.KittyService;
@@ -69,6 +72,7 @@ public class ProFixerApplication extends Application implements LifecycleEventOb
 
     //local data
     public static CartInfo cartInfo;
+    public static List<Category> categories = new ArrayList<>();
 
     @Override
     public void onCreate() {

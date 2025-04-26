@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/_4sdp"
+            android:paddingHorizontal="@dimen/_7sdp"
             android:paddingVertical="@dimen/_2sdp">
             <TextView
                 style="@style/big_text_style"
@@ -40,7 +40,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_course"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_3sdp"
+            android:clipToPadding="false"/>
 
     </LinearLayout>
 </layout>

@@ -25,6 +25,7 @@ import tpp.profixer.customer.data.model.api.response.ReviewStar;
 import tpp.profixer.customer.databinding.ActivityCourseBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
+import tpp.profixer.customer.ui.cart.CartActivity;
 import tpp.profixer.customer.ui.course.adapter.Course2Adapter;
 import tpp.profixer.customer.ui.course.adapter.LessonAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewAdapter;
@@ -208,6 +209,8 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                 viewModel.addToCart();
                 break;
             case 1:
+                Intent intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
                 break;
             case 2:
                 Intent it = new Intent(this, LessonActivity.class);
