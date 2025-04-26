@@ -69,7 +69,7 @@
             view_visibility="@{isSearch}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center_vertical"
@@ -80,7 +80,8 @@
                 android:layout_height="match_parent"
                 android:src="@{stringSearch != null &amp;&amp; !stringSearch.empty ? @drawable/ic_icon_delete : @drawable/ic_edittext_search}"
                 android:layout_marginStart="@dimen/_4sdp"
-                android:padding="@dimen/_7sdp"/>
+                android:padding="@dimen/_10sdp"
+                app:tint="@color/text"/>
             <EditText
                 style="@style/app_edit_text_search"
                 android:layout_weight="1"

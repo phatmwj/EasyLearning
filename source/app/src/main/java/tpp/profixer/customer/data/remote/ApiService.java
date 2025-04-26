@@ -58,4 +58,7 @@ public interface ApiService {
 
     @DELETE("/v1/cart-item/delete-all")
     Observable<ResponseWrapper> deleteAllCartItem();
+
+    @GET("/v1/student/my-course")
+    Observable<ResponseWrapper<ResponseListObj<Course>>> getMyCourses(@Query("isFinished") Boolean isFinished);
 }

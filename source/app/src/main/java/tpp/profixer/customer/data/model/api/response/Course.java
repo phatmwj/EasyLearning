@@ -34,6 +34,7 @@ public class Course {
     private Boolean isBuy;
     private Version version;
     private List<Lesson> lessons;
+    private Double percent;
 
     @SuppressLint("DefaultLocale")
     public String getTimeStudy(){

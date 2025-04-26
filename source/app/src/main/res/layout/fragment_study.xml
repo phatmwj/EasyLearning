@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -10,9 +11,77 @@
             type="tpp.profixer.customer.ui.fragment.study.StudyFragmentViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/medium_text_style"
+                android:textSize="@dimen/_12ssp"
+                android:text="Đang học"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:background="@drawable/bg_button_selection"
+                view_selected="@{!vm.isFinished}"
+                android:textColor="@{!vm.isFinished ? @color/white : @color/app_color }"
+                android:onClick="@{()-> f.setIsFinished(false)}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/medium_text_style"
+                android:textSize="@dimen/_12ssp"
+                android:text="Hoàn thành"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:background="@drawable/bg_button_selection"
+                view_selected="@{vm.isFinished}"
+                android:textColor="@{vm.isFinished ? @color/white : @color/app_color }"
+                android:onClick="@{()-> f.setIsFinished(true)}"/>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_my_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingVertical="@dimen/_5sdp"/>
+            <LinearLayout
+                view_visibility="@{vm.totalCourse == 0}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/grey_light"
+                    android:layout_marginBottom="@dimen/_5sdp"/>
+                <TextView
+                    style="@style/medium_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:text="Không có khóa học nào"
+                    android:textColor="#424242"
+                    />
+            </LinearLayout>
+        </FrameLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

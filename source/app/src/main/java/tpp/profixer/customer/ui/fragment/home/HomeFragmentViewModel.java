@@ -47,6 +47,7 @@ public class HomeFragmentViewModel extends BaseFragmentViewModel {
                         response -> {
                             if(response.isResult() && response.getData() != null && response.getData().getContent() != null){
                                 categoryCourses.setValue(response.getData().getContent());
+                                ProFixerApplication.categories.clear();
                                 for (CategoryCourse categoryCourse : response.getData().getContent()) {
                                     ProFixerApplication.categories.add(categoryCourse.getCategory());
                                 }
