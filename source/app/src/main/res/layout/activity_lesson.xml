@@ -31,5 +31,27 @@
             app:resize_mode="fit"
             app:controller_layout_id="@layout/custom_controller" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                style="@style/CustomTabLayoutStyle"
+                app:tabSelectedTextColor="@color/app_color"
+                android:background="@color/white"
+                android:layout_height="wrap_content"
+                app:tabTextColor="@color/black"
+                app:tabIndicatorColor="@color/app_color"
+                app:tabMode="scrollable"
+                app:tabGravity="start"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

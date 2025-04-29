@@ -20,6 +20,9 @@ import tpp.profixer.customer.ui.fragment.income.IncomeFragmentViewModel;
 import tpp.profixer.customer.ui.fragment.notification.NotificationFragmentViewModel;
 import tpp.profixer.customer.ui.fragment.profile.ProfileFragmentViewModel;
 import tpp.profixer.customer.ui.fragment.study.StudyFragmentViewModel;
+import tpp.profixer.customer.ui.lesson.fragment.ContentViewModel;
+import tpp.profixer.customer.ui.lesson.fragment.IntroduceViewModel;
+import tpp.profixer.customer.ui.lesson.fragment.ReviewViewModel;
 
 @Module
 public class FragmentModule {
@@ -75,6 +78,30 @@ public class FragmentModule {
         Supplier<StudyFragmentViewModel> supplier = () -> new StudyFragmentViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<StudyFragmentViewModel> factory = new ViewModelProviderFactory<>(StudyFragmentViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(StudyFragmentViewModel.class);
+    }
+
+    @Provides
+    @FragmentScope
+    ContentViewModel provideContentViewModel(Repository repository, Context application){
+        Supplier<ContentViewModel> supplier = () -> new ContentViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<ContentViewModel> factory = new ViewModelProviderFactory<>(ContentViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(ContentViewModel.class);
+    }
+
+    @Provides
+    @FragmentScope
+    IntroduceViewModel provideIntroduceViewModel(Repository repository, Context application){
+        Supplier<IntroduceViewModel> supplier = () -> new IntroduceViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<IntroduceViewModel> factory = new ViewModelProviderFactory<>(IntroduceViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(IntroduceViewModel.class);
+    }
+
+    @Provides
+    @FragmentScope
+    ReviewViewModel provideReviewViewModel(Repository repository, Context application){
+        Supplier<ReviewViewModel> supplier = () -> new ReviewViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<ReviewViewModel> factory = new ViewModelProviderFactory<>(ReviewViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(ReviewViewModel.class);
     }
 
 }

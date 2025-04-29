@@ -9,19 +9,24 @@ import android.view.WindowInsetsController;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.Observable;
 import androidx.databinding.library.baseAdapters.BR;
 import androidx.media3.common.MediaItem;
 import androidx.media3.common.Player;
 import androidx.media3.exoplayer.ExoPlayer;
 
+import com.google.android.material.tabs.TabLayoutMediator;
+
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.databinding.ActivityLessonBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
+import tpp.profixer.customer.ui.lesson.adapter.ViewPagerAdapter;
 
 public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonViewModel> {
 
     private ExoPlayer player;
+    private ViewPagerAdapter viewPagerAdapter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_lesson;
@@ -40,9 +45,33 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel.courseId = getIntent().getLongExtra("course_id", -1);
+
+        viewPagerAdapter = new ViewPagerAdapter(this, viewModel.courseId);
+        viewBinding.viewPager.setAdapter(viewPagerAdapter);
+        new TabLayoutMediator(viewBinding.tabLayout, viewBinding.viewPager,
+                (tab, position) -> {
+                    if (position == 0){
+                        tab.setText("Giới thiệu");
+                    }else if (position == 1){
+                        tab.setText("Nội dung");
+                    }else if (position == 2){
+                        tab.setText("Đánh giá");
+                    }
+                }
+        ).attach();
+
         player = new ExoPlayer.Builder(this).build();
         setVideoPlay("https://video.edward.io.vn/hls/media/general/7049999380021248/COURSE/8395895960731648/8395898804961280/livestream.m3u8");
         setupFullscreenToggle();
+        viewModel.course.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+
+            }
+        });
+        viewModel.getCourseDetails();
     }
 
     @Override

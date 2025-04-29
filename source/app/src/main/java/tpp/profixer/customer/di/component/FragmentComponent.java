@@ -10,6 +10,9 @@ import tpp.profixer.customer.ui.fragment.income.IncomeFragment;
 import tpp.profixer.customer.ui.fragment.notification.NotificationFragment;
 import tpp.profixer.customer.ui.fragment.profile.ProfileFragment;
 import tpp.profixer.customer.ui.fragment.study.StudyFragment;
+import tpp.profixer.customer.ui.lesson.fragment.ContentFragment;
+import tpp.profixer.customer.ui.lesson.fragment.IntroduceFragment;
+import tpp.profixer.customer.ui.lesson.fragment.ReviewFragment;
 
 @FragmentScope
 @Component(modules = {FragmentModule.class}, dependencies = AppComponent.class)
@@ -18,6 +21,8 @@ public interface FragmentComponent {
     void inject(ProfileFragment profileFragment);
     void inject(IncomeFragment incomeFragment);
     void inject(NotificationFragment notificationFragment);
-
     void inject(StudyFragment studyFragment);
+    void inject(IntroduceFragment introduceFragment);
+    void inject(ReviewFragment reviewFragment);
+    void inject(ContentFragment contentFragment);
 }

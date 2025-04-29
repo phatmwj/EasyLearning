@@ -1,4 +1,4 @@
-package tpp.profixer.customer.ui.lesson;
+package tpp.profixer.customer.ui.lesson.fragment;
 
 import androidx.databinding.ObservableField;
 
@@ -11,19 +11,17 @@ import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.data.model.api.response.Course;
-import tpp.profixer.customer.ui.base.activity.BaseViewModel;
+import tpp.profixer.customer.ui.base.fragment.BaseFragmentViewModel;
 import tpp.profixer.customer.utils.NetworkUtils;
 
-public class LessonViewModel extends BaseViewModel {
-
-    public ObservableField<Course> course = new ObservableField<>();
-    public Long courseId;
-    public ObservableField<Boolean> isFullscreen = new ObservableField<>(false);
-    public LessonViewModel(Repository repository, ProFixerApplication application) {
+public class IntroduceViewModel extends BaseFragmentViewModel {
+    public IntroduceViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
     }
-    public void getCourseDetails(){
-        showLoading();
+
+    public ObservableField<Course> course = new ObservableField<>();
+    public void getCourseDetails(Long courseId){
+//        showLoading();
         compositeDisposable.add(repository.getApiService().getCourseDetails(courseId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

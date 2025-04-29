@@ -52,6 +52,7 @@ public class StudyFragment extends BaseFragment<FragmentStudyBinding, StudyFragm
             @Override
             public void onCourseClick(Course course) {
                 Intent intent = new Intent(getContext(), LessonActivity.class);
+                intent.putExtra("course_id", course.getId());
                 startActivity(intent);
             }
         });
