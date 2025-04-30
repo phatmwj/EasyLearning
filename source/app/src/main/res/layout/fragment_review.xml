@@ -10,9 +10,16 @@
             type="tpp.profixer.customer.ui.lesson.fragment.ReviewViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:paddingHorizontal="@dimen/_7sdp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:clipToPadding="false"
+            android:id="@+id/rv_review"/>
+    </LinearLayout>
 </layout>

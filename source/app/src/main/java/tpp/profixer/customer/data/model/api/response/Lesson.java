@@ -1,5 +1,7 @@
 package tpp.profixer.customer.data.model.api.response;
 
+import android.annotation.SuppressLint;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +23,18 @@ public class Lesson {
     private String videoUrl;
     private Integer secondProgress;
     private Course course;
+
+    @SuppressLint("DefaultLocale")
+    public String getTimeVideo() {
+        if (videoDuration == null || videoDuration == 0) {
+            return "00:00";
+        }
+        int hours = videoDuration / 3600;
+        int minutes = videoDuration / 60 - hours * 60;
+        int seconds = videoDuration % 3600 - minutes * 60;
+        if (hours == 0) {
+            return String.format("%02d:%02d", minutes, seconds);
+        }
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
 }

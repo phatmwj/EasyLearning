@@ -214,6 +214,7 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                 break;
             case 2:
                 Intent it = new Intent(this, LessonActivity.class);
+                it.putExtra("course_id", viewModel.courseId);
                 startActivity(it);
                 break;
             default:
