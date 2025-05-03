@@ -17,25 +17,27 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/_7sdp"
-            android:paddingVertical="@dimen/_2sdp">
+            android:paddingVertical="@dimen/_4sdp">
             <TextView
                 style="@style/big_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@{item.category.name}"
-                android:textColor="@color/app_color"
+                android:textColor="@color/text"
                 android:maxLines="1"
                 android:ellipsize="end"/>
             <TextView
                 style="@style/title_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Xem thêm"
+                android:text="Xem thêm "
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:gravity="end"
-                android:textColor="@color/gray"/>
+                android:textColor="@color/app_color"
+                android:drawableEnd="@drawable/ic_expand"
+                android:drawableTint="@color/app_color"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_course"

@@ -13,6 +13,7 @@ import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
+import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.data.model.api.request.RequestCourse;
@@ -65,4 +66,10 @@ public interface ApiService {
 
     @POST("/v1/completion/create")
     Observable<ResponseWrapper> completeLesson(@Body CompleteLessonRequest request);
+
+    @GET("/v1/course/client-list")
+    Observable<ResponseWrapper<ResponseListObj<Course>>> getCoursesByCategory(@Query("categoryId") Long categoryId, @Query("page") Integer page, @Query("size") Integer size);
+
+    @GET("/v1/slideshow/list")
+    Observable<ResponseWrapper<ResponseListObj<Slide>>> getSlideShow(@Query("status") Integer status);
 }

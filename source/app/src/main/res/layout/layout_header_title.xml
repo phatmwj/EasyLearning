@@ -63,7 +63,7 @@
             android:text="@{title}"
             android:textSize="@dimen/_17ssp"
             android:textColor="@color/black"
-            android:maxLines="2"
+            android:maxLines="1"
             android:ellipsize="end"/>
         <LinearLayout
             view_visibility="@{isSearch}"

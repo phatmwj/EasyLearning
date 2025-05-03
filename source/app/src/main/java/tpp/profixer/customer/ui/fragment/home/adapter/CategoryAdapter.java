@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Setter;
@@ -55,6 +56,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public void setData(List<CategoryCourse> categoryCourses) {
         this.data = categoryCourses;
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<CategoryCourse> categoryCourses) {
+        if(data == null){
+            data = new ArrayList<>();
+        }
+        data.addAll(categoryCourses);
         notifyDataSetChanged();
     }
 

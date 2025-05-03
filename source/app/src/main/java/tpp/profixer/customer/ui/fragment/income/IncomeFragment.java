@@ -1,5 +1,6 @@
 package tpp.profixer.customer.ui.fragment.income;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import tpp.profixer.customer.R;
 import tpp.profixer.customer.databinding.FragmentIncomeBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.category.CategoryActivity;
 import tpp.profixer.customer.ui.fragment.income.adapter.CategoryAdapter;
 
 public class IncomeFragment extends BaseFragment<FragmentIncomeBinding, IncomeFragmentViewModel> {
@@ -51,7 +53,9 @@ public class IncomeFragment extends BaseFragment<FragmentIncomeBinding, IncomeFr
         binding.lvCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(getContext(), CategoryActivity.class);
+                intent.putExtra("category_id", id);
+                startActivity(intent);
             }
         });
     }

@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import tpp.profixer.customer.BR;
-import tpp.profixer.customer.data.model.app.Image;
+import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.databinding.ItemImageBinding;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
-    private List<Image> images;
+    private List<Slide> images;
     private Context context;
 
-    public ImageAdapter(Context context, List<Image> images) {
+    public ImageAdapter(Context context, List<Slide> images) {
         this.context = context;
         this.images = images;
     }

@@ -16,6 +16,7 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator3;
 import tpp.profixer.customer.BR;
 import tpp.profixer.customer.R;
+import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.response.Category;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
@@ -23,12 +24,13 @@ import tpp.profixer.customer.data.model.app.Image;
 import tpp.profixer.customer.databinding.FragmentHomeBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.category.CategoryActivity;
 import tpp.profixer.customer.ui.course.CourseActivity;
 import tpp.profixer.customer.ui.fragment.home.adapter.CategoryAdapter;
 import tpp.profixer.customer.ui.fragment.home.adapter.ImageAdapter;
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>{
-    private List<Image> images = new ArrayList<>();
+    private List<Slide> images = new ArrayList<>();
     private ImageAdapter imageAdapter;
     private CategoryAdapter categoryAdapter;
     @Override
@@ -61,24 +63,31 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getImages();
-        imageAdapter = new ImageAdapter(getContext(), images);
-        binding.viewPager2.setAdapter(imageAdapter);
-        binding.circelIndicator3.setViewPager(binding.viewPager2);
+//        imageAdapter = new ImageAdapter(getContext(), images);
+//        binding.viewPager2.setAdapter(imageAdapter);
+//        binding.circelIndicator3.setViewPager(binding.viewPager2);
 
         getCategoryCourse();
 
-        viewModel.categoryCourses.observe(this, categoryCourses -> {
-            categoryAdapter.setData(categoryCourses);
+        viewModel.slides.observe(this, slides -> {
+            imageAdapter = new ImageAdapter(getContext(), slides);
+            binding.viewPager2.setAdapter(imageAdapter);
+            binding.circelIndicator3.setViewPager(binding.viewPager2);
         });
 
-        viewModel.getCategoryCourse();
-    }
+        viewModel.categoryCourses.observe(this, categoryCourses -> {
+            categoryAdapter.addData(categoryCourses);
+        });
 
-    private void getImages(){
-        images.add(new Image(R.drawable.banner));
-        images.add(new Image(R.drawable.banner));
-        images.add(new Image(R.drawable.banner));
+        binding.swipeRefresh.setColorSchemeResources(R.color.app_color);
+        binding.swipeRefresh.setOnRefreshListener(() -> {
+            categoryAdapter.setData(new ArrayList<>());
+            viewModel.kind = 3;
+            viewModel.getSlideShow();
+            binding.swipeRefresh.setRefreshing(false);
+        });
+
+        viewModel.getSlideShow();
     }
 
     private void getCategoryCourse(){
@@ -89,7 +98,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
         categoryAdapter.setListener(new CategoryAdapter.CategoryListener() {
             @Override
             public void onItemClick(CategoryCourse categoryCourse) {
-
+                Intent intent = new Intent(getContext(), CategoryActivity.class);
+                intent.putExtra("category_id", categoryCourse.getCategory().getId());
+                startActivity(intent);
             }
 
             @Override

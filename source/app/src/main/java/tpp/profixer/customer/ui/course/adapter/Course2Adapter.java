@@ -33,6 +33,11 @@ public class Course2Adapter extends RecyclerView.Adapter<Course2Adapter.Course2V
         notifyDataSetChanged();
     }
 
+    public void addData(List<Course> relatedCourses) {
+        this.data.addAll(relatedCourses);
+        notifyDataSetChanged();
+    }
+
     public interface CourseListener{
         void onCourseClick(Course course);
     }
