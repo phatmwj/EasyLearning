@@ -10,13 +10,19 @@ import androidx.databinding.DataBindingUtil;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.model.api.response.CustomLesson;
+import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.databinding.ItemLesson2Binding;
 import tpp.profixer.customer.databinding.ItemLessonTitle2Binding;
 
 public class Lesson2Adapter extends BaseExpandableListAdapter {
     private List<CustomLesson> data;
+    @Getter
+    @Setter
+    private Lesson currentLesson;
     private Context context;
     private LayoutInflater layoutInflater;
     public Lesson2Adapter(Context context, List<CustomLesson> data) {
@@ -86,6 +92,7 @@ public class Lesson2Adapter extends BaseExpandableListAdapter {
             binding = (ItemLesson2Binding) convertView.getTag();
         }
         binding.setItem(data.get(groupPosition).getLessons().get(childPosition));
+        binding.setItemCurrent(currentLesson);
         binding.executePendingBindings();
         return convertView;
     }

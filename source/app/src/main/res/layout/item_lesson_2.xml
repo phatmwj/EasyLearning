@@ -6,6 +6,9 @@
         <variable
             name="item"
             type="tpp.profixer.customer.data.model.api.response.Lesson" />
+        <variable
+            name="itemCurrent"
+            type="tpp.profixer.customer.data.model.api.response.Lesson" />
         <import type="android.view.View"/>
     </data>
 
@@ -19,7 +22,7 @@
             android:layout_height="@dimen/_18sdp"
             android:layout_marginStart="@dimen/_7sdp"
             android:src='@{item.kind == 1 ? @drawable/ic_file : @drawable/ic_video}'
-            app:tint="@color/text"/>
+            icon_tint="@{itemCurrent != null &amp;&amp; itemCurrent.id.equals(item.id)}"/>
         <TextView
             style="@style/regular_text_style"
             android:layout_width="0dp"
@@ -29,7 +32,7 @@
             android:text="@{item.name}"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/black"
+            android:textColor="@{itemCurrent != null &amp;&amp; itemCurrent.id.equals(item.id) ? @color/app_color : @color/text}"
             />
         <TextView
             style="@style/regular_text_style"
@@ -39,7 +42,7 @@
             android:text="@{item.getTimeVideo()}"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/black"
+            android:textColor="@{itemCurrent != null &amp;&amp; itemCurrent.id.equals(item.id) ? @color/app_color : @color/text}"
             />
         <ImageView
             android:visibility="@{item.isDone != null &amp;&amp; item.isDone ? View.VISIBLE : View.INVISIBLE}"

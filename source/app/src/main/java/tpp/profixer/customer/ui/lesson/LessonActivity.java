@@ -3,6 +3,8 @@ package tpp.profixer.customer.ui.lesson;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
@@ -17,7 +19,13 @@ import androidx.media3.exoplayer.ExoPlayer;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import tpp.profixer.customer.R;
+import tpp.profixer.customer.data.model.api.response.CustomLesson;
+import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.databinding.ActivityLessonBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
@@ -27,6 +35,7 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
 
     private ExoPlayer player;
     private ViewPagerAdapter viewPagerAdapter;
+    private List<CustomLesson> customLessons = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.activity_lesson;
@@ -63,12 +72,61 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
         ).attach();
 
         player = new ExoPlayer.Builder(this).build();
-        setVideoPlay("https://video.edward.io.vn/hls/media/general/7049999380021248/COURSE/8395895960731648/8395898804961280/livestream.m3u8");
+        player.addListener(new Player.Listener() {
+            @Override
+            public void onPlaybackStateChanged(int state) {
+                if (state == Player.STATE_BUFFERING) {
+                    viewBinding.playerView.findViewById(R.id.exo_play_pause).setVisibility(View.GONE);
+                    viewBinding.playerView.findViewById(R.id.exo_progress_placeholder).setVisibility(View.VISIBLE);
+                } else if (state == Player.STATE_READY || state == Player.STATE_ENDED) {
+                    viewBinding.playerView.findViewById(R.id.exo_play_pause).setVisibility(View.VISIBLE);
+                    viewBinding.playerView.findViewById(R.id.exo_progress_placeholder).setVisibility(View.GONE);
+                    if(state == Player.STATE_ENDED){
+                        Integer a = (int) (player.getCurrentPosition()/1000);
+                        viewModel.completeLesson(a);
+                        handler.removeCallbacks(updateRunnable);
+                    }else {
+                        handler.post(updateRunnable);
+                    }
+                }
+            }
+        });
+        viewBinding.playerView.setPlayer(player);
         setupFullscreenToggle();
+
+        viewModel.currentLesson.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                Lesson lesson = viewModel.currentLesson.get();
+                if(lesson != null && lesson.getKind() == 2){
+                    setVideoPlay(lesson.getVideoUrl());
+                }
+            }
+        });
         viewModel.course.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-
+                List<Lesson> lessons = viewModel.course.get().getLessons();
+                customLessons.clear();
+                if(lessons != null){
+                    lessons.sort(Comparator.comparingInt(Lesson::getOrdering));
+                    for(int i = 0; i < lessons.size(); i++){
+                        Lesson lesson = lessons.get(i);
+                        if(lesson.getKind() == 3){
+                            CustomLesson customLesson = new CustomLesson();
+                            customLesson.setLesson(lesson);
+                            customLesson.setLessons(new ArrayList<>());
+                            customLessons.add(customLesson);
+                        }else {
+                            if(customLessons.isEmpty()) return;
+                            CustomLesson customLesson = customLessons.get(customLessons.size() - 1);
+                            customLesson.getLessons().add(lesson);
+                        }
+                    }
+                }
+                if(!customLessons.isEmpty() && !customLessons.get(0).getLessons().isEmpty()){
+                    viewModel.getLessonDetails(customLessons.get(0).getLessons().get(0).getId());
+                }
             }
         });
         viewModel.getCourseDetails();
@@ -103,19 +161,6 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
     }
 
     private void setVideoPlay(String url){
-        player.addListener(new Player.Listener() {
-            @Override
-            public void onPlaybackStateChanged(int state) {
-                if (state == Player.STATE_BUFFERING) {
-                    viewBinding.playerView.findViewById(R.id.exo_play_pause).setVisibility(View.GONE);
-                    viewBinding.playerView.findViewById(R.id.exo_progress_placeholder).setVisibility(View.VISIBLE);
-                } else if (state == Player.STATE_READY || state == Player.STATE_ENDED) {
-                    viewBinding.playerView.findViewById(R.id.exo_play_pause).setVisibility(View.VISIBLE);
-                    viewBinding.playerView.findViewById(R.id.exo_progress_placeholder).setVisibility(View.GONE);
-                }
-            }
-        });
-        viewBinding.playerView.setPlayer(player);
         MediaItem mediaItem = MediaItem.fromUri(url);
         player.setMediaItem(mediaItem);
         player.prepare();
@@ -164,4 +209,23 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
             }
         }
     }
+
+    public void getLessonDetails(Long lessonId){
+        viewModel.getLessonDetails(lessonId);
+    }
+
+    Handler handler = new Handler(Looper.getMainLooper());
+    Runnable updateRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (player != null && player.isPlaying()) {
+                int currentPosition = (int) player.getCurrentPosition()/1000;
+
+                if (currentPosition > 0 && currentPosition % 5 == 0) {
+                    viewModel.completeLesson(currentPosition);
+                }
+            }
+            handler.postDelayed(this, 1000);
+        }
+    };
 }

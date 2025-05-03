@@ -17,7 +17,7 @@
     <RelativeLayout
         android:id="@+id/layout_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_38sdp"
         android:background="@color/white">
 
         <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:padding="@dimen/_8sdp">
+                android:padding="@dimen/_5sdp">
                 <ImageView
                     android:id="@+id/button_back"
                     android:layout_width="@dimen/_18sdp"
@@ -46,11 +46,12 @@
                 android:id="@+id/tv_header_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:text="@{title}"
                 android:textSize="@dimen/_17ssp"
-                android:textColor="#424242"
-                android:maxLines="2"
+                android:textColor="@color/black"
+                android:maxLines="1"
                 android:ellipsize="end"/>
             <TextView
                 android:visibility="gone"

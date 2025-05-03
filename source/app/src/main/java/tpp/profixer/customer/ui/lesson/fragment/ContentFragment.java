@@ -2,6 +2,8 @@ package tpp.profixer.customer.ui.lesson.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.databinding.FragmentContentBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.lesson.LessonActivity;
 import tpp.profixer.customer.ui.lesson.adapter.Lesson2Adapter;
 
 public class ContentFragment extends BaseFragment<FragmentContentBinding, ContentViewModel> {
@@ -66,6 +69,24 @@ public class ContentFragment extends BaseFragment<FragmentContentBinding, Conten
     private void setLayoutLesson(){
         lesson2Adapter = new Lesson2Adapter(getContext(), customLessons);
         binding.lvLesson.setAdapter(lesson2Adapter);
+
+        binding.lvLesson.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
+
+        binding.lvLesson.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                lesson2Adapter.setCurrentLesson(customLessons.get(groupPosition).getLessons().get(childPosition));
+                lesson2Adapter.notifyDataSetChanged();
+                LessonActivity lessonActivity = (LessonActivity) getActivity();
+                lessonActivity.getLessonDetails(id);
+                return false;
+            }
+        });
     }
 
     private void loadLessonData(List<Lesson> lessons){
@@ -89,6 +110,9 @@ public class ContentFragment extends BaseFragment<FragmentContentBinding, Conten
         lesson2Adapter.notifyDataSetChanged();
 
         if(!customLessons.isEmpty()){
+            if(!customLessons.get(0).getLessons().isEmpty()){
+                lesson2Adapter.setCurrentLesson(customLessons.get(0).getLessons().get(0));
+            }
             binding.lvLesson.expandGroup(0);
         }
     }

@@ -12,6 +12,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
+import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.data.model.api.request.RequestCourse;
@@ -51,7 +52,7 @@ public interface ApiService {
     Observable<ResponseWrapper<Expert>> getProfile(@Query("studentId") Long studentId);
 
     @GET("/v1/lesson/lesson-detail/{lesson_id}")
-    Observable<ResponseWrapper<Lesson>> getLessonDetails(@Path("studentId") Long lessonId);
+    Observable<ResponseWrapper<Lesson>> getLessonDetails(@Path("lesson_id") Long lessonId);
 
     @DELETE("/v1/cart-item/delete/{cart_item_id}")
     Observable<ResponseWrapper> deleteCartItem(@Path("cart_item_id") Long cartItemId);
@@ -61,4 +62,7 @@ public interface ApiService {
 
     @GET("/v1/student/my-course")
     Observable<ResponseWrapper<ResponseListObj<Course>>> getMyCourses(@Query("isFinished") Boolean isFinished);
+
+    @POST("/v1/completion/create")
+    Observable<ResponseWrapper> completeLesson(@Body CompleteLessonRequest request);
 }

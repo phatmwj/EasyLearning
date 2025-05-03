@@ -1,0 +1,14 @@
+package tpp.profixer.customer.data.model.api.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CompleteLessonRequest {
+    private Long courseId;
+    private Long lessonId;
+    private Integer secondProgress;
+}

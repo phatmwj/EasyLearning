@@ -1,10 +1,14 @@
 package tpp.profixer.customer.utils;
 
+import android.content.Context;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
@@ -77,5 +81,16 @@ public final class BindingUtils {
         if(a){
             textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
+    }
+
+    @BindingAdapter("icon_tint")
+    public static void setIconTint(ImageView view, Boolean check) {
+        if(check != null && check){
+            view.setColorFilter(ContextCompat.getColor(view.getContext(), R.color.app_color),
+                    PorterDuff.Mode.MULTIPLY);
+            return;
+        }
+        view.setColorFilter(ContextCompat.getColor(view.getContext(), R.color.text),
+                PorterDuff.Mode.MULTIPLY);
     }
 }
