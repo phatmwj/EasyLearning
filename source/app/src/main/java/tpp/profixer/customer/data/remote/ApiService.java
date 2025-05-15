@@ -72,4 +72,7 @@ public interface ApiService {
 
     @GET("/v1/slideshow/list")
     Observable<ResponseWrapper<ResponseListObj<Slide>>> getSlideShow(@Query("status") Integer status);
+
+    @GET("/v1/course/client-list")
+    Observable<ResponseWrapper<ResponseListObj<Course>>> searchCourses(@Query("query") String query, @Query("isFree") Boolean isFree, @Query("fieldId") Long fieldId, @Query("size") Integer size);
 }

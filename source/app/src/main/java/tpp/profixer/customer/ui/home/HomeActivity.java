@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -63,6 +64,13 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         gpsObserver.onChange(gpsObserver.isGPSEnabled(this));
 
         viewModel.getCart();
+
+        viewModel.textSearch.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                handleSearch(viewModel.textSearch.get());
+            }
+        });
 
     }
 
@@ -200,5 +208,10 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
     @Override
     public boolean showHeader() {
         return true;
+    }
+
+    public void handleSearch(String search){
+        if(incomeFragment == null) return;
+        incomeFragment.handleSearch(search);
     }
 }

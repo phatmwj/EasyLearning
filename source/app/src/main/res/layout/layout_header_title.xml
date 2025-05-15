@@ -75,7 +75,7 @@
             android:gravity="center_vertical"
             android:background="@drawable/bg_default">
             <ImageView
-                android:onClick="@{()->a.onBackPressed()}"
+                android:id="@+id/img_delete"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="match_parent"
                 android:src="@{stringSearch != null &amp;&amp; !stringSearch.empty ? @drawable/ic_icon_delete : @drawable/ic_edittext_search}"
@@ -83,6 +83,7 @@
                 android:padding="@dimen/_10sdp"
                 app:tint="@color/text"/>
             <EditText
+                android:id="@+id/edit_text_search"
                 style="@style/app_edit_text_search"
                 android:layout_weight="1"
                 android:layout_width="0dp"

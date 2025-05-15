@@ -24,35 +24,87 @@
 <!--            app:layout_constraintStart_toStartOf="parent"-->
 <!--            app:layout_constraintEnd_toEndOf="parent"-->
 <!--            >-->
-            <androidx.core.widget.NestedScrollView
+        <FrameLayout
+            view_visibility="@{!vm.query.empty}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="@dimen/_7sdp"
-                android:fillViewport="true">
-                <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:orientation="vertical">
+                <TextView
+                    style="@style/bold_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:text='@{"Kết quả cho " + "\""+vm.query+ "\""}'
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#424242"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:orientation="vertical">
-                    <TextView
-                        style="@style/bold_text_style"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_14ssp"
-                        android:text="Thể loại"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="#424242"
-                        />
-                    <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:dividerHeight="0dp"
-                        android:divider="@android:color/transparent"
-                        android:id="@+id/lv_category"/>
-                </LinearLayout>
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:dividerHeight="0dp"
+                    android:divider="@android:color/transparent"
+                    android:id="@+id/rv_course"/>
+            </LinearLayout>
+            <LinearLayout
+                view_visibility="@{vm.totalElements == 0}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/grey_light"
+                    android:layout_marginBottom="@dimen/_5sdp"/>
+                <TextView
+                    style="@style/medium_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:text="Không tìm thấy"
+                    android:textColor="#424242"
+                    />
+            </LinearLayout>
+        </FrameLayout>
+        <androidx.core.widget.NestedScrollView
+            view_visibility="@{vm.query.empty}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/_7sdp"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="vertical">
+                <TextView
+                    style="@style/bold_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:text="Thể loại"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#424242"
+                    />
+                <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:dividerHeight="0dp"
+                    android:divider="@android:color/transparent"
+                    android:id="@+id/lv_category"/>
+            </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 <!--        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
     </FrameLayout>
 </layout>

@@ -43,7 +43,8 @@
             bind:dontback="@{Boolean.TRUE}"
             bind:isLogin="@{vm.isLogin}"
             bind:donLoginBtn="@{vm.loginButton}"
-            bind:isSearch="@{vm.isSearch}"/>
+            bind:isSearch="@{vm.isSearch}"
+            bind:stringSearch="@={vm.textSearch}"/>
 
         <FrameLayout
             android:id="@+id/frameLayout"

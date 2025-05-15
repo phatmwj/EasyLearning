@@ -333,6 +333,12 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
                         startActivity(intent);
                     }
                 });
+                headerBinding.imgDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        headerBinding.editTextSearch.setText("");
+                    }
+                });
                 headerBinding.executePendingBindings();
             }
         }
