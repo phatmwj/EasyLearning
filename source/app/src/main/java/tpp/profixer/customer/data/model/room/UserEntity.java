@@ -21,4 +21,8 @@ public class UserEntity {
     private Integer kind;
     private String phone;
     private String email;
+    private Long provinceId;
+    private Long wardId;
+    private Long districtId;
+    private String address;
 }

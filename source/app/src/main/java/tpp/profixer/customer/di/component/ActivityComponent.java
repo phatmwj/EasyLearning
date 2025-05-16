@@ -5,6 +5,7 @@ import tpp.profixer.customer.di.scope.ActivityScope;
 import tpp.profixer.customer.ui.account.AccountActivity;
 import tpp.profixer.customer.ui.cart.CartActivity;
 import tpp.profixer.customer.ui.category.CategoryActivity;
+import tpp.profixer.customer.ui.changepassword.ChangePasswordActivity;
 import tpp.profixer.customer.ui.course.CourseActivity;
 import tpp.profixer.customer.ui.expert.ExpertActivity;
 import tpp.profixer.customer.ui.home.HomeActivity;
@@ -38,5 +39,7 @@ public interface ActivityComponent {
     void inject(SignupActivity signupActivity);
 
     void inject(ExpertActivity expertActivity);
+
+    void inject(ChangePasswordActivity changePasswordActivity);
 }
 

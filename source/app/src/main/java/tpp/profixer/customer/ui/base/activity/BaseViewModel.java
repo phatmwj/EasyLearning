@@ -126,7 +126,7 @@ public class BaseViewModel extends ViewModel {
                         response -> {
                             hideLoading();
                             if(response.isResult() && response.getData() != null){
-                                repository.getRoomService().userDao().insert(response.getData().getAccount().convertToEntity());
+                                repository.getRoomService().userDao().insert(response.getData().convertToEntity());
                             }
                         }, throwable -> {
                             hideLoading();

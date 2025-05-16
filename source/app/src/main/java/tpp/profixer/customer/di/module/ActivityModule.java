@@ -13,6 +13,7 @@ import tpp.profixer.customer.ui.account.AccountViewModel;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.cart.CartViewModel;
 import tpp.profixer.customer.ui.category.CategoryViewModel;
+import tpp.profixer.customer.ui.changepassword.ChangePasswordViewModel;
 import tpp.profixer.customer.ui.course.CourseViewModel;
 import tpp.profixer.customer.ui.expert.ExpertViewModel;
 import tpp.profixer.customer.ui.home.HomeViewModel;
@@ -140,5 +141,11 @@ public class ActivityModule {
         return new ViewModelProvider(activity, factory).get(ExpertViewModel.class);
     }
 
-
+    @Provides
+    @ActivityScope
+    ChangePasswordViewModel provideChangePasswordViewModel(Repository repository, Context application) {
+        Supplier<ChangePasswordViewModel> supplier = () -> new ChangePasswordViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<ChangePasswordViewModel> factory = new ViewModelProviderFactory<>(ChangePasswordViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(ChangePasswordViewModel.class);
+    }
 }

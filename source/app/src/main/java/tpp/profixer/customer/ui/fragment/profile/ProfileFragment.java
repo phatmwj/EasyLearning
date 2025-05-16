@@ -19,6 +19,7 @@ import tpp.profixer.customer.data.model.room.UserEntity;
 import tpp.profixer.customer.databinding.FragmentProfileBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.changepassword.ChangePasswordActivity;
 import tpp.profixer.customer.ui.fragment.profile.adapter.AccountAdapter;
 import tpp.profixer.customer.ui.login.LoginActivity;
 
@@ -79,6 +80,8 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
                     case 2:
                         break;
                     case 3:
+                        Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;

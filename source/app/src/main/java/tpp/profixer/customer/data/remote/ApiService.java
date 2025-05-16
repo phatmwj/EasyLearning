@@ -8,6 +8,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
@@ -15,6 +16,7 @@ import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
 import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.Slide;
+import tpp.profixer.customer.data.model.api.request.UpdateProfileRequest;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.data.model.api.request.RequestCourse;
@@ -86,4 +88,7 @@ public interface ApiService {
 
     @GET("/v1/expert/client-get/{expert_id}")
     Observable<ResponseWrapper<ExpertInfo>> getExpertInfo(@Path("expert_id") Long expertId);
+
+    @PUT("/v1/student/update-profile")
+    Observable<ResponseWrapper> updateProfile(@Body UpdateProfileRequest request);
 }

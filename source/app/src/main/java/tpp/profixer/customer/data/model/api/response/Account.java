@@ -16,15 +16,4 @@ public class Account {
     private String phone;
     private String email;
     private Group group;
-
-    public UserEntity convertToEntity(){
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(id);
-        userEntity.setFullName(fullName);
-        userEntity.setAvatar(avatar);
-        userEntity.setKind(kind);
-        userEntity.setPhone(phone);
-        userEntity.setEmail(email);
-        return userEntity;
-    }
 }

@@ -14,7 +14,8 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+//        api-easy.edward.io.vn
+//        media.edward.io.vn
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", "\"https://api-easy.edward.io.vn\""
@@ -196,4 +197,6 @@ dependencies {
 //    implementation 'com.github.blogpost:ExpandableTextView:1.0.0'
     implementation 'io.github.glailton.expandabletextview:expandabletextview:1.0.4'
     implementation 'com.ms-square:expandableTextView:0.1.4'
+
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }

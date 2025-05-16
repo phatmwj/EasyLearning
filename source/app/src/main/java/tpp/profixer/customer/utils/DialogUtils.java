@@ -60,6 +60,9 @@ public class DialogUtils {
 
         builder.setCancelable(false); // if you want user to wait for some process to finish,
         builder.setView(layout);
-        return builder.create();
+
+        Dialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        return dialog;
     }
 }
