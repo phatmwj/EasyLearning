@@ -1,4 +1,6 @@
-package tpp.profixer.customer.ui.fragment.home;
+package tpp.profixer.customer.ui.expert;
+
+import android.text.Html;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
@@ -14,26 +16,26 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
-import tpp.profixer.customer.data.model.api.request.Slide;
-import tpp.profixer.customer.data.model.api.response.CategoryCourse;
-import tpp.profixer.customer.data.model.room.UserEntity;
-import tpp.profixer.customer.ui.base.fragment.BaseFragmentViewModel;
+import tpp.profixer.customer.data.model.api.ApiModelUtils;
+import tpp.profixer.customer.data.model.api.response.Course;
+import tpp.profixer.customer.data.model.api.response.ExpertInfo;
+import tpp.profixer.customer.data.model.api.response.Identification;
+import tpp.profixer.customer.ui.base.activity.BaseViewModel;
 import tpp.profixer.customer.utils.NetworkUtils;
 
-public class HomeFragmentViewModel extends BaseFragmentViewModel {
-    public ObservableField<UserEntity> profile = new ObservableField<>();
-    public  Repository repository;
-    public Integer kind =3;
-    private Integer status =1;
-    public MutableLiveData<List<CategoryCourse>> categoryCourses = new MutableLiveData<>();
-    public MutableLiveData<List<Slide>> slides = new MutableLiveData<>();
-    public HomeFragmentViewModel(Repository repository, ProFixerApplication application) {
+public class ExpertViewModel extends BaseViewModel {
+
+    public ObservableField<ExpertInfo> expertInfo = new ObservableField<>();
+    public ObservableField<Identification> identification = new ObservableField<>();
+    public Long expertId;
+    public MutableLiveData<List<Course>> relatedCourses = new MutableLiveData<>();
+    public ExpertViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
-        this.repository = repository;
     }
 
-    public void getCategoryCourse(){
-        compositeDisposable.add(repository.getApiService().getCategories(kind,status)
+    public void getExpertInfo(){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().getExpertInfo(expertId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -51,40 +53,20 @@ public class HomeFragmentViewModel extends BaseFragmentViewModel {
                 )
                 .subscribe(
                         response -> {
-                            if(response.isResult() && response.getData() != null && response.getData().getContent() != null){
-                                categoryCourses.setValue(response.getData().getContent());
-                                ProFixerApplication.categories.clear();
-                                for (CategoryCourse categoryCourse : response.getData().getContent()) {
-                                    ProFixerApplication.categories.add(categoryCourse.getCategory());
-                                }
-                            }else {
-                                categoryCourses.setValue(new ArrayList<>());
-                                Timber.e(response.getMessage());
-                            }
-                            if(kind == 3){
-                                kind = 4;
-                                getCategoryCourse();
-                                return;
-                            }
-                            if(kind == 4){
-                                kind = 1;
-                                getCategoryCourse();
-                                return;
-                            }
-                            if(kind == 1){
-                                hideLoading();
-                            }
+                            expertInfo.set(response.getData());
+                            identification.set(ApiModelUtils.fromJson(expertInfo.get().getIdentification(), Identification.class));
+//                            hideLoading();
+                            getCourses();
                         }, throwable -> {
-                            categoryCourses.setValue(new ArrayList<>());
                             hideLoading();
                             handleException(throwable);
                             Timber.e(throwable);
                         }));
     }
 
-    public void getSlideShow(){
-        showLoading();
-        compositeDisposable.add(repository.getApiService().getSlideShow(1)
+    public void getCourses(){
+//        showLoading();
+        compositeDisposable.add(repository.getApiService().getCoursesByExpert(expertId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -103,18 +85,17 @@ public class HomeFragmentViewModel extends BaseFragmentViewModel {
                 .subscribe(
                         response -> {
                             if(response.isResult() && response.getData() != null && response.getData().getContent() != null){
-                                slides.setValue(response.getData().getContent());
+                                relatedCourses.setValue(response.getData().getContent());
                             }else {
-                                slides.setValue(new ArrayList<>());
+                                relatedCourses.setValue(new ArrayList<>());
                                 Timber.e(response.getMessage());
                             }
-                            getCategoryCourse();
+                            hideLoading();
                         }, throwable -> {
-                            slides.setValue(new ArrayList<>());
-                            getCategoryCourse();
+                            relatedCourses.setValue(new ArrayList<>());
+                            hideLoading();
                             handleException(throwable);
                             Timber.e(throwable);
                         }));
     }
-
 }

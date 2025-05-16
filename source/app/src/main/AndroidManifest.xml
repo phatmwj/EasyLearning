@@ -49,6 +49,16 @@
         android:theme="@style/App.Theme"
         android:windowSoftInputMode="adjustResize|stateHidden">
         <activity
+            android:name=".ui.expert.ExpertActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.signup.SignupActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".ui.category.CategoryActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">

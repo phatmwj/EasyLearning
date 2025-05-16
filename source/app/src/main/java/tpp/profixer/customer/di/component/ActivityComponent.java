@@ -6,10 +6,12 @@ import tpp.profixer.customer.ui.account.AccountActivity;
 import tpp.profixer.customer.ui.cart.CartActivity;
 import tpp.profixer.customer.ui.category.CategoryActivity;
 import tpp.profixer.customer.ui.course.CourseActivity;
+import tpp.profixer.customer.ui.expert.ExpertActivity;
 import tpp.profixer.customer.ui.home.HomeActivity;
 import tpp.profixer.customer.ui.lesson.LessonActivity;
 import tpp.profixer.customer.ui.login.LoginActivity;
 import tpp.profixer.customer.ui.map.MapActivity;
+import tpp.profixer.customer.ui.signup.SignupActivity;
 import tpp.profixer.customer.ui.splash.SplashActivity;
 
 import dagger.Component;
@@ -32,5 +34,9 @@ public interface ActivityComponent {
     void inject(AccountActivity accountActivity);
 
     void inject(CategoryActivity categoryActivity);
+
+    void inject(SignupActivity signupActivity);
+
+    void inject(ExpertActivity expertActivity);
 }
 

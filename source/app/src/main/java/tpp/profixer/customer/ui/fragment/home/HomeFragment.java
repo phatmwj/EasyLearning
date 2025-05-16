@@ -21,6 +21,7 @@ import tpp.profixer.customer.data.model.api.response.Category;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.app.Image;
+import tpp.profixer.customer.data.model.room.UserEntity;
 import tpp.profixer.customer.databinding.FragmentHomeBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
@@ -68,6 +69,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
 //        binding.circelIndicator3.setViewPager(binding.viewPager2);
 
         getCategoryCourse();
+
+        viewModel.repository.getRoomService().userDao().loadAllToLiveData().observe(this, userEntities -> {
+            Long userId = viewModel.repository.getSharedPreferences().getUserId();
+            for (UserEntity userEntity : userEntities) {
+                if (userEntity.getId().equals(userId)){
+                    viewModel.profile.set(userEntity);
+                }
+            }
+        });
 
         viewModel.slides.observe(this, slides -> {
             imageAdapter = new ImageAdapter(getContext(), slides);

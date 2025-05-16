@@ -23,10 +23,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Setter
     private CourseListener listener;
 
+    @Setter
+    private Integer itemWidth;
     public CourseAdapter(Context context, List<Course> data) {
         this.context = context;
         this.data = data;
         layoutInflater = LayoutInflater.from(context);
+        itemWidth = ScreenUtils.getScreenWidth(context)/5*2;
     }
 
     public void setData(List<Course> relatedCourses) {
@@ -43,7 +46,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemCourseBinding binding = ItemCourseBinding.inflate(layoutInflater, parent, false);
         ViewGroup.LayoutParams layoutParams = binding.getRoot().getLayoutParams();
-        layoutParams.width = ScreenUtils.getScreenWidth(context)/5*2;
+        layoutParams.width = itemWidth;
         binding.getRoot().setLayoutParams(layoutParams);
         return new CourseViewHolder(binding);
     }

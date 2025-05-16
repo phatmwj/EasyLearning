@@ -13,6 +13,7 @@ import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
+import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
@@ -21,6 +22,7 @@ import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Expert;
+import tpp.profixer.customer.data.model.api.response.ExpertInfo;
 import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.LoginResponse;
 import tpp.profixer.customer.data.model.api.response.Review;
@@ -30,6 +32,10 @@ public interface ApiService {
     @POST("/api/token")
     @Headers({"BasicAuth: 1"})
     Observable<LoginResponse> login(@Body LoginRequest request);
+
+    @POST("/v1/student/signup")
+    @Headers({"BasicAuth: 1"})
+    Observable<ResponseWrapper> signup(@Body SignupRequest request);
     @GET("/v1/category-home/client-list")
     Observable<ResponseWrapper<ResponseListObj<CategoryCourse>>> getCategories(@Query("kind") Integer kind, @Query("status") Integer status);
 
@@ -68,11 +74,16 @@ public interface ApiService {
     Observable<ResponseWrapper> completeLesson(@Body CompleteLessonRequest request);
 
     @GET("/v1/course/client-list")
-    Observable<ResponseWrapper<ResponseListObj<Course>>> getCoursesByCategory(@Query("categoryId") Long categoryId, @Query("page") Integer page, @Query("size") Integer size);
+    Observable<ResponseWrapper<ResponseListObj<Course>>> getCoursesByCategory(@Query("categoryId") Long categoryId, @Query("page") Integer page, @Query("size") Integer size, @Query("isFree") Boolean isFree);
 
     @GET("/v1/slideshow/list")
     Observable<ResponseWrapper<ResponseListObj<Slide>>> getSlideShow(@Query("status") Integer status);
 
     @GET("/v1/course/client-list")
     Observable<ResponseWrapper<ResponseListObj<Course>>> searchCourses(@Query("query") String query, @Query("isFree") Boolean isFree, @Query("fieldId") Long fieldId, @Query("size") Integer size);
+    @GET("/v1/course/client-list")
+    Observable<ResponseWrapper<ResponseListObj<Course>>> getCoursesByExpert(@Query("expertId") Long expertId);
+
+    @GET("/v1/expert/client-get/{expert_id}")
+    Observable<ResponseWrapper<ExpertInfo>> getExpertInfo(@Path("expert_id") Long expertId);
 }

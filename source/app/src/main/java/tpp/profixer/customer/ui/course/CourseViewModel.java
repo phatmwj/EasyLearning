@@ -1,5 +1,7 @@
 package tpp.profixer.customer.ui.course;
 
+import android.content.Intent;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 
@@ -19,6 +21,7 @@ import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
+import tpp.profixer.customer.ui.expert.ExpertActivity;
 import tpp.profixer.customer.utils.NetworkUtils;
 
 public class CourseViewModel extends BaseViewModel {
@@ -205,5 +208,11 @@ public class CourseViewModel extends BaseViewModel {
                             hideLoading();
                             handleException(throwable);
                         }));
+    }
+
+    public void navigateToExpert(){
+        Intent intent = new Intent(application.getCurrentActivity(), ExpertActivity.class);
+        intent.putExtra("expert_id", course.get().getExpert().getId());
+        application.getCurrentActivity().startActivity(intent);
     }
 }

@@ -14,10 +14,12 @@ import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.cart.CartViewModel;
 import tpp.profixer.customer.ui.category.CategoryViewModel;
 import tpp.profixer.customer.ui.course.CourseViewModel;
+import tpp.profixer.customer.ui.expert.ExpertViewModel;
 import tpp.profixer.customer.ui.home.HomeViewModel;
 import tpp.profixer.customer.ui.lesson.LessonViewModel;
 import tpp.profixer.customer.ui.login.LoginViewModel;
 import tpp.profixer.customer.ui.map.MapViewModel;
+import tpp.profixer.customer.ui.signup.SignupViewModel;
 import tpp.profixer.customer.ui.splash.SplashViewModel;
 import tpp.profixer.customer.utils.GetInfo;
 
@@ -121,5 +123,22 @@ public class ActivityModule {
         ViewModelProviderFactory<CategoryViewModel> factory = new ViewModelProviderFactory<>(CategoryViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(CategoryViewModel.class);
     }
+
+    @Provides
+    @ActivityScope
+    SignupViewModel provideSignupViewModel(Repository repository, Context application) {
+        Supplier<SignupViewModel> supplier = () -> new SignupViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<SignupViewModel> factory = new ViewModelProviderFactory<>(SignupViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(SignupViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    ExpertViewModel provideExpertViewModel(Repository repository, Context application) {
+        Supplier<ExpertViewModel> supplier = () -> new ExpertViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<ExpertViewModel> factory = new ViewModelProviderFactory<>(ExpertViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(ExpertViewModel.class);
+    }
+
 
 }

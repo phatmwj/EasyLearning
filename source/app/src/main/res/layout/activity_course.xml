@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:expandableTextView="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -66,6 +67,7 @@
                         android:textSize="@dimen/_12ssp"/>
 
                     <TextView
+                        android:onClick="@{()->vm.navigateToExpert()}"
                         style="@style/medium_text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -225,6 +227,43 @@
                                     />
                             </LinearLayout>
                         </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:text="Giới thiệu khóa học"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#424242"
+                            />
+                        <com.ms.square.android.expandabletextview.ExpandableTextView
+                            android:id="@+id/expand_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            expandableTextView:maxCollapsedLines="4"
+                            expandableTextView:animDuration="200">
+                            <TextView
+                                android:id="@id/expandable_text"
+                                style="@style/regular_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_12ssp"
+                                android:textColor="@color/text"
+                                />
+                            <ImageButton
+                                android:id="@id/expand_collapse"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|bottom"
+                                android:background="@android:color/transparent"/>
+                        </com.ms.square.android.expandabletextview.ExpandableTextView>
                     </LinearLayout>
 
                     <LinearLayout

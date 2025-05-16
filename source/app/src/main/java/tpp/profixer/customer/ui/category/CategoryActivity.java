@@ -18,9 +18,11 @@ import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.course.CourseActivity;
 import tpp.profixer.customer.ui.course.adapter.Course2Adapter;
+import tpp.profixer.customer.ui.fragment.home.adapter.CourseAdapter;
 
 public class CategoryActivity extends BaseActivity<ActivityCategoryBinding, CategoryViewModel> {
     Course2Adapter course2Adapter;
+    CourseAdapter courseAdapter;
     @Override
     public int getLayoutId() {
         return R.layout.activity_category;
@@ -51,12 +53,18 @@ public class CategoryActivity extends BaseActivity<ActivityCategoryBinding, Cate
         }
 
         setLayoutRelatedCourses();
+        setLayoutFreeCourses();
         viewModel.courses.observe(this, courses ->{
             if(viewModel.page.get() == 0){
                 course2Adapter.setData(courses);
                 return;
             }
             course2Adapter.addData(courses);
+        });
+
+        viewModel.freeCourses.observe(this, courses ->{
+            courseAdapter.setData(courses);
+            viewModel.totalFreeCourses.set(courses != null ? courses.size() : 0);
         });
 
         viewBinding.swipeRefresh.setColorSchemeResources(R.color.app_color);
@@ -87,5 +95,26 @@ public class CategoryActivity extends BaseActivity<ActivityCategoryBinding, Cate
     public void loadMore(){
         viewModel.page.set(viewModel.page.get() + 1);
         viewModel.getCoursesByCategory();
+    }
+
+    @Override
+    public boolean showHeader() {
+        return true;
+    }
+
+    private void setLayoutFreeCourses(){
+        courseAdapter = new CourseAdapter(this, new ArrayList<>());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        viewBinding.rvFreeCourse.setLayoutManager(layoutManager);
+        viewBinding.rvFreeCourse.setAdapter(courseAdapter);
+        courseAdapter.setListener(new CourseAdapter.CourseListener() {
+            @Override
+            public void onCourseClick(Course course) {
+                Intent it = new Intent(CategoryActivity.this, CourseActivity.class);
+                it.putExtra("course_id", course.getId());
+                it.putExtra("category_id", viewModel.categoryId);
+                startActivity(it);
+            }
+        });
     }
 }

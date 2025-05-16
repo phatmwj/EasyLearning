@@ -3,6 +3,8 @@ package tpp.profixer.customer.ui.course;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -76,6 +78,12 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                 if(viewModel.course.get().getIsBuy()){
                     viewModel.courseState.set(2);
                 }
+                String rawHtml = viewModel.course.get().getDescription();
+                String cleanedHtml = rawHtml
+                        .replaceAll("(?i)<p>(\\s|&nbsp;)*</p>", "")     // Xóa <p> chỉ có khoảng trắng hoặc &nbsp;
+                        .replaceAll("(?i)<span>(\\s|&nbsp;)*</span>", ""); // Xóa <span> tương tự
+                Spanned html = Html.fromHtml(cleanedHtml, Html.FROM_HTML_MODE_LEGACY);
+                viewBinding.expandTextView.setText(html);
             }
         });
 

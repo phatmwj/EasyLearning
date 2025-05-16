@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="tpp.profixer.customer.ui.expert.ExpertViewModel" />
+        <variable
+            name="a"
+            type="tpp.profixer.customer.ui.expert.ExpertActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"
+            bind:title='@{"Giảng viên"}'/>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:background="@drawable/bg_oval"
+                        android:padding="@dimen/_1sdp"
+                        android:backgroundTint="@color/app_color"
+                        image_url="@{vm.expertInfo.avatar}"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:text="@{vm.expertInfo.fullName}"
+                            android:textColor="#424242"
+                            />
+                        <TextView
+                            android:visibility="gone"
+                            style="@style/regular_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_12ssp"
+                            android:text="Giảng viên tại Easy Learning"
+                            android:textColor="#424242"
+                            />
+                        <TextView
+                            style="@style/regular_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:textSize="@dimen/_11ssp"
+                            text_html="@{vm.identification.shortInfo}"
+                            android:textColor="@color/text"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_7sdp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_10ssp"
+                            android:text="Tổng số học viên"
+                            android:textColor="#424242"
+                            />
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_18ssp"
+                            android:text="@{vm.expertInfo.totalStudent}"
+                            android:textColor="@color/black"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:orientation="vertical">
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_10ssp"
+                            android:text="Khóa học"
+                            android:textColor="#424242"
+                            />
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_18ssp"
+                            android:text="@{vm.expertInfo.totalCourse}"
+                            android:textColor="@color/black"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/bold_text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_14ssp"
+                        android:text="Giới thiệu về tôi"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="#424242"
+                        />
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
+                        android:id="@+id/expand_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        expandableTextView:maxCollapsedLines="4"
+                        expandableTextView:animDuration="200">
+                        <TextView
+                            android:id="@id/expandable_text"
+                            style="@style/regular_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_12ssp"
+                            android:textColor="@color/text"
+                            />
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:background="@android:color/transparent"/>
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+<!--                    <io.github.glailton.expandabletextview.ExpandableTextView-->
+<!--                        android:id="@+id/expand_tv"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        expandableTextView:collapsedLines="3"-->
+<!--                        expandableTextView:animDuration="500"-->
+<!--                        expandableTextView:readMoreText="Đọc thêm"-->
+<!--                        expandableTextView:readLessText="Thu gọn"-->
+<!--                        expandableTextView:textMode="line"-->
+<!--                        expandableTextView:isExpanded="false"-->
+<!--                        app:expandType="layout"-->
+<!--                        android:textSize="@dimen/_12ssp"-->
+<!--                        text_html="@{vm.identification.introduction}" />-->
+<!--                    <TextView-->
+<!--                        style="@style/regular_text_style"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textSize="@dimen/_12ssp"-->
+<!--                        text_html="@{vm.identification.introduction}"-->
+<!--                        android:textColor="@color/text"-->
+<!--                        />-->
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:orientation="vertical">
+                <TextView
+                    style="@style/bold_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:text="Khoá học đã giảng dạy"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#424242"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:clipToPadding="false"
+                    android:id="@+id/rv_courses"/>
+            </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

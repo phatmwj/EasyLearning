@@ -25,13 +25,15 @@ public class CategoryViewModel extends BaseViewModel {
     public ObservableField<Integer> page = new ObservableField<>(0);
     public MutableLiveData<List<Course>> courses = new MutableLiveData<>();
     public ObservableField<Integer> totalPage = new ObservableField<>();
+    public MutableLiveData<List<Course>> freeCourses = new MutableLiveData<>();
+    public ObservableField<Integer> totalFreeCourses = new ObservableField<>(0);
     public CategoryViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
     }
 
     public void getCoursesByCategory(){
         showLoading();
-        compositeDisposable.add(repository.getApiService().getCoursesByCategory(categoryId, page.get(), size)
+        compositeDisposable.add(repository.getApiService().getCoursesByCategory(categoryId, page.get(), size, null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -56,9 +58,43 @@ public class CategoryViewModel extends BaseViewModel {
                                 courses.setValue(new ArrayList<>());
                                 Timber.e(response.getMessage());
                             }
-                            hideLoading();
+                            getFreeCoursesByCategory();
                         }, throwable -> {
                             courses.setValue(new ArrayList<>());
+                            hideLoading();
+                            handleException(throwable);
+                            Timber.e(throwable);
+                        }));
+    }
+
+    public void getFreeCoursesByCategory(){
+        compositeDisposable.add(repository.getApiService().getCoursesByCategory(categoryId, page.get(), Integer.MAX_VALUE, true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            if(response.isResult() && response.getData() != null && response.getData().getContent() != null){
+                                freeCourses.setValue(response.getData().getContent());
+                            }else {
+                                freeCourses.setValue(new ArrayList<>());
+                                Timber.e(response.getMessage());
+                            }
+                            hideLoading();
+                        }, throwable -> {
+                            freeCourses.setValue(new ArrayList<>());
                             hideLoading();
                             handleException(throwable);
                             Timber.e(throwable);

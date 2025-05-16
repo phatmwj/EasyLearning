@@ -3,6 +3,8 @@ package tpp.profixer.customer.utils;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.os.Build;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 
+import io.github.glailton.expandabletextview.ExpandableTextView;
 import tpp.profixer.customer.BuildConfig;
 import tpp.profixer.customer.R;
 
@@ -92,5 +95,23 @@ public final class BindingUtils {
         }
         view.setColorFilter(ContextCompat.getColor(view.getContext(), R.color.text),
                 PorterDuff.Mode.MULTIPLY);
+    }
+
+    @BindingAdapter("text_html")
+    public static void textHtml(TextView textView, String html) {
+        if(html == null){
+            textView.setText("");
+            return;
+        }
+        textView.setText(Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY));
+    }
+
+    @BindingAdapter("text_html")
+    public static void textHtml(ExpandableTextView textView, String html) {
+        if(html == null){
+            textView.setText("");
+            return;
+        }
+        textView.setText(Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY));
     }
 }

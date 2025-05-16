@@ -1,40 +1,31 @@
-package tpp.profixer.customer.ui.login;
-
-
-import android.content.Intent;
+package tpp.profixer.customer.ui.signup;
 
 import androidx.databinding.ObservableField;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
-import tpp.profixer.customer.data.model.api.request.LoginRequest;
+import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
-import tpp.profixer.customer.ui.home.HomeActivity;
-import tpp.profixer.customer.ui.signup.SignupActivity;
 import tpp.profixer.customer.utils.NetworkUtils;
 
-public class LoginViewModel extends BaseViewModel {
+public class SignupViewModel extends BaseViewModel {
+
+    public ObservableField<SignupRequest> request = new ObservableField<>(new SignupRequest());
     public ObservableField<Boolean> isShowPassword = new ObservableField<>(false);
-    public ObservableField<LoginRequest> request = new ObservableField<>(new LoginRequest());
-
-    public ObservableField<String> tenantId = new ObservableField<>();
-
-    public CompositeDisposable compositeDisposableUpdateDeviceToken = new CompositeDisposable();
-
-    public LoginViewModel(Repository repository, ProFixerApplication application) {
+    public ObservableField<Boolean> isShowPassword2 = new ObservableField<>(false);
+    public SignupViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
     }
 
-    public void doLogin(){
+    public void doSignup(){
         showLoading();
-        compositeDisposable.add(repository.getApiService().login(request.get())
+        compositeDisposable.add(repository.getApiService().signup(request.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -50,13 +41,8 @@ public class LoginViewModel extends BaseViewModel {
                 .subscribe(
                         response -> {
                             hideLoading();
-                            repository.getSharedPreferences().setToken(response.getAccess_token());
-                            repository.getSharedPreferences().setUserId(response.getUser_id());
-                            getProfile();
-                            getCart();
-                            isLogin.set(true);
                             application.getCurrentActivity().finish();
-                            showSuccessMessage("Đăng nhập thành công");
+                            showSuccessMessage("Đăng kí thành công");
                         }, throwable -> {
                             hideLoading();
                             handleException(throwable);
@@ -64,19 +50,10 @@ public class LoginViewModel extends BaseViewModel {
                         }));
     }
 
-    private void navigateToHome(){
-        Intent intent = new Intent(application.getCurrentActivity(), HomeActivity.class);
-        application.getCurrentActivity().startActivity(intent);
-        application.getCurrentActivity().finish();
-    }
-
-    public void navigateToSignup(){
-        Intent intent = new Intent(application.getCurrentActivity(), SignupActivity.class);
-        application.getCurrentActivity().startActivity(intent);
-    }
-
     public void showPassword(){
         isShowPassword.set(Boolean.FALSE.equals(isShowPassword.get()));
     }
-
+    public void showPassword2(){
+        isShowPassword2.set(Boolean.FALSE.equals(isShowPassword2.get()));
+    }
 }
