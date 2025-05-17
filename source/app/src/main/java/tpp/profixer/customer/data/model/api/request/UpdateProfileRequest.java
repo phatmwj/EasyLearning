@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProfileRequest {
+    private String avatarPath;
     private String address;
     private String confirmPassword;
     private String email;

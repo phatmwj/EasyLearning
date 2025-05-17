@@ -199,4 +199,7 @@ dependencies {
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    //Pick Image from Gallery, Camera
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,9 +12,366 @@
             type="tpp.profixer.customer.ui.account.AccountActivity" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"/>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/_7sdp"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:onClick="@{()->a.showDialogChooseImage()}"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_gravity="center_horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgAvatar"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_gravity="center_horizontal"
+                        image_url="@{vm.request.avatarPath}"
+                        />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:padding="@dimen/_7sdp"
+                        android:layout_gravity="bottom|right"
+                        android:src="@drawable/baseline_edit_24"
+                        android:background="@drawable/bg_oval"
+                        android:backgroundTint="@color/grey_light"/>
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Họ và tên"
+                            style="@style/label_edit_text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_12ssp"/>
+                    </LinearLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_36sdp"
+                        style="@style/app_edit_text"
+                        android:hint="Nhập họ và tên"
+                        android:text="@={vm.request.fullName}"
+                        android:focusable="true"
+                        android:paddingEnd="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:maxLength="30"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp">
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        style="@style/label_edit_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_12ssp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/edit_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    style="@style/app_edit_text"
+                    android:hint="mail@example.com"
+                    android:text="@={vm.request.email}"
+                    android:focusable="true"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:enabled="false"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Số điện thoại"
+                            style="@style/label_edit_text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_12ssp"/>
+                    </LinearLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_36sdp"
+                        style="@style/app_edit_text"
+                        android:hint="Nhập số điện thoại"
+                        android:text="@={vm.request.phone}"
+                        android:focusable="true"
+                        android:paddingEnd="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:maxLength="10"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:inputType="phone"
+                        android:enabled="false"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tỉnh/ thành"
+                            style="@style/label_edit_text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_12ssp"/>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:boxBackgroundMode="outline"
+                        app:shapeAppearanceOverlay="@style/Rounded"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:boxStrokeWidthFocused="@dimen/_1sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="#EDEDED"
+                        app:endIconDrawable="@drawable/ic_dropdown"
+                        app:hintTextColor="#EDEDED"
+                        app:hintEnabled="false"
+                        android:hint="Chọn"
+                        app:hintAnimationEnabled="false"
+                        app:endIconTint="@color/black">
+                        <AutoCompleteTextView
+                            style="@style/medium_text_style"
+                            android:id="@+id/actv_payment_method"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_36sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center_vertical"
+                            android:inputType="none"
+                            android:textSize="@dimen/_12sdp"
+                            android:overScrollMode="ifContentScrolls"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quận/ Huyện"
+                            style="@style/label_edit_text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_12ssp"/>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:boxBackgroundMode="outline"
+                        app:shapeAppearanceOverlay="@style/Rounded"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:boxStrokeWidthFocused="@dimen/_1sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="#EDEDED"
+                        app:endIconDrawable="@drawable/ic_dropdown"
+                        app:hintTextColor="#EDEDED"
+                        app:hintEnabled="false"
+                        android:hint="Chọn"
+                        app:hintAnimationEnabled="false"
+                        app:endIconTint="@color/black">
+                        <AutoCompleteTextView
+                            style="@style/medium_text_style"
+                            android:id="@+id/actv_payment_method2"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_36sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center_vertical"
+                            android:inputType="none"
+                            android:textSize="@dimen/_12sdp"
+                            android:overScrollMode="ifContentScrolls"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Phường/ Xã"
+                            style="@style/label_edit_text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_12ssp"/>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:boxBackgroundMode="outline"
+                        app:shapeAppearanceOverlay="@style/Rounded"
+                        app:boxStrokeWidth="@dimen/_1sdp"
+                        app:boxStrokeWidthFocused="@dimen/_1sdp"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="#EDEDED"
+                        app:endIconDrawable="@drawable/ic_dropdown"
+                        app:hintTextColor="#EDEDED"
+                        app:hintEnabled="false"
+                        android:hint="Chọn"
+                        app:hintAnimationEnabled="false"
+                        app:endIconTint="@color/black">
+                        <AutoCompleteTextView
+                            style="@style/medium_text_style"
+                            android:id="@+id/actv_payment_method3"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_36sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center_vertical"
+                            android:inputType="none"
+                            android:textSize="@dimen/_12sdp"
+                            android:overScrollMode="ifContentScrolls"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp">
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mật khẩu"
+                        style="@style/label_edit_text"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="@dimen/_12ssp"/>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/layout_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_email"
+                    android:layout_marginTop="@dimen/_7sdp">
+
+                    <EditText
+                        android:id="@+id/edit_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_36sdp"
+                        style="@style/app_edit_text"
+                        android:hint="Nhập mật khẩu"
+                        android:inputType="textPassword"
+                        android:text="@={vm.request.oldPassword}"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_40sdp"
+                        android:layout_marginTop="0dp"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_gravity="end|center_vertical"
+                        android:onClick="@{(v)-> vm.showPassword()}">
+                        <ImageView
+                            android:id="@+id/img_show_password"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@{ vm.isShowPassword ? @drawable/ic_eye_off : @drawable/ic_eye, default = @drawable/ic_eye}"
+                            android:layout_centerInParent="true"
+                            android:layout_marginEnd="@dimen/_12sdp"
+                            app:tint="@color/gray"
+                            />
+                    </RelativeLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
 </layout>

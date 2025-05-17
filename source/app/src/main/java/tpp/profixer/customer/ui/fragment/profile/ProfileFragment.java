@@ -18,6 +18,7 @@ import tpp.profixer.customer.data.model.app.AccountBtn;
 import tpp.profixer.customer.data.model.room.UserEntity;
 import tpp.profixer.customer.databinding.FragmentProfileBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
+import tpp.profixer.customer.ui.account.AccountActivity;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
 import tpp.profixer.customer.ui.changepassword.ChangePasswordActivity;
 import tpp.profixer.customer.ui.fragment.profile.adapter.AccountAdapter;
@@ -76,6 +77,8 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch ((int) id){
                     case 1:
+                        Intent it = new Intent(getContext(), AccountActivity.class);
+                        startActivity(it);
                         break;
                     case 2:
                         break;

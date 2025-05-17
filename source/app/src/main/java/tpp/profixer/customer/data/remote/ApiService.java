@@ -3,12 +3,16 @@ package tpp.profixer.customer.data.remote;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
@@ -17,6 +21,7 @@ import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
 import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.request.UpdateProfileRequest;
+import tpp.profixer.customer.data.model.api.response.AvatarPathResponse;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.data.model.api.request.RequestCourse;
@@ -27,6 +32,7 @@ import tpp.profixer.customer.data.model.api.response.Expert;
 import tpp.profixer.customer.data.model.api.response.ExpertInfo;
 import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.LoginResponse;
+import tpp.profixer.customer.data.model.api.response.Province;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
 
@@ -90,5 +96,13 @@ public interface ApiService {
     Observable<ResponseWrapper<ExpertInfo>> getExpertInfo(@Path("expert_id") Long expertId);
 
     @PUT("/v1/student/update-profile")
-    Observable<ResponseWrapper> updateProfile(@Body UpdateProfileRequest request);
+    Observable<ResponseWrapper>  updateProfile(@Body UpdateProfileRequest request);
+
+    @GET("/v1/nation/auto-complete")
+    Observable<ResponseWrapper<ResponseListObj<Province>>>  getNation(@Query("kind") Integer kind, @Query("parentId") Long parentId);
+
+    @Multipart
+    @POST("v1/file/upload")
+    @Headers({"isMedia: 1"})
+    Observable<ResponseWrapper<AvatarPathResponse>> uploadFile(@Part("type") RequestBody type, @Part MultipartBody.Part file);
 }

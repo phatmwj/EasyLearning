@@ -95,7 +95,7 @@
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/bg_edit_txt_custom</item>
         <item name="android:textColor">#424242</item>
-        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:textColorHint">#7C7C7C</item>
     </style>
     <style name="app_edit_text_search">
         <item name="fontFamily"> @font/roboto_medium </item>

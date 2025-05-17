@@ -17,4 +17,7 @@
     <string name="current_location">Current Location</string>
     <string name="server_error">server error</string>
 
+    <string name="not_permission_gallery">Quyền truy cập thư viện bị từ chối</string>
+    <string name="not_permission_camera">Quyền truy cập camera bị từ chối</string>
+
 </resources>
