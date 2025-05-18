@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_15sdp"
                 android:orientation="vertical">
 
                 <FrameLayout
@@ -99,6 +100,7 @@
                         android:text="Email"
                         style="@style/label_edit_text"/>
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" *"
@@ -135,6 +137,7 @@
                             android:text="Số điện thoại"
                             style="@style/label_edit_text"/>
                         <TextView
+                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" *"
@@ -191,10 +194,10 @@
                         app:boxStrokeWidth="@dimen/_1sdp"
                         app:boxStrokeWidthFocused="@dimen/_1sdp"
                         app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="#EDEDED"
+                        app:boxStrokeColor="@color/box_stroke_color"
                         app:endIconDrawable="@drawable/ic_dropdown"
-                        app:hintTextColor="#EDEDED"
-                        app:hintEnabled="false"
+                        app:hintTextColor="#7C7C7C"
+                        app:hintEnabled="true"
                         android:hint="Chọn"
                         app:hintAnimationEnabled="false"
                         app:endIconTint="@color/black">
@@ -243,10 +246,10 @@
                         app:boxStrokeWidth="@dimen/_1sdp"
                         app:boxStrokeWidthFocused="@dimen/_1sdp"
                         app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="#EDEDED"
+                        app:boxStrokeColor="@color/box_stroke_color"
                         app:endIconDrawable="@drawable/ic_dropdown"
-                        app:hintTextColor="#EDEDED"
-                        app:hintEnabled="false"
+                        app:hintTextColor="#7C7C7C"
+                        app:hintEnabled="true"
                         android:hint="Chọn"
                         app:hintAnimationEnabled="false"
                         app:endIconTint="@color/black">
@@ -295,10 +298,10 @@
                         app:boxStrokeWidth="@dimen/_1sdp"
                         app:boxStrokeWidthFocused="@dimen/_1sdp"
                         app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="#EDEDED"
+                        app:boxStrokeColor="@color/box_stroke_color"
                         app:endIconDrawable="@drawable/ic_dropdown"
-                        app:hintTextColor="#EDEDED"
-                        app:hintEnabled="false"
+                        app:hintTextColor="#7C7C7C"
+                        app:hintEnabled="true"
                         android:hint="Chọn"
                         app:hintAnimationEnabled="false"
                         app:endIconTint="@color/black">
@@ -313,6 +316,42 @@
                             android:textSize="@dimen/_12sdp"
                             android:overScrollMode="ifContentScrolls"/>
                     </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Địa chỉ"
+                            style="@style/label_edit_text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" *"
+                            android:textColor="@color/red"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="@dimen/_12ssp"/>
+                    </LinearLayout>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_36sdp"
+                        style="@style/app_edit_text"
+                        android:hint="Nhập họ và tên"
+                        android:text="@={vm.request.address}"
+                        android:focusable="true"
+                        android:paddingEnd="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:maxLength="30"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
@@ -370,6 +409,20 @@
                             />
                     </RelativeLayout>
                 </FrameLayout>
+
+                <TextView
+                    style="@style/medium_text_style"
+                    android:id="@+id/btn_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/bg_button_filled"
+                    android:gravity="center"
+                    android:onClick="@{()-> a.hideKeyboard() | vm.updateProfile()}"
+                    android:text="Xác nhận"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/_14ssp"
+                    android:paddingVertical="@dimen/_10sdp"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

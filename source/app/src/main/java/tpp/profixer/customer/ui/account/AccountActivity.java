@@ -130,7 +130,7 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             viewBinding.actvPaymentMethod2.setText(paymentMethods.get(position),false);
-                            viewModel.request.get().setDistrictId(viewModel.provinces.get().get(position).getId());
+                            viewModel.request.get().setDistrictId(viewModel.districts.get().get(position).getId());
                             viewModel.request.get().setWardId(null);
                             viewModel.getWards(3, viewModel.request.get().getDistrictId());
                         }

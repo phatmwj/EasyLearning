@@ -105,7 +105,6 @@ public class BaseViewModel extends ViewModel {
         if(userId == null || userId == -1){
             return;
         }
-        showLoading();
         compositeDisposable.add(repository.getApiService().getProfile(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())

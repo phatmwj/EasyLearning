@@ -14,6 +14,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.data.model.api.request.UpdateProfileRequest;
@@ -86,7 +87,7 @@ public class AccountViewModel extends BaseViewModel {
                 )
                 .subscribe(
                         response -> {
-                            if(response.isResult()){
+                            if(response.isResult() && response.getData().getContent() != null){
                                 provinces.set(response.getData().getContent());
                             }else {
                                 provinces.set(new ArrayList<>());
@@ -117,7 +118,7 @@ public class AccountViewModel extends BaseViewModel {
                 )
                 .subscribe(
                         response -> {
-                            if(response.isResult()){
+                            if(response.isResult() && response.getData().getContent() != null){
                                 wards.set(response.getData().getContent());
                             }else {
                                 wards.set(new ArrayList<>());
@@ -148,7 +149,7 @@ public class AccountViewModel extends BaseViewModel {
                 )
                 .subscribe(
                         response -> {
-                            if(response.isResult()){
+                            if(response.isResult() && response.getData().getContent() != null){
                                 districts.set(response.getData().getContent());
                             }else {
                                 districts.set(new ArrayList<>());
@@ -162,5 +163,36 @@ public class AccountViewModel extends BaseViewModel {
                         }
                 )
         );
+    }
+
+    public void updateProfile(){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().updateProfile(request.get())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            if(response.isResult()){
+                                showSuccessMessage(response.getMessage());
+                            }
+                            getProfile();
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                            Timber.e(throwable);
+                        }));
     }
 }
