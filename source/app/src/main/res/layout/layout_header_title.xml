@@ -25,6 +25,9 @@
             name="isSearch"
             type="boolean" />
         <variable
+            name="isApp"
+            type="boolean" />
+        <variable
             name="countItemCart"
             type="java.lang.Integer" />
 
@@ -35,6 +38,31 @@
         android:layout_height="@dimen/_38sdp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+        <LinearLayout
+            view_visibility="@{isApp}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_icon_app"
+                />
+            <TextView
+                style="@style/bold_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:text="Easy Learning"
+                android:textSize="@dimen/_17ssp"
+                android:textColor="@color/app_color"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
         <RelativeLayout
             view_visibility="@{!dontback}"
             android:id="@+id/layout_back"

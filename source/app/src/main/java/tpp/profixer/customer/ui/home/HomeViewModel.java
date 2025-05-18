@@ -11,6 +11,7 @@ public class HomeViewModel extends BaseViewModel {
     public ObservableField<Boolean> loginButton = new ObservableField<>(false);
     public ObservableField<Boolean> isSearch = new ObservableField<>(false);
     public ObservableField<String> textSearch = new ObservableField<>("");
+    public ObservableField<Boolean> notApp = new ObservableField<>(false);
     public HomeViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
         getProfile();

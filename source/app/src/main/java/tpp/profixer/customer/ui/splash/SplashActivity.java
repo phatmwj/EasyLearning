@@ -3,6 +3,7 @@ package tpp.profixer.customer.ui.splash;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -68,8 +69,13 @@ public class SplashActivity extends BaseActivity<ActivityMainBinding, SplashView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        navigateToHome();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                navigateToHome();
+            }
+        },3000);
     }
 
     private void checkLocationPermission(){

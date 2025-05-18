@@ -293,7 +293,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     @Override
     public void onProviderDisabled(@NonNull String provider) {
-        LocationListener.super.onProviderDisabled(provider);
+//        LocationListener.super.onProviderDisabled(provider);
     }
 
     @Override

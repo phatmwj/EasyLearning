@@ -50,14 +50,30 @@
                         android:layout_centerInParent="true"
                         android:onClick="@{() -> a.hideKeyboard()}">
 
-                        <TextView
-                            style="@style/bold_text_style"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Đăng nhập vào Life Uni"
-                            android:maxLines="2"
-                            android:ellipsize="end"
-                            android:textSize="@dimen/_20ssp"/>
+                            android:orientation="horizontal">
+                            <TextView
+                                style="@style/bold_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Đăng nhập vào"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_20ssp"/>
+
+                            <TextView
+                                style="@style/bold_text_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" Easy Learning"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_20ssp"
+                                android:textColor="@color/app_color"/>
+                        </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -89,7 +105,7 @@
                             android:paddingEnd="@dimen/_7sdp"
                             android:paddingStart="@dimen/_10sdp"
                             android:maxLength="20"
-                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
                             />
 
                         <LinearLayout
@@ -117,7 +133,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_email"
-                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
                             >
 
                             <EditText

@@ -122,6 +122,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.loginButton.set(true);
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
+        viewModel.notApp.set(false);
         if(studyFragment == null){
             studyFragment = new StudyFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -138,6 +139,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.loginButton.set(false);
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
+        viewModel.notApp.set(true);
         if(homeFragment == null){
             homeFragment = new HomeFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -154,6 +156,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.loginButton.set(true);
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
+        viewModel.notApp.set(false);
         if(profileFragment == null){
             profileFragment = new ProfileFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -171,6 +174,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.loginButton.set(true);
 //        viewModel.textSearch.set("");
         viewModel.isSearch.set(true);
+        viewModel.notApp.set(false);
         if(incomeFragment == null){
             incomeFragment = new IncomeFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -188,6 +192,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.loginButton.set(true);
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
+        viewModel.notApp.set(false);
         if(notificationFragment == null){
             notificationFragment = new NotificationFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

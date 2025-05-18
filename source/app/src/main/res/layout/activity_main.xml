@@ -15,8 +15,33 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_icon_app"
+                />
+            <TextView
+                style="@style/bold_text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:text="Easy Learning"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@color/text"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+        </LinearLayout>
+    </FrameLayout>
 </layout>

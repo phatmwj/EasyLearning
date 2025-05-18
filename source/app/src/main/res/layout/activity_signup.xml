@@ -91,7 +91,7 @@
                                 android:paddingEnd="@dimen/_7sdp"
                                 android:paddingStart="@dimen/_10sdp"
                                 android:maxLength="30"
-                                android:layout_marginTop="@dimen/_7sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
                                 />
                         </LinearLayout>
 
@@ -124,7 +124,7 @@
                             android:focusable="true"
                             android:paddingEnd="@dimen/_7sdp"
                             android:paddingStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
                             />
 
                         <LinearLayout
@@ -159,7 +159,7 @@
                                 android:paddingEnd="@dimen/_7sdp"
                                 android:paddingStart="@dimen/_10sdp"
                                 android:maxLength="10"
-                                android:layout_marginTop="@dimen/_7sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
                                 android:inputType="phone"
                                 />
                         </LinearLayout>
@@ -188,7 +188,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_email"
-                            android:layout_marginTop="@dimen/_7sdp">
+                            android:layout_marginTop="@dimen/_3sdp">
 
                             <EditText
                                 android:id="@+id/edit_password"
@@ -243,7 +243,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_email"
-                            android:layout_marginTop="@dimen/_7sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
                             >
 
                             <EditText
@@ -306,7 +306,7 @@
                                 android:paddingEnd="@dimen/_7sdp"
                                 android:paddingStart="@dimen/_10sdp"
                                 android:maxLength="20"
-                                android:layout_marginTop="@dimen/_7sdp"
+                                android:layout_marginTop="@dimen/_3sdp"
                                 android:inputType="phone"
                                 />
                         </LinearLayout>
