@@ -109,4 +109,10 @@ public interface ApiService {
 
     @GET("/v1/notification/my-notification")
     Observable<ResponseWrapper<ResponseListObj<Notification>>>  getNotification(@Query("appKind") Integer appKind, @Query("state") Integer state);
+
+    @PUT("/v1/notification/read-all")
+    Observable<ResponseWrapper>  readAll(@Query("appKind") Integer appKind);
+
+    @DELETE("/v1/notification/delete-all")
+    Observable<ResponseWrapper>  deleteAllNotification(@Query("appKind") Integer appKind);
 }

@@ -62,4 +62,60 @@ public class NotificationFragmentViewModel extends BaseFragmentViewModel {
                         }));
     }
 
+    public void readAll(){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().readAll(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            showSuccessMessage(response.getMessage());
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                        }));
+    }
+
+    public void deleteAll(){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().deleteAllNotification(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            showSuccessMessage(response.getMessage());
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                        }));
+    }
+
 }

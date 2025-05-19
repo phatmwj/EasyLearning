@@ -17,6 +17,7 @@ import tpp.profixer.customer.data.model.api.response.Notification;
 import tpp.profixer.customer.databinding.FragmentNotificationBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
+import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.fragment.notification.adpater.NotificationAdapter;
 import tpp.profixer.customer.ui.fragment.study.adpater.MyCourseAdapter;
 import tpp.profixer.customer.ui.lesson.LessonActivity;
@@ -66,6 +67,20 @@ public class NotificationFragment extends BaseFragment<FragmentNotificationBindi
 
             }
         });
+    }
+
+    public void confirmDeleteAll(){
+        ConfirmDialog confirmDialog = new ConfirmDialog(getContext());
+        confirmDialog.title.set("Xóa tất cả thông báo?");
+        confirmDialog.titleRightButton.set("Xóa");
+        confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void confirm() {
+                confirmDialog.dismiss();
+                viewModel.deleteAll();
+            }
+        });
+        confirmDialog.show();
     }
 
     public void setState(Integer state){
