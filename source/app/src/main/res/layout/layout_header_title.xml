@@ -58,7 +58,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:text="Easy Learning"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_14ssp"
                 android:textColor="@color/text"
                 android:maxLines="1"
                 android:ellipsize="end"/>

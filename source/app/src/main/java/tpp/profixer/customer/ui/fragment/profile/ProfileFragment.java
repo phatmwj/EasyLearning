@@ -21,6 +21,7 @@ import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.account.AccountActivity;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
 import tpp.profixer.customer.ui.changepassword.ChangePasswordActivity;
+import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.fragment.profile.adapter.AccountAdapter;
 import tpp.profixer.customer.ui.login.LoginActivity;
 
@@ -120,6 +121,20 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     public void navigateToLogin(){
         Intent intent = new Intent(getContext(), LoginActivity.class);
         startActivity(intent);
+    }
+
+    public void confirmLogout(){
+        ConfirmDialog confirmDialog = new ConfirmDialog(getContext());
+        confirmDialog.title.set("Bạn muốn đăng xuất?");
+        confirmDialog.titleRightButton.set("Đăng xuất");
+        confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void confirm() {
+                confirmDialog.dismiss();
+                viewModel.logout();
+            }
+        });
+        confirmDialog.show();
     }
 
 }

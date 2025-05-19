@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="itemMsg"
+            type="tpp.profixer.customer.data.model.api.response.Msg" />
+        <variable
+            name="item"
+            type="tpp.profixer.customer.data.model.api.response.Notification" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/medium_text_style"
+                android:textColor="@color/text"
+                android:textSize="@dimen/_12sdp"
+                android:text="@{itemMsg.code}"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/regular_text_style"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_12sdp"
+                text_datetime="@{item.createdDate}"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

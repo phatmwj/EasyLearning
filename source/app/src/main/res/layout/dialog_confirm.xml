@@ -34,7 +34,7 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"/>
+                    android:textSize="@dimen/_13ssp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_button_cancel"
-                        android:paddingVertical="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_10sdp"
                         android:text="Hủy"
                         android:gravity="center"
                         android:textColor="#F23030"
@@ -70,7 +70,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/bg_button_filled"
                         android:layout_marginVertical="@dimen/_1sdp"
-                        android:paddingVertical="@dimen/_7sdp"
+                        android:paddingVertical="@dimen/_10sdp"
                         android:orientation="horizontal"
                         android:gravity="center">
                         <ImageView

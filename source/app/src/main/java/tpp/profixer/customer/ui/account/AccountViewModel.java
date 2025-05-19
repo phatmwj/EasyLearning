@@ -42,6 +42,7 @@ public class AccountViewModel extends BaseViewModel {
 
     public void doUploadAvatar(MultipartBody.Part imagePart){
         RequestBody type = RequestBody.create("AVATAR", MediaType.parse("multipart/form-data"));
+        showLoading();
         compositeDisposable.add(repository.getApiService().uploadFile(type, imagePart)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,7 +58,7 @@ public class AccountViewModel extends BaseViewModel {
                 .subscribe(
                         response -> {
                             if(response.isResult()){
-
+                                request.setAvatarPath(response.getData().getFilePath());
                             }else{
                                 showErrorMessage(response.getMessage());
                             }

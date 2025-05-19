@@ -32,6 +32,7 @@ import tpp.profixer.customer.data.model.api.response.Expert;
 import tpp.profixer.customer.data.model.api.response.ExpertInfo;
 import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.LoginResponse;
+import tpp.profixer.customer.data.model.api.response.Notification;
 import tpp.profixer.customer.data.model.api.response.Province;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
@@ -105,4 +106,7 @@ public interface ApiService {
     @POST("v1/file/upload")
     @Headers({"isMedia: 1"})
     Observable<ResponseWrapper<AvatarPathResponse>> uploadFile(@Part("type") RequestBody type, @Part MultipartBody.Part file);
+
+    @GET("/v1/notification/my-notification")
+    Observable<ResponseWrapper<ResponseListObj<Notification>>>  getNotification(@Query("appKind") Integer appKind, @Query("state") Integer state);
 }

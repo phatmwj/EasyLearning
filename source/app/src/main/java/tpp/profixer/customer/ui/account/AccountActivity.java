@@ -235,7 +235,7 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
         } else {
             viewBinding.layoutPass.setError(null);
         }
-        viewModel.getProfile();
+        viewModel.updateProfile();
     }
 
     private void initView() {
@@ -318,11 +318,11 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
         if (requestCode == ImagePicker.REQUEST_CODE) {
             if (resultCode == RESULT_OK && data != null) {
                 Uri selectedImageUri = data.getData();
-                Glide.with(this)
-                        .load(selectedImageUri)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(viewBinding.imgAvatar);
+//                Glide.with(this)
+//                        .load(selectedImageUri)
+//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                        .skipMemoryCache(true)
+//                        .into(viewBinding.imgAvatar);
                 MultipartBody.Part imagePart = uriToMultipartBodyPart(selectedImageUri, "file");
                 // Call API to upload image
                 viewModel.doUploadAvatar(imagePart);

@@ -13,8 +13,77 @@
             type="tpp.profixer.customer.ui.fragment.notification.NotificationFragmentViewModel" />
 
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/medium_text_style"
+                android:textSize="@dimen/_12ssp"
+                android:text="Tất cả"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:background="@drawable/bg_button_selection"
+                view_selected="@{vm.state == null}"
+                android:textColor="@{vm.state == null ? @color/white : @color/app_color }"
+                android:onClick="@{()-> f.setStateNull()}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/medium_text_style"
+                android:textSize="@dimen/_12ssp"
+                android:text="Chưa đọc"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:background="@drawable/bg_button_selection"
+                view_selected="@{vm.state != null &amp;&amp; vm.state == 0}"
+                android:textColor="@{vm.state != null &amp;&amp; vm.state == 0? @color/white : @color/app_color }"
+                android:onClick="@{()-> f.setState(0)}"/>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingVertical="@dimen/_5sdp"/>
+            <LinearLayout
+                view_visibility="@{vm.totalNoti == 0}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_delete"
+                    app:tint="@color/grey_light"
+                    android:layout_marginBottom="@dimen/_5sdp"/>
+                <TextView
+                    style="@style/medium_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_14ssp"
+                    android:text="Không có thông báo nào"
+                    android:textColor="#424242"
+                    />
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
 </layout>

@@ -19,6 +19,7 @@ import tpp.profixer.customer.R;
 import tpp.profixer.customer.databinding.ActivityHomeBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
+import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.fragment.home.HomeFragment;
 import tpp.profixer.customer.ui.fragment.income.IncomeFragment;
 import tpp.profixer.customer.ui.fragment.notification.NotificationFragment;
@@ -207,7 +208,17 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        ConfirmDialog confirmDialog = new ConfirmDialog(this);
+        confirmDialog.title.set("Bạn muốn thoát ứng dụng?");
+        confirmDialog.titleRightButton.set("Thoát");
+        confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+            @Override
+            public void confirm() {
+                confirmDialog.dismiss();
+                finish();
+            }
+        });
+        confirmDialog.show();
     }
 
     @Override

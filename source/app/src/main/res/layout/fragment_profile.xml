@@ -100,7 +100,7 @@
                     />
                 <TextView
                     view_visibility="@{vm.profile != null}"
-                    android:onClick="@{()-> vm.logout()}"
+                    android:onClick="@{()-> f.confirmLogout()}"
                     style="@style/medium_text_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
