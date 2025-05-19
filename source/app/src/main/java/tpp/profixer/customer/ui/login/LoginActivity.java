@@ -33,6 +33,29 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
         initView();
 
+        viewModel.request.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if (propertyId == BR.phone) {
+                    String phone = viewModel.request.getPhone();
+                    if (phone == null || phone.trim().isEmpty()) {
+                        viewBinding.layoutUsername.setError("Số điện thoại hoặc email không được để trống");
+                    } else {
+                        viewBinding.layoutUsername.setError(null);
+                    }
+                }
+
+                if (propertyId == BR.password) {
+                    String password = viewModel.request.getPassword();
+                    if (password == null || password.trim().isEmpty()) {
+                        viewBinding.layoutPass.setError("Mật khẩu không được để trống");
+                    } else {
+                        viewBinding.layoutPass.setError(null);
+                    }
+                }
+            }
+        });
+
     }
 
     private void initView() {
@@ -49,6 +72,22 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
             }
         });
+    }
+
+    public void login(){
+        if(viewModel.request.getPhone() == null || viewModel.request.getPhone().isEmpty()){
+            viewBinding.layoutUsername.setError("Số điện thoại hoặc email không được để trống");
+            return;
+        }else {
+            viewBinding.layoutUsername.setError(null);
+        }
+        if(viewModel.request.getPassword() == null || viewModel.request.getPassword().isEmpty()){
+            viewBinding.layoutPass.setError("Mật khẩu không được để trống");
+            return;
+        }else {
+            viewBinding.layoutPass.setError(null);
+        }
+        viewModel.doLogin();
     }
 
 }

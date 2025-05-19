@@ -1,10 +1,14 @@
 package tpp.profixer.customer.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputLayout;
 
 import io.github.glailton.expandabletextview.ExpandableTextView;
 import tpp.profixer.customer.BuildConfig;
@@ -113,5 +118,20 @@ public final class BindingUtils {
             return;
         }
         textView.setText(Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY));
+    }
+
+    @BindingAdapter("require_field")
+    public static void textHtml(TextInputLayout layout, Boolean isRequire) {
+        if(isRequire){
+            String hint = layout.getHint().toString();
+            SpannableString spannable = new SpannableString(hint + " *");
+            spannable.setSpan(
+                    new ForegroundColorSpan(Color.RED),          // Màu đỏ
+                    hint.length(),                               // Bắt đầu từ vị trí dấu *
+                    hint.length() + 2,                           // Kết thúc sau dấu *
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+            layout.setHint(spannable);
+        }
     }
 }

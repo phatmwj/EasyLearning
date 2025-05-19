@@ -16,7 +16,7 @@ import tpp.profixer.customer.utils.NetworkUtils;
 
 public class SignupViewModel extends BaseViewModel {
 
-    public ObservableField<SignupRequest> request = new ObservableField<>(new SignupRequest());
+    public SignupRequest request = new SignupRequest();
     public ObservableField<Boolean> isShowPassword = new ObservableField<>(false);
     public ObservableField<Boolean> isShowPassword2 = new ObservableField<>(false);
     public SignupViewModel(Repository repository, ProFixerApplication application) {
@@ -25,7 +25,7 @@ public class SignupViewModel extends BaseViewModel {
 
     public void doSignup(){
         showLoading();
-        compositeDisposable.add(repository.getApiService().signup(request.get())
+        compositeDisposable.add(repository.getApiService().signup(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -41,8 +41,8 @@ public class SignupViewModel extends BaseViewModel {
                 .subscribe(
                         response -> {
                             hideLoading();
-                            application.getCurrentActivity().finish();
                             showSuccessMessage("Đăng kí thành công");
+                            application.getCurrentActivity().finish();
                         }, throwable -> {
                             hideLoading();
                             handleException(throwable);

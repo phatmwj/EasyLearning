@@ -33,9 +33,9 @@ public class Expert {
         userEntity.setKind(account.getKind());
         userEntity.setPhone(account.getPhone());
         userEntity.setEmail(account.getEmail());
-        userEntity.setProvinceId(province.getId());
-        userEntity.setWardId(ward.getId());
-        userEntity.setDistrictId(district.getId());
+        if(province != null) userEntity.setProvinceId(province.getId());
+        if(ward != null) userEntity.setWardId(ward.getId());
+        if(district != null) userEntity.setDistrictId(district.getId());
         userEntity.setAddress(address);
         return userEntity;
     }

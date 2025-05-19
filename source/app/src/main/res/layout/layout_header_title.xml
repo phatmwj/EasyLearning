@@ -52,14 +52,14 @@
                 android:src="@drawable/ic_icon_app"
                 />
             <TextView
-                style="@style/bold_text_style"
+                style="@style/medium_text_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:text="Easy Learning"
                 android:textSize="@dimen/_17ssp"
-                android:textColor="@color/app_color"
+                android:textColor="@color/text"
                 android:maxLines="1"
                 android:ellipsize="end"/>
         </LinearLayout>

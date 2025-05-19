@@ -11,9 +11,13 @@ import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.HttpException;
 import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
+import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.Repository;
+import tpp.profixer.customer.data.model.api.ApiModelUtils;
+import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
 import tpp.profixer.customer.ui.home.HomeActivity;
@@ -22,7 +26,7 @@ import tpp.profixer.customer.utils.NetworkUtils;
 
 public class LoginViewModel extends BaseViewModel {
     public ObservableField<Boolean> isShowPassword = new ObservableField<>(false);
-    public ObservableField<LoginRequest> request = new ObservableField<>(new LoginRequest());
+    public LoginRequest request = new LoginRequest();
 
     public ObservableField<String> tenantId = new ObservableField<>();
 
@@ -34,7 +38,7 @@ public class LoginViewModel extends BaseViewModel {
 
     public void doLogin(){
         showLoading();
-        compositeDisposable.add(repository.getApiService().login(request.get())
+        compositeDisposable.add(repository.getApiService().login(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -50,17 +54,30 @@ public class LoginViewModel extends BaseViewModel {
                 .subscribe(
                         response -> {
                             hideLoading();
+                            showSuccessMessage("Đăng nhập thành công");
                             repository.getSharedPreferences().setToken(response.getAccess_token());
                             repository.getSharedPreferences().setUserId(response.getUser_id());
                             getProfile();
                             getCart();
                             isLogin.set(true);
                             application.getCurrentActivity().finish();
-                            showSuccessMessage("Đăng nhập thành công");
                         }, throwable -> {
                             hideLoading();
-                            handleException(throwable);
-                            Timber.e(throwable);
+                            if (throwable instanceof HttpException) {
+                                HttpException httpException = (HttpException) throwable;
+                                if(httpException.code() >= 500){
+                                    showErrorMessage(application.getString(R.string.server_error));
+                                    return;
+                                }
+                                try {
+                                    ResponseWrapper responseWrapper = ApiModelUtils.fromJson(httpException.response().errorBody().string(), ResponseWrapper.class);
+                                    showErrorMessage("Số điện thoại hoặc mật khẩu không chính xác");
+                                }catch (Throwable error){
+                                    Timber.d(error);
+                                }
+                            }else {
+                                showErrorMessage(application.getString(R.string.network_error));
+                            }
                         }));
     }
 
