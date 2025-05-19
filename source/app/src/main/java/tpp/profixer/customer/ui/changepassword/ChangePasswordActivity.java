@@ -36,15 +36,13 @@ public class ChangePasswordActivity extends BaseActivity<ActivityChangepasswordB
             Long userId = viewModel.repository.getSharedPreferences().getUserId();
             for (UserEntity userEntity : userEntities) {
                 if (userEntity.getId().equals(userId)){
-                    UpdateProfileRequest updateProfileRequest = new UpdateProfileRequest();
-                    updateProfileRequest.setFullName(userEntity.getFullName());
-                    updateProfileRequest.setPhone(userEntity.getPhone());
-                    updateProfileRequest.setEmail(userEntity.getEmail());
-                    updateProfileRequest.setProvinceId(userEntity.getProvinceId());
-                    updateProfileRequest.setWardId(userEntity.getWardId());
-                    updateProfileRequest.setDistrictId(userEntity.getDistrictId());
-                    updateProfileRequest.setAddress(userEntity.getAddress());
-                    viewModel.updateProfileRequest = updateProfileRequest;
+                    viewModel.updateProfileRequest.setFullName(userEntity.getFullName());
+                    viewModel.updateProfileRequest.setPhone(userEntity.getPhone());
+                    viewModel.updateProfileRequest.setEmail(userEntity.getEmail());
+                    viewModel.updateProfileRequest.setProvinceId(userEntity.getProvinceId());
+                    viewModel.updateProfileRequest.setWardId(userEntity.getWardId());
+                    viewModel.updateProfileRequest.setDistrictId(userEntity.getDistrictId());
+                    viewModel.updateProfileRequest.setAddress(userEntity.getAddress());
                 }
             }
         });
@@ -76,10 +74,6 @@ public class ChangePasswordActivity extends BaseActivity<ActivityChangepasswordB
                             viewBinding.layoutConfirmPass.setError("Xác nhận mật khẩu không được để trống");
                             return;
                         }
-                        if(!viewModel.updateProfileRequest.getNewPassword().equals(viewModel.updateProfileRequest.getConfirmPassword())){
-                            viewBinding.layoutConfirmPass.setError("Xác nhận mật khẩu không đúng");
-                            return;
-                        }
                         viewBinding.layoutConfirmPass.setError(null);
                         break;
                     default:
@@ -103,6 +97,11 @@ public class ChangePasswordActivity extends BaseActivity<ActivityChangepasswordB
         }
         if(viewModel.updateProfileRequest.getConfirmPassword() == null || viewModel.updateProfileRequest.getConfirmPassword().isEmpty()){
             viewBinding.layoutConfirmPass.setError("Xác nhận mật khẩu không được để trống");
+            return;
+        }
+
+        if(!viewModel.updateProfileRequest.getNewPassword().equals(viewModel.updateProfileRequest.getConfirmPassword())){
+            viewBinding.layoutConfirmPass.setError("Xác nhận mật khẩu không đúng");
             return;
         }
         viewModel.updateProfile();

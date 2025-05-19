@@ -42,6 +42,7 @@ import okhttp3.RequestBody;
 import timber.log.Timber;
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.constant.Constants;
+import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.UpdateProfileRequest;
 import tpp.profixer.customer.data.model.room.UserEntity;
 import tpp.profixer.customer.databinding.ActivityAccountBinding;
@@ -74,13 +75,13 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 if (viewModel.provinces.get() != null) {
-                    if(viewModel.request.get().getProvinceId() == null){
+                    if(viewModel.request.getProvinceId() == null){
                         viewBinding.actvPaymentMethod.setText("",false);
                     }
                     List<String> paymentMethods = new ArrayList<>();
                     for (int i = 0; i < viewModel.provinces.get().size(); i++) {
                         paymentMethods.add(viewModel.provinces.get().get(i).getName());
-                        if(viewModel.request.get().getProvinceId() != null && viewModel.request.get().getProvinceId().equals(viewModel.provinces.get().get(i).getId())){
+                        if(viewModel.request.getProvinceId() != null && viewModel.request.getProvinceId().equals(viewModel.provinces.get().get(i).getId())){
                             viewBinding.actvPaymentMethod.setText(viewModel.provinces.get().get(i).getName());
                         }
                     }
@@ -94,10 +95,10 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             viewBinding.actvPaymentMethod.setText(paymentMethods.get(position), false);
-                            viewModel.request.get().setProvinceId(viewModel.provinces.get().get(position).getId());
-                            viewModel.request.get().setDistrictId(null);
-                            viewModel.getDistricts(2, viewModel.request.get().getProvinceId());
-                            viewModel.request.get().setWardId(null);
+                            viewModel.request.setProvinceId(viewModel.provinces.get().get(position).getId());
+                            viewModel.request.setDistrictId(null);
+                            viewModel.getDistricts(2, viewModel.request.getProvinceId());
+                            viewModel.request.setWardId(null);
                             viewModel.wards.set(new ArrayList<>());
                         }
                     });
@@ -110,13 +111,13 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 if (viewModel.districts.get() != null) {
-                    if(viewModel.request.get().getDistrictId() == null){
+                    if(viewModel.request.getDistrictId() == null){
                         viewBinding.actvPaymentMethod2.setText("", false);
                     }
                     List<String> paymentMethods = new ArrayList<>();
                     for (int i = 0; i < viewModel.districts.get().size(); i++) {
                         paymentMethods.add(viewModel.districts.get().get(i).getName());
-                        if(viewModel.request.get().getDistrictId() != null && viewModel.request.get().getDistrictId().equals(viewModel.districts.get().get(i).getId())){
+                        if(viewModel.request.getDistrictId() != null && viewModel.request.getDistrictId().equals(viewModel.districts.get().get(i).getId())){
                             viewBinding.actvPaymentMethod2.setText(viewModel.districts.get().get(i).getName());
                         }
                     }
@@ -130,9 +131,9 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             viewBinding.actvPaymentMethod2.setText(paymentMethods.get(position),false);
-                            viewModel.request.get().setDistrictId(viewModel.districts.get().get(position).getId());
-                            viewModel.request.get().setWardId(null);
-                            viewModel.getWards(3, viewModel.request.get().getDistrictId());
+                            viewModel.request.setDistrictId(viewModel.districts.get().get(position).getId());
+                            viewModel.request.setWardId(null);
+                            viewModel.getWards(3, viewModel.request.getDistrictId());
                         }
                     });
                     viewBinding.actvPaymentMethod2.setAdapter(adapter);
@@ -144,13 +145,13 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 if (viewModel.wards.get() != null) {
-                    if(viewModel.request.get().getWardId() == null){
+                    if(viewModel.request.getWardId() == null){
                         viewBinding.actvPaymentMethod3.setText("",false);
                     }
                     List<String> paymentMethods = new ArrayList<>();
                     for (int i = 0; i < viewModel.wards.get().size(); i++) {
                         paymentMethods.add(viewModel.wards.get().get(i).getName());
-                        if(viewModel.request.get().getWardId() != null && viewModel.request.get().getWardId().equals(viewModel.wards.get().get(i).getId())){
+                        if(viewModel.request.getWardId() != null && viewModel.request.getWardId().equals(viewModel.wards.get().get(i).getId())){
                             viewBinding.actvPaymentMethod3.setText(viewModel.wards.get().get(i).getName());
                         }
                     }
@@ -164,7 +165,7 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             viewBinding.actvPaymentMethod3.setText(paymentMethods.get(position), false);
-                            viewModel.request.get().setWardId(viewModel.wards.get().get(position).getId());
+                            viewModel.request.setWardId(viewModel.wards.get().get(position).getId());
                         }
                     });
                     viewBinding.actvPaymentMethod3.setAdapter(adapter);
@@ -175,9 +176,30 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
         viewModel.request.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.getProvinces(1,null);
-                viewModel.getDistricts(2, viewModel.request.get().getProvinceId());
-                viewModel.getWards(3, viewModel.request.get().getDistrictId());
+                UpdateProfileRequest request = viewModel.request;
+
+                switch (propertyId) {
+                    case BR.fullName:
+                        if (request.getFullName() == null || request.getFullName().isEmpty()) {
+                            viewBinding.layoutFullname.setError("Họ và tên không được để trống");
+                        } else {
+                            viewBinding.layoutFullname.setError(null);
+                        }
+                        break;
+
+                    case BR.password:
+                        if (request.getOldPassword() == null || request.getOldPassword().isEmpty()) {
+                            viewBinding.layoutPass.setError("Mật khẩu không được để trống");
+                        } else {
+                            viewBinding.layoutPass.setError(null);
+                        }
+                        break;
+                    default:
+                        viewModel.getProvinces(1,null);
+                        viewModel.getDistricts(2, viewModel.request.getProvinceId());
+                        viewModel.getWards(3, viewModel.request.getDistrictId());
+                        break;
+                }
             }
         });
 
@@ -187,19 +209,33 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
             Long userId = viewModel.repository.getSharedPreferences().getUserId();
             for (UserEntity userEntity : userEntities) {
                 if (userEntity.getId().equals(userId)){
-                    UpdateProfileRequest updateProfileRequest = new UpdateProfileRequest();
-                    updateProfileRequest.setFullName(userEntity.getFullName());
-                    updateProfileRequest.setPhone(userEntity.getPhone());
-                    updateProfileRequest.setEmail(userEntity.getEmail());
-                    updateProfileRequest.setProvinceId(userEntity.getProvinceId());
-                    updateProfileRequest.setWardId(userEntity.getWardId());
-                    updateProfileRequest.setDistrictId(userEntity.getDistrictId());
-                    updateProfileRequest.setAddress(userEntity.getAddress());
-                    updateProfileRequest.setAvatarPath(userEntity.getAvatar());
-                    viewModel.request.set(updateProfileRequest);
+                    viewModel.request.setFullName(userEntity.getFullName());
+                    viewModel.request.setPhone(userEntity.getPhone());
+                    viewModel.request.setEmail(userEntity.getEmail());
+                    viewModel.request.setProvinceId(userEntity.getProvinceId());
+                    viewModel.request.setWardId(userEntity.getWardId());
+                    viewModel.request.setDistrictId(userEntity.getDistrictId());
+                    viewModel.request.setAddress(userEntity.getAddress());
+                    viewModel.request.setAvatarPath(userEntity.getAvatar());
                 }
             }
         });
+    }
+
+    public void updateProfile(){
+        if (viewModel.request.getFullName() == null || viewModel.request.getFullName().isEmpty()) {
+            viewBinding.layoutFullname.setError("Họ và tên không được để trống");
+            return;
+        } else {
+            viewBinding.layoutFullname.setError(null);
+        }
+        if (viewModel.request.getOldPassword() == null || viewModel.request.getOldPassword().isEmpty()) {
+            viewBinding.layoutPass.setError("Mật khẩu không được để trống");
+            return;
+        } else {
+            viewBinding.layoutPass.setError(null);
+        }
+        viewModel.getProfile();
     }
 
     private void initView() {

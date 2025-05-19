@@ -53,7 +53,90 @@
                         android:background="@drawable/bg_oval"
                         android:backgroundTint="#EDEDED"/>
                 </FrameLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_fullname"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Họ và tên"
+                    app:hintAnimationEnabled="false"
+                    require_field="@{Boolean.TRUE}">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.fullName}"
+                        android:inputType="text"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_email"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="#F6F4F4"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Email"
+                    app:hintAnimationEnabled="false"
+                    android:enabled="false">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.email}"
+                        android:inputType="textEmailAddress"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_phone"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="#F6F4F4"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Số điện thoại"
+                    app:hintAnimationEnabled="false"
+                    android:enabled="false">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.phone}"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -90,6 +173,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp">
@@ -110,6 +194,7 @@
                 </LinearLayout>
 
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/edit_username"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_36sdp"
@@ -124,6 +209,7 @@
                     />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -167,6 +253,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_7sdp">
@@ -188,7 +275,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
                         app:boxBackgroundMode="outline"
                         app:shapeAppearanceOverlay="@style/Rounded"
                         app:boxStrokeWidth="@dimen/_1sdp"
@@ -198,14 +285,14 @@
                         app:endIconDrawable="@drawable/ic_dropdown"
                         app:hintTextColor="#7C7C7C"
                         app:hintEnabled="true"
-                        android:hint="Chọn"
+                        android:hint="Tỉnh/ Thành"
                         app:hintAnimationEnabled="false"
                         app:endIconTint="@color/black">
                         <AutoCompleteTextView
                             style="@style/medium_text_style"
                             android:id="@+id/actv_payment_method"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:inputType="none"
@@ -219,6 +306,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_7sdp">
@@ -240,7 +328,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
                         app:boxBackgroundMode="outline"
                         app:shapeAppearanceOverlay="@style/Rounded"
                         app:boxStrokeWidth="@dimen/_1sdp"
@@ -250,14 +338,14 @@
                         app:endIconDrawable="@drawable/ic_dropdown"
                         app:hintTextColor="#7C7C7C"
                         app:hintEnabled="true"
-                        android:hint="Chọn"
+                        android:hint="Quận/ Huyện"
                         app:hintAnimationEnabled="false"
                         app:endIconTint="@color/black">
                         <AutoCompleteTextView
                             style="@style/medium_text_style"
                             android:id="@+id/actv_payment_method2"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:inputType="none"
@@ -273,7 +361,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_7sdp">
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:visibility="gone">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -292,7 +381,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
                         app:boxBackgroundMode="outline"
                         app:shapeAppearanceOverlay="@style/Rounded"
                         app:boxStrokeWidth="@dimen/_1sdp"
@@ -302,14 +391,14 @@
                         app:endIconDrawable="@drawable/ic_dropdown"
                         app:hintTextColor="#7C7C7C"
                         app:hintEnabled="true"
-                        android:hint="Chọn"
+                        android:hint="Phường/ Xã"
                         app:hintAnimationEnabled="false"
                         app:endIconTint="@color/black">
                         <AutoCompleteTextView
                             style="@style/medium_text_style"
                             android:id="@+id/actv_payment_method3"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_36sdp"
+                            android:layout_height="@dimen/_40sdp"
                             android:layout_gravity="center"
                             android:gravity="center_vertical"
                             android:inputType="none"
@@ -318,7 +407,35 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_code"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:boxStrokeErrorColor="@color/red"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Địa chỉ"
+                    app:hintAnimationEnabled="false">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.address}"
+                        android:inputType="text"
+                        android:maxLength="10"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -354,7 +471,36 @@
                         />
                 </LinearLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_pass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Mật khẩu"
+                    app:hintAnimationEnabled="false"
+                    app:endIconTint="@color/gray"
+                    require_field="@{Boolean.TRUE}">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.oldPassword}"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp">
@@ -374,6 +520,7 @@
                 </LinearLayout>
 
                 <FrameLayout
+                    android:visibility="gone"
                     android:id="@+id/layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -418,7 +565,7 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/bg_button_filled"
                     android:gravity="center"
-                    android:onClick="@{()-> a.hideKeyboard() | vm.updateProfile()}"
+                    android:onClick="@{()-> a.hideKeyboard() | a.updateProfile()}"
                     android:text="Xác nhận"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/_14ssp"

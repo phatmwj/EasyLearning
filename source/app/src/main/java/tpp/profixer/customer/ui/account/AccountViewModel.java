@@ -24,7 +24,7 @@ import tpp.profixer.customer.utils.NetworkUtils;
 
 public class AccountViewModel extends BaseViewModel {
 
-    public ObservableField<UpdateProfileRequest> request = new ObservableField<>(new UpdateProfileRequest());
+    public UpdateProfileRequest request = new UpdateProfileRequest();
     public ObservableField<UpdateProfileRequest> currentProfile = new ObservableField<>();
     public Repository repository;
     public ObservableField<Boolean> isShowPassword = new ObservableField<>(false);
@@ -167,7 +167,7 @@ public class AccountViewModel extends BaseViewModel {
 
     public void updateProfile(){
         showLoading();
-        compositeDisposable.add(repository.getApiService().updateProfile(request.get())
+        compositeDisposable.add(repository.getApiService().updateProfile(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
