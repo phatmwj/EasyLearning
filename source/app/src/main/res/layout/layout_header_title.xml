@@ -92,7 +92,8 @@
             android:textSize="@dimen/_17ssp"
             android:textColor="@color/black"
             android:maxLines="1"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            android:gravity="center"/>
         <LinearLayout
             view_visibility="@{isSearch}"
             android:layout_width="0dp"

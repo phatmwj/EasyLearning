@@ -96,7 +96,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
 
     private void setLayoutAbout(){
         List<AccountBtn> data = new ArrayList<>();
-        data.add(new AccountBtn(1,"Giới thiệu về LifeUni", R.drawable.ic_info));
+        data.add(new AccountBtn(1,"Giới thiệu về Easy Learning", R.drawable.ic_info));
         data.add(new AccountBtn(2,"Thông tin liên hệ", R.drawable.ic_about));
 
         aboutAdapter = new AccountAdapter(getContext(), data);

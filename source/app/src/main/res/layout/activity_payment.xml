@@ -19,7 +19,7 @@
             android:id="@+id/ui_header"
             layout="@layout/layout_header_title"
             bind:a ="@{a}"
-            bind:isLogin="@{vm.isLogin}"/>
+            bind:title='@{"Thanh toán"}'/>
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
