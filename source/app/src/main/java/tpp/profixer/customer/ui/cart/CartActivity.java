@@ -22,6 +22,7 @@ import tpp.profixer.customer.ui.dialog.ConfirmDialog;
 import tpp.profixer.customer.ui.fragment.home.adapter.CourseAdapter;
 import tpp.profixer.customer.ui.home.HomeActivity;
 import tpp.profixer.customer.ui.login.LoginActivity;
+import tpp.profixer.customer.ui.payment.PaymentActivity;
 
 public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewModel> {
     private CartAdapter cartAdapter;
@@ -142,6 +143,11 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
     public void navigateToHome(){
         Intent it = new Intent(getApplicationContext(), HomeActivity.class);
         it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(it);
+    }
+
+    public void navigateToPayment(){
+        Intent it = new Intent(getApplicationContext(), PaymentActivity.class);
         startActivity(it);
     }
 }

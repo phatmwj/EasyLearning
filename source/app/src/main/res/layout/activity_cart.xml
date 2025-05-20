@@ -130,6 +130,7 @@
                             </LinearLayout>
 
                             <RelativeLayout
+                                android:onClick="@{()->a.navigateToPayment()}"
                                 android:id="@+id/btn_bring_home"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

@@ -20,6 +20,7 @@ import tpp.profixer.customer.ui.home.HomeViewModel;
 import tpp.profixer.customer.ui.lesson.LessonViewModel;
 import tpp.profixer.customer.ui.login.LoginViewModel;
 import tpp.profixer.customer.ui.map.MapViewModel;
+import tpp.profixer.customer.ui.payment.PaymentViewModel;
 import tpp.profixer.customer.ui.signup.SignupViewModel;
 import tpp.profixer.customer.ui.splash.SplashViewModel;
 import tpp.profixer.customer.utils.GetInfo;
@@ -147,5 +148,13 @@ public class ActivityModule {
         Supplier<ChangePasswordViewModel> supplier = () -> new ChangePasswordViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<ChangePasswordViewModel> factory = new ViewModelProviderFactory<>(ChangePasswordViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(ChangePasswordViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    PaymentViewModel providePaymentViewModel(Repository repository, Context application) {
+        Supplier<PaymentViewModel> supplier = () -> new PaymentViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<PaymentViewModel> factory = new ViewModelProviderFactory<>(PaymentViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(PaymentViewModel.class);
     }
 }
