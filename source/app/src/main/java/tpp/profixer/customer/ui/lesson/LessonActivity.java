@@ -56,8 +56,9 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
         super.onCreate(savedInstanceState);
 
         viewModel.courseId = getIntent().getLongExtra("course_id", -1);
+        viewModel.expertId = getIntent().getLongExtra("expert_id", -1);
 
-        viewPagerAdapter = new ViewPagerAdapter(this, viewModel.courseId);
+        viewPagerAdapter = new ViewPagerAdapter(this, viewModel.courseId, viewModel.expertId);
         viewBinding.viewPager.setAdapter(viewPagerAdapter);
         new TabLayoutMediator(viewBinding.tabLayout, viewBinding.viewPager,
                 (tab, position) -> {

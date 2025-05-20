@@ -18,6 +18,7 @@ import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
+import tpp.profixer.customer.data.model.api.request.ReviewRequest;
 import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.request.UpdateProfileRequest;
@@ -115,4 +116,13 @@ public interface ApiService {
 
     @DELETE("/v1/notification/delete-all")
     Observable<ResponseWrapper>  deleteAllNotification(@Query("appKind") Integer appKind);
+
+    @GET("/v1/review/my-review")
+    Observable<ResponseWrapper<ResponseListObj<Review>>> getMyReview(@Query("courseId") Long courseId);
+
+    @POST("/v1/review/create")
+    Observable<ResponseWrapper>  review(@Body ReviewRequest request);
+
+
+
 }

@@ -11,15 +11,36 @@
     </data>
 
     <LinearLayout
-        android:paddingHorizontal="@dimen/_7sdp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
+            android:paddingHorizontal="@dimen/_7sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/_5sdp"
             android:clipToPadding="false"
-            android:id="@+id/rv_review"/>
+            android:id="@+id/rv_review"
+            android:layout_weight="1"/>
+        <FrameLayout
+            android:paddingHorizontal="@dimen/_7sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_conner_top">
+            <TextView
+                android:onClick="@{() -> vm.getMyReview()}"
+                style="@style/medium_text_style"
+                android:id="@+id/btn_signin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:background="@drawable/bg_button_filled"
+                android:gravity="center"
+                android:text="Đánh giá"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/_14ssp"
+                android:paddingVertical="@dimen/_10sdp"/>
+        </FrameLayout>
     </LinearLayout>
 </layout>

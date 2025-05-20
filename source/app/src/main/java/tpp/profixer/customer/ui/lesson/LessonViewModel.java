@@ -20,6 +20,7 @@ public class LessonViewModel extends BaseViewModel {
 
     public ObservableField<Course> course = new ObservableField<>();
     public Long courseId;
+    public Long expertId;
     public ObservableField<Boolean> isFullscreen = new ObservableField<>(false);
     public ObservableField<Lesson> currentLesson = new ObservableField<>();
     public LessonViewModel(Repository repository, ProFixerApplication application) {

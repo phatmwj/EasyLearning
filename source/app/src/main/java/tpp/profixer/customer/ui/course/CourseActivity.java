@@ -223,6 +223,9 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             case 2:
                 Intent it = new Intent(this, LessonActivity.class);
                 it.putExtra("course_id", viewModel.courseId);
+                if(viewModel.course.get().getExpert() != null && viewModel.course.get().getExpert().getId() != null){
+                    it.putExtra("expert_id", viewModel.course.get().getExpert().getId());
+                }
                 startActivity(it);
                 break;
             default:

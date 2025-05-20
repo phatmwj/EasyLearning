@@ -13,10 +13,12 @@ import tpp.profixer.customer.ui.lesson.fragment.ReviewFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
     private Long courseId;
+    private Long expertId;
 
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, Long courseId) {
+    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, Long courseId, Long expertId) {
         super(fragmentActivity);
         this.courseId = courseId;
+        this.expertId = expertId;
     }
 
     public ViewPagerAdapter(@NonNull Fragment fragment) {
@@ -41,7 +43,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         }
         else if (position == 2)
         {
-            fragment = new ReviewFragment(courseId);
+            fragment = new ReviewFragment(courseId, expertId);
         }
         return fragment;
     }

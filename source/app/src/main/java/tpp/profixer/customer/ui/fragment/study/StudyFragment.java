@@ -53,6 +53,9 @@ public class StudyFragment extends BaseFragment<FragmentStudyBinding, StudyFragm
             public void onCourseClick(Course course) {
                 Intent intent = new Intent(getContext(), LessonActivity.class);
                 intent.putExtra("course_id", course.getId());
+                if(course.getExpert() != null && course.getExpert().getId() != null){
+                    intent.putExtra("expert_id", course.getExpert().getId());
+                }
                 startActivity(intent);
             }
         });

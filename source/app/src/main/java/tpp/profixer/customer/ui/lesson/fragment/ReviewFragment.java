@@ -15,12 +15,15 @@ import tpp.profixer.customer.databinding.FragmentReviewBinding;
 import tpp.profixer.customer.di.component.FragmentComponent;
 import tpp.profixer.customer.ui.base.fragment.BaseFragment;
 import tpp.profixer.customer.ui.course.adapter.ReviewAdapter;
+import tpp.profixer.customer.ui.dialog.ReviewDialog;
 
 public class ReviewFragment extends BaseFragment<FragmentReviewBinding, ReviewViewModel> {
     private Long courseId;
+    private Long expertId;
     private ReviewAdapter reviewAdapter;
-    public ReviewFragment(Long courseId){
+    public ReviewFragment(Long courseId, Long expertId){
         this.courseId = courseId;
+        this.expertId = expertId;
     }
     @Override
     public int getBindingVariable() {
@@ -45,6 +48,8 @@ public class ReviewFragment extends BaseFragment<FragmentReviewBinding, ReviewVi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel.courseId = courseId;
+        viewModel.expertId = expertId;
         setLayoutReviewList();
         viewModel.reviewList.observe(this, reviews -> {
             reviewAdapter.setData(reviews);
@@ -57,5 +62,10 @@ public class ReviewFragment extends BaseFragment<FragmentReviewBinding, ReviewVi
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rvReview.setLayoutManager(layoutManager);
         binding.rvReview.setAdapter(reviewAdapter);
+    }
+
+    public void dialogReview(){
+        ReviewDialog reviewDialog = new ReviewDialog(getContext());
+        reviewDialog.show();
     }
 }
