@@ -15,6 +15,7 @@ import tpp.profixer.customer.ui.cart.CartViewModel;
 import tpp.profixer.customer.ui.category.CategoryViewModel;
 import tpp.profixer.customer.ui.changepassword.ChangePasswordViewModel;
 import tpp.profixer.customer.ui.course.CourseViewModel;
+import tpp.profixer.customer.ui.email.EmailViewModel;
 import tpp.profixer.customer.ui.expert.ExpertViewModel;
 import tpp.profixer.customer.ui.home.HomeViewModel;
 import tpp.profixer.customer.ui.lesson.LessonViewModel;
@@ -156,5 +157,13 @@ public class ActivityModule {
         Supplier<PaymentViewModel> supplier = () -> new PaymentViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<PaymentViewModel> factory = new ViewModelProviderFactory<>(PaymentViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(PaymentViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    EmailViewModel provideEmailViewModel(Repository repository, Context application) {
+        Supplier<EmailViewModel> supplier = () -> new EmailViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<EmailViewModel> factory = new ViewModelProviderFactory<>(EmailViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(EmailViewModel.class);
     }
 }

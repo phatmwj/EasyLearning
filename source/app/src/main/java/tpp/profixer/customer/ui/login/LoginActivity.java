@@ -1,5 +1,6 @@
 package tpp.profixer.customer.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import tpp.profixer.customer.R;
 import tpp.profixer.customer.databinding.ActivityLoginBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
+import tpp.profixer.customer.ui.email.EmailActivity;
 
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
@@ -88,6 +90,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             viewBinding.layoutPass.setError(null);
         }
         viewModel.doLogin();
+    }
+
+    public void navigateToEmail(){
+        Intent intent = new Intent(this, EmailActivity.class);
+        startActivity(intent);
     }
 
 }

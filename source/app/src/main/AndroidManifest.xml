@@ -49,6 +49,11 @@
         android:theme="@style/App.Theme"
         android:windowSoftInputMode="adjustResize|stateHidden">
         <activity
+            android:name=".ui.email.EmailActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".ui.changepassword.ChangePasswordActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">

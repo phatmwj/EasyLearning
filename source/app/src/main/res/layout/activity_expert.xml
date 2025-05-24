@@ -35,11 +35,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_7sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="@dimen/_60sdp"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_90sdp"
                         android:background="@drawable/bg_oval"
                         android:padding="@dimen/_1sdp"
                         android:backgroundTint="@color/app_color"
@@ -47,13 +47,13 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_7sdp"
+                        android:gravity="center_horizontal"
                         android:orientation="vertical">
                         <TextView
                             style="@style/medium_text_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_14ssp"
+                            android:textSize="@dimen/_18ssp"
                             android:text="@{vm.expertInfo.fullName}"
                             android:textColor="#424242"
                             />
@@ -71,9 +71,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/_12ssp"
                             text_html="@{vm.identification.shortInfo}"
                             android:textColor="@color/text"
+                            android:gravity="center_horizontal"
                             android:maxLines="2"
                             android:ellipsize="end"
                             />
@@ -81,41 +82,73 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/_7sdp"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_75sdp"
+                        android:background="@drawable/bg_button_filled"
+                        android:gravity="center_horizontal"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:backgroundTint="#2600ACC1">
                         <TextView
                             style="@style/medium_text_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_10ssp"
-                            android:text="Tổng số học viên"
+                            android:textSize="@dimen/_12ssp"
+                            android:text="Học viên"
                             android:textColor="#424242"
                             />
                         <TextView
                             style="@style/bold_text_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_18ssp"
+                            android:textSize="@dimen/_20ssp"
                             android:text="@{vm.expertInfo.totalStudent}"
                             android:textColor="@color/black"
                             />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_75sdp"
+                        android:background="@drawable/bg_button_filled"
+                        android:gravity="center_horizontal"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_7sdp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:backgroundTint="#240051E1">
                         <TextView
                             style="@style/medium_text_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_10ssp"
+                            android:textSize="@dimen/_12ssp"
+                            android:text="Giờ giảng"
+                            android:textColor="#424242"
+                            />
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_20ssp"
+                            android:text="@{vm.expertInfo.totalLessonTime}"
+                            android:textColor="@color/black"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="@dimen/_75sdp"
+                        android:background="@drawable/bg_button_filled"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:orientation="vertical"
+                        android:backgroundTint="#42E1A800">
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_12ssp"
                             android:text="Khóa học"
                             android:textColor="#424242"
                             />
@@ -123,7 +156,7 @@
                             style="@style/bold_text_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_18ssp"
+                            android:textSize="@dimen/_20ssp"
                             android:text="@{vm.expertInfo.totalCourse}"
                             android:textColor="@color/black"
                             />

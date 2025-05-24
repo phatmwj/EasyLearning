@@ -18,6 +18,7 @@ import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
 import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
+import tpp.profixer.customer.data.model.api.request.ForgetRequest;
 import tpp.profixer.customer.data.model.api.request.ReviewRequest;
 import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.Slide;
@@ -31,6 +32,7 @@ import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Expert;
 import tpp.profixer.customer.data.model.api.response.ExpertInfo;
+import tpp.profixer.customer.data.model.api.response.ForgetResponse;
 import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.LoginResponse;
 import tpp.profixer.customer.data.model.api.response.Notification;
@@ -123,6 +125,7 @@ public interface ApiService {
     @POST("/v1/review/create")
     Observable<ResponseWrapper>  review(@Body ReviewRequest request);
 
-
+    @POST("/v1/account/request_forget_password")
+    Observable<ResponseWrapper<ForgetResponse>>  requestForgetPassword(@Body ForgetRequest request);
 
 }

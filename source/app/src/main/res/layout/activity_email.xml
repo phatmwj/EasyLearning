@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="tpp.profixer.customer.ui.email.EmailViewModel" />
+
+        <variable
+            name="a"
+            type="tpp.profixer.customer.ui.email.EmailActivity" />
+
+        <import type="android.text.TextUtils" />
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:onClick="@{() -> a.hideKeyboard()}">
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"
+            bind:title='@{"Quên mật khẩu"}'/>
+        <RelativeLayout
+            android:id="@+id/layout_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:onClick="@{() -> a.hideKeyboard()}"
+            android:paddingHorizontal="@dimen/_7sdp">
+
+            <ScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/layout_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_centerInParent="true"
+                        android:onClick="@{() -> a.hideKeyboard()}">
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_70sdp">
+                            <TextView
+                                android:id="@+id/tv_username"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Số điện thoại/Email"
+                                style="@style/label_edit_text"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" *"
+                                android:textColor="@color/red"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="@dimen/_12ssp"/>
+                        </LinearLayout>
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/edit_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_36sdp"
+                            style="@style/app_edit_text"
+                            android:hint="Nhập số điện thoại hoặc email"
+                            android:text="@={vm.email}"
+                            android:focusable="true"
+                            android:paddingEnd="@dimen/_7sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:maxLength="20"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/layout_username"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_40sdp"
+                            app:boxBackgroundMode="outline"
+                            app:shapeAppearanceOverlay="@style/Rounded"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:boxStrokeWidthFocused="@dimen/_1sdp"
+                            app:boxBackgroundColor="@color/white"
+                            app:boxStrokeColor="@color/box_stroke_color"
+                            app:boxStrokeErrorColor="@color/red"
+                            app:hintTextColor="#7C7C7C"
+                            app:hintEnabled="true"
+                            android:hint="Email"
+                            app:hintAnimationEnabled="false"
+                            require_field="@{Boolean.TRUE}">
+                            <EditText
+                                style="@style/medium_text_style"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@={vm.email}"
+                                android:inputType="text"
+                                android:maxLength="100"
+                                android:textSize="@dimen/_12sdp"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_12sdp">
+                            <TextView
+                                android:id="@+id/tv_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mật khẩu"
+                                style="@style/label_edit_text"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" *"
+                                android:textColor="@color/red"
+                                android:fontFamily="@font/roboto_medium"
+                                android:textSize="@dimen/_12ssp"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/medium_text_style"
+                            android:id="@+id/btn_signin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:background="@drawable/bg_button_filled"
+                            android:gravity="center"
+                            android:onClick="@{()-> a.hideKeyboard() | a.requestForgetPassword()}"
+                            android:text="Xác nhận"
+                            android:textColor="#FFFFFF"
+                            android:textSize="@dimen/_14ssp"
+                            android:paddingVertical="@dimen/_10sdp"/>
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>
