@@ -58,9 +58,8 @@ public class LoginViewModel extends BaseViewModel {
                             repository.getSharedPreferences().setToken(response.getAccess_token());
                             repository.getSharedPreferences().setUserId(response.getUser_id());
                             getProfile();
-                            getCart();
+                            getCart2(response.getUser_id());
                             isLogin.set(true);
-                            application.getCurrentActivity().finish();
                         }, throwable -> {
                             hideLoading();
                             if (throwable instanceof HttpException) {
@@ -94,6 +93,38 @@ public class LoginViewModel extends BaseViewModel {
 
     public void showPassword(){
         isShowPassword.set(Boolean.FALSE.equals(isShowPassword.get()));
+    }
+
+    public void getCart2(Long userId){
+//        showLoading();
+        compositeDisposable.add(repository.getApiService().getCart(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            if(response.isResult() && response.getData() != null){
+                                ProFixerApplication.cartInfo = response.getData();
+                                cartInfo.setValue(response.getData());
+                            }
+                            application.getCurrentActivity().finish();
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                        }));
     }
 
 }

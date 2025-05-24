@@ -37,6 +37,7 @@ public class DateUtils {
         outputFormat.setTimeZone(TimeZone.getDefault());
         try {
             Date utcDate = inputFormat.parse(dateString);
+            Date loacalDate = outputFormat.parse(outputFormat.format(utcDate));
             String localDateString = outputFormat.format(utcDate);
             return localDateString;
         } catch (ParseException e) {
