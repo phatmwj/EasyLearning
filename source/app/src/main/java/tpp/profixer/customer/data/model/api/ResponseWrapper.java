@@ -5,6 +5,7 @@ public class ResponseWrapper<T> {
     private T data;
     private String message;
     private String code;
+    private String desc;
 
     public boolean isResult() {
         return result;
@@ -20,5 +21,8 @@ public class ResponseWrapper<T> {
 
     public String getCode() {
         return code;
+    }
+    public String getDesc() {
+        return desc;
     }
 }

@@ -16,6 +16,7 @@ import tpp.profixer.customer.databinding.ActivityPaymentBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.payment.adapter.PaymentAdapter;
+import tpp.profixer.customer.ui.qrcode.QrcodeActivity;
 
 public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, PaymentViewModel> {
     PaymentAdapter paymentAdapter;
@@ -70,5 +71,10 @@ public class PaymentActivity extends BaseActivity<ActivityPaymentBinding, Paymen
         paymentAdapter.setListener(new PaymentAdapter.PaymentListener() {
 
         });
+    }
+
+    public void navigateToQrcode(){
+        Intent intent = new Intent(this, QrcodeActivity.class);
+        startActivity(intent);
     }
 }

@@ -14,6 +14,7 @@ import tpp.profixer.customer.ui.lesson.LessonActivity;
 import tpp.profixer.customer.ui.login.LoginActivity;
 import tpp.profixer.customer.ui.map.MapActivity;
 import tpp.profixer.customer.ui.payment.PaymentActivity;
+import tpp.profixer.customer.ui.qrcode.QrcodeActivity;
 import tpp.profixer.customer.ui.signup.SignupActivity;
 import tpp.profixer.customer.ui.splash.SplashActivity;
 
@@ -47,5 +48,7 @@ public interface ActivityComponent {
     void inject(PaymentActivity paymentActivity);
 
     void inject(EmailActivity emailActivity);
+
+    void inject(QrcodeActivity qrcodeActivity);
 }
 

@@ -22,6 +22,7 @@ import tpp.profixer.customer.ui.lesson.LessonViewModel;
 import tpp.profixer.customer.ui.login.LoginViewModel;
 import tpp.profixer.customer.ui.map.MapViewModel;
 import tpp.profixer.customer.ui.payment.PaymentViewModel;
+import tpp.profixer.customer.ui.qrcode.QrcodeViewModel;
 import tpp.profixer.customer.ui.signup.SignupViewModel;
 import tpp.profixer.customer.ui.splash.SplashViewModel;
 import tpp.profixer.customer.utils.GetInfo;
@@ -165,5 +166,13 @@ public class ActivityModule {
         Supplier<EmailViewModel> supplier = () -> new EmailViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<EmailViewModel> factory = new ViewModelProviderFactory<>(EmailViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(EmailViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    QrcodeViewModel provideQrcodeViewModel(Repository repository, Context application) {
+        Supplier<QrcodeViewModel> supplier = () -> new QrcodeViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<QrcodeViewModel> factory = new ViewModelProviderFactory<>(QrcodeViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(QrcodeViewModel.class);
     }
 }

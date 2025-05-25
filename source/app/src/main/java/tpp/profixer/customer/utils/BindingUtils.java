@@ -1,6 +1,8 @@
 package tpp.profixer.customer.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -9,6 +11,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -133,5 +136,16 @@ public final class BindingUtils {
             );
             layout.setHint(spannable);
         }
+    }
+
+    @BindingAdapter({"imageBase64"})
+    public static void setImageBase64(ImageView imageView, String imageBase64) {
+            if (imageBase64 != null && !imageBase64.isEmpty()) {
+                Bitmap bitmap = null;
+                String base64String = imageBase64.split(",")[1];
+                byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                imageView.setImageBitmap(bitmap);
+            }
     }
 }

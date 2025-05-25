@@ -17,6 +17,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import tpp.profixer.customer.data.model.api.ResponseListObj;
 import tpp.profixer.customer.data.model.api.ResponseWrapper;
+import tpp.profixer.customer.data.model.api.request.BankInfo;
+import tpp.profixer.customer.data.model.api.request.BookingRequest;
 import tpp.profixer.customer.data.model.api.request.CompleteLessonRequest;
 import tpp.profixer.customer.data.model.api.request.ForgetRequest;
 import tpp.profixer.customer.data.model.api.request.ReviewRequest;
@@ -36,7 +38,9 @@ import tpp.profixer.customer.data.model.api.response.ForgetResponse;
 import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.LoginResponse;
 import tpp.profixer.customer.data.model.api.response.Notification;
+import tpp.profixer.customer.data.model.api.response.PaymentInfo;
 import tpp.profixer.customer.data.model.api.response.Province;
+import tpp.profixer.customer.data.model.api.response.Qrcode;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
 
@@ -128,4 +132,14 @@ public interface ApiService {
     @POST("/v1/account/request_forget_password")
     Observable<ResponseWrapper<ForgetResponse>>  requestForgetPassword(@Body ForgetRequest request);
 
+    @POST("/v1/booking/create")
+    Observable<ResponseWrapper<PaymentInfo>>  createBooking(@Body BookingRequest request);
+
+    @POST("/api/web/{paymentLinkId}/check-status/")
+    @Headers({"isPayos: 1"})
+    Observable<ResponseWrapper>  checkStatus(@Path("paymentLinkId") String paymentLinkId);
+
+    @POST("/v2/generate")
+    @Headers({"isBank:1","X-Api-Key:5b310ff0-2683-4cb5-a3aa-227b8179aec3","X-Client-Id:72a88234-f90e-45af-b4f1-bafdc9d7a01a"})
+    Observable<ResponseWrapper<Qrcode>> generateQrcode(@Body BankInfo request);
 }

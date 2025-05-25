@@ -21,6 +21,7 @@ android {
         buildConfigField "String", "BASE_URL", "\"https://api-easy.edward.io.vn\""
         buildConfigField "String", "UPDATE_URL", "\"https://update.digibes.de/qrlive/qrcode_random.txt\""
         buildConfigField "String", "MEDIA_URL", "\"https://media.edward.io.vn\""
+        buildConfigField "String", "PAYOS_URL", "\"https://pay.payos.vn\""
         buildConfigField "String", "WS_URL", "\"wss://socket.phatluu.net/ws\""
         buildConfigField "String", "GOOGLE_MAP_URL", "\"https://maps.googleapis.com/maps/api\""
         buildConfigField "String", "BANK_URL", "\"https://api.vietqr.io\""
@@ -202,4 +203,8 @@ dependencies {
 
     //Pick Image from Gallery, Camera
     implementation ("com.github.dhaval2404:imagepicker:2.1")
+
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    implementation 'com.google.zxing:core:3.3.0'
 }
