@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -18,6 +21,7 @@ import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.data.model.api.request.BankInfo;
 import tpp.profixer.customer.data.model.api.request.BookingRequest;
+import tpp.profixer.customer.data.model.api.response.DeepLink;
 import tpp.profixer.customer.data.model.api.response.PaymentInfo;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
 import tpp.profixer.customer.utils.NetworkUtils;
@@ -28,8 +32,11 @@ public class QrcodeViewModel extends BaseViewModel {
     public ObservableField<String> qrCode = new ObservableField<>();
     public ObservableField<String> timeString = new ObservableField<>();
     public ObservableField<String> status = new ObservableField<>("");
+    public ObservableField<List<DeepLink>> deepLinks = new ObservableField<>(new ArrayList<>());
+    public ObservableField<DeepLink> cDeepLink = new ObservableField<>();
     public QrcodeViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
+        getDeepLinkBank();
     }
 
     public void createBooking(){
@@ -90,7 +97,7 @@ public class QrcodeViewModel extends BaseViewModel {
                         }));
     }
 
-public void generateQrcode(BankInfo request){
+    public void generateQrcode(BankInfo request){
         compositeDisposable.add(repository.getApiService().generateQrcode(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -111,6 +118,29 @@ public void generateQrcode(BankInfo request){
                         }, throwable -> {
                             Timber.e(throwable);
                             hideLoading();
+                            handleException(throwable);
+                        }));
+    }
+
+    public void getDeepLinkBank(){
+        compositeDisposable.add(repository.getApiService().getDeepLinks()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap((Function<Throwable, ObservableSource<?>>) throwable1 -> {
+                            if (NetworkUtils.checkNetworkError(throwable1)) {
+                                hideLoading();
+                                return application.showDialogNoInternetAccess();
+                            }else{
+                                return Observable.error(throwable1);
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            deepLinks.set(response.getApps());
+                        }, throwable -> {
+                            Timber.e(throwable);
                             handleException(throwable);
                         }));
     }

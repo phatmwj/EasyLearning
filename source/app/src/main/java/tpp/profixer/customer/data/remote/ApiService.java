@@ -32,6 +32,7 @@ import tpp.profixer.customer.data.model.api.request.RequestCourse;
 import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
+import tpp.profixer.customer.data.model.api.response.DeepLink;
 import tpp.profixer.customer.data.model.api.response.Expert;
 import tpp.profixer.customer.data.model.api.response.ExpertInfo;
 import tpp.profixer.customer.data.model.api.response.ForgetResponse;
@@ -143,4 +144,8 @@ public interface ApiService {
     @POST("/v2/generate")
     @Headers({"isBank:1","X-Api-Key:5b310ff0-2683-4cb5-a3aa-227b8179aec3","X-Client-Id:72a88234-f90e-45af-b4f1-bafdc9d7a01a"})
     Observable<ResponseWrapper<Qrcode>> generateQrcode(@Body BankInfo request);
+
+    @GET("/v2/android-app-deeplinks")
+    @Headers({"isBank:1"})
+    Observable<ResponseListObj<DeepLink>> getDeepLinks();
 }

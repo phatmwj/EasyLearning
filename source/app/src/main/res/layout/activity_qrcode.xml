@@ -23,50 +23,6 @@
             layout="@layout/layout_header"
             bind:a ="@{a}"/>
         <LinearLayout
-            view_visibility='@{vm.status.equals("PAID")}'
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_marginHorizontal="@dimen/_70sdp"
-                android:src="@drawable/ic_success"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_5sdp"
-                android:textSize="@dimen/_12sdp"
-                android:layout_gravity="center"
-                style="@style/bold_text_style"
-                android:textColor="@color/text"
-                android:text="Đơn hàng đã được thanh toán thành công!" />
-        </LinearLayout>
-        <LinearLayout
-            view_visibility='@{vm.status.equals("FAILED")}'
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_marginHorizontal="@dimen/_70sdp"
-                android:src="@drawable/ic_failed"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_5sdp"
-                android:textSize="@dimen/_12sdp"
-                android:layout_gravity="center"
-                style="@style/bold_text_style"
-                android:textColor="@color/text"
-                android:text="Thanh toán thất bại!" />
-        </LinearLayout>
-        <LinearLayout
             view_visibility='@{vm.status.equals("PENDING")}'
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -109,6 +65,104 @@
                         android:drawableStart="@drawable/ic_download" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:layout_gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginHorizontal="@dimen/_7sdp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:onClick="@{()->a.bankDialog()}"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            image_url="@{vm.cDeepLink.appLogo}"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingVertical="@dimen/_5sdp"
+                            android:textSize="@dimen/_12sdp"
+                            style="@style/medium_text_style"
+                            android:textColor="@color/text"
+                            android:text='@{vm.cDeepLink == null ? "Chọn ứng dụng thanh toán" : vm.cDeepLink.bankName}'
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
+                    </LinearLayout>
+                    <TextView
+                        android:onClick="@{()->a.openApp()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_button_filled"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:textSize="@dimen/_14ssp"
+                        style="@style/bold_text_style"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:text="Chuyển tiền" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            view_visibility='@{vm.status.equals("PAID")}'
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginHorizontal="@dimen/_70sdp"
+                android:src="@drawable/ic_success"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="center"
+                style="@style/bold_text_style"
+                android:textColor="@color/text"
+                android:text="Đơn hàng đã được thanh toán thành công!" />
+        </LinearLayout>
+        <LinearLayout
+            view_visibility='@{vm.status.equals("FAILED")}'
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginHorizontal="@dimen/_70sdp"
+                android:src="@drawable/ic_failed"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="center"
+                style="@style/bold_text_style"
+                android:textColor="@color/text"
+                android:text="Thanh toán thất bại!" />
         </LinearLayout>
     </LinearLayout>
 </layout>

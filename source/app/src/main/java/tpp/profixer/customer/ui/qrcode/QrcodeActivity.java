@@ -35,10 +35,12 @@ import tpp.profixer.customer.BR;
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.model.api.ApiModelUtils;
 import tpp.profixer.customer.data.model.api.request.BankInfo;
+import tpp.profixer.customer.data.model.api.response.DeepLink;
 import tpp.profixer.customer.data.model.api.response.PaymentInfo;
 import tpp.profixer.customer.databinding.ActivityQrcodeBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
+import tpp.profixer.customer.ui.dialog.BankDialog;
 
 public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeViewModel> {
 
@@ -161,5 +163,34 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    public void bankDialog(){
+        BankDialog bankDialog = new BankDialog(this, viewModel.deepLinks.get());
+        bankDialog.setOnItemBankListener(new BankDialog.OnItemBankListener() {
+            @Override
+            public void itemClick(DeepLink DeepLink) {
+                viewModel.cDeepLink.set(DeepLink);
+            }
+
+            @Override
+            public void hideKeyboard() {
+                hideKeyboard();
+            }
+        });
+        bankDialog.show();
+    }
+
+    public void openApp(){
+        if(viewModel.cDeepLink.get() == null){
+            return;
+        }
+        String deeplink = viewModel.cDeepLink.get().getDeeplink();
+//        if(viewModel.cDeepLink.get().getAutofill() == 1){
+            deeplink = deeplink + "&mb=" + viewModel.paymentInfo.get().getData().getAccountNumber() + "@bidv&am=" + viewModel.paymentInfo.get().getData().getAmount() + "&tn=" + viewModel.paymentInfo.get().getData().getDescription();
+//        }
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(deeplink));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

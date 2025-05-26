@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="d"
+            type="tpp.profixer.customer.ui.dialog.BankDialog" />
+        <import type="android.view.View"/>
+    </data>
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_7sdp"
+                android:paddingTop="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:onClick="@{()->d.dismiss()}"
+                        android:id="@+id/button_back"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_back"
+                        />
+                    <TextView
+                        style="@style/medium_text_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/_14sdp"
+                        android:gravity="center_horizontal"
+                        android:text="Chọn ngân hàng" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_default">
+                    <ImageView
+                        android:id="@+id/img_delete"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_edittext_search"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:padding="@dimen/_10sdp"
+                        app:tint="@color/text"/>
+                    <EditText
+                        android:id="@+id/edit_text_search"
+                        style="@style/app_edit_text_search"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_9sdp"
+                        android:inputType="text"
+                        android:background="@android:color/transparent"
+                        android:focusable="true"
+                        android:imeOptions="actionDone"
+                        android:text="@={d.stringSearch}"
+                        android:hint="Tìm kiếm"
+                        android:textColorHint="@color/gray"
+                        />
+                    <ImageView
+                        android:onClick="@{()->d.deleteTextSearch()}"
+                        view_visibility="@{d.stringSearch != null &amp;&amp; !d.stringSearch.empty}"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginLeft="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/menu_list_search_bar_img"
+                        android:src="@drawable/ic_icon_delete"
+                        android:padding="@dimen/_7sdp"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_15sdp"/>
+            </LinearLayout>
+
+</layout>
