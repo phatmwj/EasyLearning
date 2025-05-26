@@ -14,9 +14,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
+import tpp.profixer.customer.data.model.api.ApiModelUtils;
 import tpp.profixer.customer.data.model.api.request.BookingRequest;
 import tpp.profixer.customer.data.model.api.response.CartInfo;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
+import tpp.profixer.customer.ui.qrcode.QrcodeActivity;
 import tpp.profixer.customer.utils.NetworkUtils;
 
 public class PaymentViewModel extends BaseViewModel {
@@ -48,9 +50,10 @@ public class PaymentViewModel extends BaseViewModel {
                         response -> {
                             hideLoading();
                             Timber.e(response.getData().getData().getCheckoutUrl());
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(response.getData().getData().getCheckoutUrl()));
+                            Intent intent = new Intent(application.getCurrentActivity(), QrcodeActivity.class);
+                            intent.putExtra("payment_info", ApiModelUtils.GSON.toJson(response.getData()));
                             application.getCurrentActivity().startActivity(intent);
+                            application.getCurrentActivity().finish();
                         }, throwable -> {
                             Timber.e(throwable);
                             hideLoading();

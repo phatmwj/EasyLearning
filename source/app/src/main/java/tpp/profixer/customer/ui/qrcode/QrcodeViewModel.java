@@ -5,9 +5,12 @@ import android.net.Uri;
 
 import androidx.databinding.ObservableField;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
@@ -23,6 +26,8 @@ public class QrcodeViewModel extends BaseViewModel {
 
     public ObservableField<PaymentInfo> paymentInfo = new ObservableField<>();
     public ObservableField<String> qrCode = new ObservableField<>();
+    public ObservableField<String> timeString = new ObservableField<>();
+    public ObservableField<String> status = new ObservableField<>("");
     public QrcodeViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
     }
@@ -44,8 +49,7 @@ public class QrcodeViewModel extends BaseViewModel {
                 )
                 .subscribe(
                         response -> {
-                            hideLoading();
-                            checkStatus(response.getData().getData().getPaymentLinkId());
+                            paymentInfo.set(response.getData());
                             BankInfo request = new BankInfo();
                             request.setAccountNo(response.getData().getData().getAccountNumber());
                             request.setAccountName(response.getData().getData().getAccountName());
@@ -56,7 +60,6 @@ public class QrcodeViewModel extends BaseViewModel {
 //                            Intent intent = new Intent(Intent.ACTION_VIEW);
 //                            intent.setData(Uri.parse(response.getData().getData().getCheckoutUrl()));
 //                            application.getCurrentActivity().startActivity(intent);
-                            paymentInfo.set(response.getData());
                         }, throwable -> {
                             Timber.e(throwable);
                             hideLoading();
@@ -80,10 +83,9 @@ public class QrcodeViewModel extends BaseViewModel {
                 )
                 .subscribe(
                         response -> {
-                            hideLoading();
+                            status.set(response.getData().getStatus());
                         }, throwable -> {
                             Timber.e(throwable);
-                            hideLoading();
                             handleException(throwable);
                         }));
     }
@@ -104,8 +106,8 @@ public void generateQrcode(BankInfo request){
                 )
                 .subscribe(
                         response -> {
-                            hideLoading();
                             qrCode.set(response.getData().getQrDataURL());
+                            hideLoading();
                         }, throwable -> {
                             Timber.e(throwable);
                             hideLoading();

@@ -1,5 +1,6 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -17,20 +18,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <WebView
-            android:visibility="gone"
-            android:id="@+id/webview"
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"/>
+        <LinearLayout
+            view_visibility='@{vm.status.equals("PAID")}'
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            imageBase64="@{vm.qrCode}"/>
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginHorizontal="@dimen/_70sdp"
+                android:src="@drawable/ic_success"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="center"
+                style="@style/bold_text_style"
+                android:textColor="@color/text"
+                android:text="Đơn hàng đã được thanh toán thành công!" />
+        </LinearLayout>
+        <LinearLayout
+            view_visibility='@{vm.status.equals("FAILED")}'
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginHorizontal="@dimen/_70sdp"
+                android:src="@drawable/ic_failed"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_5sdp"
+                android:textSize="@dimen/_12sdp"
+                android:layout_gravity="center"
+                style="@style/bold_text_style"
+                android:textColor="@color/text"
+                android:text="Thanh toán thất bại!" />
+        </LinearLayout>
+        <LinearLayout
+            view_visibility='@{vm.status.equals("PENDING")}'
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/medium_text_style"
+                android:text='@{"Đơn hàng sẽ hết hạn sau "+vm.timeString}'
+                android:textColor="@color/text"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"/>
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:layout_gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        imageBase64="@{vm.qrCode}"/>
+                    <TextView
+                        android:onClick="@{()->a.downloadImage()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_gravity="center"
+                        style="@style/bold_text_style"
+                        android:textColor="@color/app_color"
+                        android:text="Tải xuống mã QR"
+                        android:drawableStart="@drawable/ic_download" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 </layout>

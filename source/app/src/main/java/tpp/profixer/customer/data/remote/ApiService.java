@@ -43,6 +43,7 @@ import tpp.profixer.customer.data.model.api.response.Province;
 import tpp.profixer.customer.data.model.api.response.Qrcode;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
+import tpp.profixer.customer.data.model.api.response.Status;
 
 public interface ApiService {
     @POST("/api/token")
@@ -137,7 +138,7 @@ public interface ApiService {
 
     @POST("/api/web/{paymentLinkId}/check-status/")
     @Headers({"isPayos: 1"})
-    Observable<ResponseWrapper>  checkStatus(@Path("paymentLinkId") String paymentLinkId);
+    Observable<ResponseWrapper<Status>>  checkStatus(@Path("paymentLinkId") String paymentLinkId);
 
     @POST("/v2/generate")
     @Headers({"isBank:1","X-Api-Key:5b310ff0-2683-4cb5-a3aa-227b8179aec3","X-Client-Id:72a88234-f90e-45af-b4f1-bafdc9d7a01a"})
