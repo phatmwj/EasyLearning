@@ -27,13 +27,16 @@ import tpp.profixer.customer.data.model.api.response.Lesson;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
 import tpp.profixer.customer.databinding.ActivityCourseBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
+import tpp.profixer.customer.ui.base.BaseCallback;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.cart.CartActivity;
 import tpp.profixer.customer.ui.course.adapter.Course2Adapter;
 import tpp.profixer.customer.ui.course.adapter.LessonAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewAdapter;
 import tpp.profixer.customer.ui.course.adapter.ReviewStarAdapter;
+import tpp.profixer.customer.ui.dialog.CourseDialog;
 import tpp.profixer.customer.ui.lesson.LessonActivity;
+import tpp.profixer.customer.ui.payment.PaymentActivity;
 
 public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseViewModel> {
     private LessonAdapter lessonAdapter;
@@ -132,16 +135,24 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             viewModel.courseState.set(3);
             return;
         }
+        boolean isFind = false;
         if(cartInfo.getTotalElements() != null && cartInfo.getTotalElements() != 0){
             for(int i = 0; i < cartInfo.getContent().getCartItems().size(); i++){
                 if(cartInfo.getContent().getCartItems().get(i).getCourse().getId().equals(viewModel.courseId)){
                     viewModel.courseState.set(1);
+                    isFind = true;
                     break;
                 }
             }
-        }else {
+        }
+        if(!isFind){
             viewModel.courseState.set(0);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void setLayoutLessons(){
@@ -221,7 +232,22 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         }
         switch (viewModel.courseState.get()){
             case 0:
-                viewModel.addToCart();
+                viewModel.addToCart(new BaseCallback() {
+                    @Override
+                    public void onSuccess() {
+                        handleAddToCartSuccess();
+                    }
+
+                    @Override
+                    public void onFailed() {
+
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+
+                    }
+                });
                 break;
             case 1:
                 Intent intent = new Intent(this, CartActivity.class);
@@ -240,6 +266,42 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             default:
                 break;
         }
+    }
+
+    public void handleAddToCartSuccess(){
+        CourseDialog courseDialog = new CourseDialog(this);
+        courseDialog.course.set(viewModel.course.get());
+        courseDialog.show();
+    }
+
+    public void buyCourse(){
+        if(token == null || token.isEmpty() || token.equals("NULL")){
+            confirmLogin();
+            return;
+        }
+        if(viewModel.courseState.get() == 0){
+            viewModel.addToCart(new BaseCallback() {
+                @Override
+                public void onSuccess() {
+                    Intent intent = new Intent(CourseActivity.this, PaymentActivity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailed() {
+
+                }
+
+                @Override
+                public void onError(Exception exception) {
+
+                }
+            });
+        }else if(viewModel.courseState.get() == 1){
+            Intent intent = new Intent(CourseActivity.this, PaymentActivity.class);
+            startActivity(intent);
+        }
+
     }
 
 }

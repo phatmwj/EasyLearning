@@ -20,6 +20,7 @@ import tpp.profixer.customer.data.model.api.request.RequestCourse;
 import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.api.response.Review;
 import tpp.profixer.customer.data.model.api.response.ReviewStar;
+import tpp.profixer.customer.ui.base.BaseCallback;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
 import tpp.profixer.customer.ui.expert.ExpertActivity;
 import tpp.profixer.customer.utils.NetworkUtils;
@@ -177,7 +178,7 @@ public class CourseViewModel extends BaseViewModel {
                         }));
     }
 
-    public void addToCart(){
+    public void addToCart(BaseCallback baseCallback){
         showLoading();
         compositeDisposable.add(repository.getApiService().addToCart(new RequestCourse(courseId))
                 .subscribeOn(Schedulers.io())
@@ -199,7 +200,7 @@ public class CourseViewModel extends BaseViewModel {
                         response -> {
                             hideLoading();
                             if(response.isResult()){
-                                showSuccessMessage(response.getMessage());
+                                baseCallback.onSuccess();
                                 getCart();
                             }else {
                                 showErrorMessage(response.getMessage());
