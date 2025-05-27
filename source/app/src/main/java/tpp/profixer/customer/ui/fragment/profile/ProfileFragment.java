@@ -68,7 +68,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     private void setLayoutAccount(){
         List<AccountBtn> data = new ArrayList<>();
         data.add(new AccountBtn(1,"Hồ sơ", R.drawable.ic_icon_account));
-        data.add(new AccountBtn(2,"Ví của tôi", R.drawable.ic_wallet));
+//        data.add(new AccountBtn(2,"Ví của tôi", R.drawable.ic_wallet));
         data.add(new AccountBtn(3,"Đổi mật khẩu", R.drawable.ic_password));
 
         accountAdapter = new AccountAdapter(getContext(), data);

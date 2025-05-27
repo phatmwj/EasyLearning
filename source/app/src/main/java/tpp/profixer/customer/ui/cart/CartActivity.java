@@ -58,12 +58,12 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
                     int oldPrice = 0;
                     for(CartItem cartItem : cartInfo.getContent().getCartItems()){
                         courseIds.add(cartItem.getCourse().getId());
+                        categoryIds.add(cartItem.getCourse().getField().getId());
                         price = price + cartItem.getCourse().getMoney();
                         oldPrice = oldPrice + cartItem.getCourse().getPrice();
                     }
                     viewModel.price.set(price);
                     viewModel.oldPrice.set(oldPrice);
-                    categoryIds.add(7050199255187456L);
                     viewModel.getRelatedCourses(courseIds, categoryIds);
                 }
             }
@@ -85,7 +85,7 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
             public void onItemClick(CartItem cartItem) {
                 Intent it = new Intent(getApplicationContext(), CourseActivity.class);
                 it.putExtra("course_id", cartItem.getCourse().getId());
-//                it.putExtra("category_id", viewModel.categoryId);
+                it.putExtra("category_id", cartItem.getCourse().getField().getId());
                 startActivity(it);
             }
 
@@ -106,7 +106,7 @@ public class CartActivity extends BaseActivity<ActivityCartBinding, CartViewMode
             public void onCourseClick(Course course) {
                 Intent it = new Intent(getApplicationContext(), CourseActivity.class);
                 it.putExtra("course_id", course.getId());
-//                it.putExtra("category_id", viewModel.categoryId);
+                it.putExtra("category_id", course.getField().getId());
                 startActivity(it);
             }
         });

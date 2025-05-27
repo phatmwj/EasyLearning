@@ -8,10 +8,12 @@
     </data>
 
     <LinearLayout
+        view_visibility="@{item.courses != null &amp;&amp; !item.courses.empty}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
+            view_visibility="@{item.courses != null &amp;&amp; !item.courses.empty}"
             android:id="@+id/layout_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +30,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"/>
             <TextView
-                style="@style/title_text_style"
+                style="@style/medium_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Xem thêm "
@@ -36,6 +38,7 @@
                 android:ellipsize="end"
                 android:gravity="end"
                 android:textColor="@color/app_color"
+                android:textSize="@dimen/_12ssp"
                 android:drawableEnd="@drawable/ic_expand"
                 android:drawableTint="@color/app_color"/>
         </LinearLayout>

@@ -51,41 +51,6 @@
                         android:layout_centerInParent="true"
                         android:onClick="@{() -> a.hideKeyboard()}">
 
-                        <LinearLayout
-                            android:visibility="gone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_70sdp">
-                            <TextView
-                                android:id="@+id/tv_username"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Số điện thoại/Email"
-                                style="@style/label_edit_text"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=" *"
-                                android:textColor="@color/red"
-                                android:fontFamily="@font/roboto_medium"
-                                android:textSize="@dimen/_12ssp"/>
-                        </LinearLayout>
-
-                        <EditText
-                            android:visibility="gone"
-                            android:id="@+id/edit_username"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_36sdp"
-                            style="@style/app_edit_text"
-                            android:hint="Nhập số điện thoại hoặc email"
-                            android:text="@={vm.email}"
-                            android:focusable="true"
-                            android:paddingEnd="@dimen/_7sdp"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:maxLength="20"
-                            android:layout_marginTop="@dimen/_3sdp"
-                            />
-
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/layout_username"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

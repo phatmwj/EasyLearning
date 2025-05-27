@@ -2,6 +2,7 @@ package tpp.profixer.customer.ui.fragment.home.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import lombok.Setter;
 import tpp.profixer.customer.BR;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.databinding.ItemImageBinding;
+import tpp.profixer.customer.generated.callback.OnClickListener;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
@@ -21,6 +24,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public ImageAdapter(Context context, List<Slide> images) {
         this.context = context;
         this.images = images;
+    }
+
+    @Setter
+    private OnItemListener onItemListener;
+    public interface OnItemListener {
+        void onItemClick(Slide slide);
     }
 
     @NonNull
@@ -43,12 +52,22 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         private ItemImageBinding itemImageBinding;
+        int position;
         public ImageViewHolder(@NonNull ItemImageBinding itemImageBinding) {
             super(itemImageBinding.getRoot());
             this.itemImageBinding = itemImageBinding;
+            itemImageBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onItemListener != null){
+                        onItemListener.onItemClick(images.get(position));
+                    }
+                }
+            });
         }
 
         public void onBind(int position){
+            this.position = position;
             itemImageBinding.setVariable(BR.image, images.get(position));
             itemImageBinding.executePendingBindings();
         }

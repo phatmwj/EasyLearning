@@ -54,6 +54,7 @@ public class PaymentViewModel extends BaseViewModel {
                             intent.putExtra("payment_info", ApiModelUtils.GSON.toJson(response.getData()));
                             application.getCurrentActivity().startActivity(intent);
                             application.getCurrentActivity().finish();
+                            getCart();
                         }, throwable -> {
                             Timber.e(throwable);
                             hideLoading();

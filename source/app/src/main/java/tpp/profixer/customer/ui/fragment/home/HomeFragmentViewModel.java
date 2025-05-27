@@ -16,6 +16,7 @@ import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.response.CategoryCourse;
+import tpp.profixer.customer.data.model.api.response.Course;
 import tpp.profixer.customer.data.model.room.UserEntity;
 import tpp.profixer.customer.ui.base.fragment.BaseFragmentViewModel;
 import tpp.profixer.customer.utils.NetworkUtils;

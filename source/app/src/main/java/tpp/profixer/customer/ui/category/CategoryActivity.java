@@ -86,7 +86,7 @@ public class CategoryActivity extends BaseActivity<ActivityCategoryBinding, Cate
             public void onCourseClick(Course course) {
                 Intent it = new Intent(CategoryActivity.this, CourseActivity.class);
                 it.putExtra("course_id", course.getId());
-                it.putExtra("category_id", viewModel.categoryId);
+                it.putExtra("category_id", course.getField().getId());
                 startActivity(it);
             }
         });

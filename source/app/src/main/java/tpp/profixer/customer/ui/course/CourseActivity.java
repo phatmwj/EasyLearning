@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.model.api.response.AmountReview;
 import tpp.profixer.customer.data.model.api.response.CartInfo;
@@ -77,6 +78,8 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                 loadLessonData(viewModel.course.get().getLessons());
                 if(viewModel.course.get().getIsBuy()){
                     viewModel.courseState.set(2);
+                }else if(viewModel.course.get().getIsProcessing()){
+                    viewModel.courseState.set(3);
                 }
                 String rawHtml = viewModel.course.get().getDescription();
                 String cleanedHtml = rawHtml
@@ -123,6 +126,10 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         super.handleCart(cartInfo);
         if(viewModel.course.get() != null &&viewModel.course.get().getIsBuy()){
             viewModel.courseState.set(2);
+            return;
+        }
+        if(viewModel.course.get() != null &&viewModel.course.get().getIsProcessing()){
+            viewModel.courseState.set(3);
             return;
         }
         if(cartInfo.getTotalElements() != null && cartInfo.getTotalElements() != 0){
@@ -201,7 +208,7 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
             public void onCourseClick(Course course) {
                 Intent it = new Intent(CourseActivity.this, CourseActivity.class);
                 it.putExtra("course_id", course.getId());
-                it.putExtra("category_id", viewModel.categoryId);
+                it.putExtra("category_id", course.getField().getId());
                 startActivity(it);
             }
         });
@@ -227,6 +234,8 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
                     it.putExtra("expert_id", viewModel.course.get().getExpert().getId());
                 }
                 startActivity(it);
+                break;
+            case 3:
                 break;
             default:
                 break;

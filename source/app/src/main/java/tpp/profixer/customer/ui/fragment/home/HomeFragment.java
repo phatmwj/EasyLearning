@@ -2,6 +2,7 @@ package tpp.profixer.customer.ui.fragment.home;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator3;
 import tpp.profixer.customer.BR;
+import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.R;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.response.Category;
@@ -83,6 +85,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
             imageAdapter = new ImageAdapter(getContext(), slides);
             binding.viewPager2.setAdapter(imageAdapter);
             binding.circelIndicator3.setViewPager(binding.viewPager2);
+            imageAdapter.setOnItemListener(new ImageAdapter.OnItemListener() {
+                @Override
+                public void onItemClick(Slide slide) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(slide.getUrl()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
         });
 
         viewModel.categoryCourses.observe(this, categoryCourses -> {
@@ -117,7 +127,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeFragment
             public void onCourseClick(Course course, Category category) {
                 Intent it = new Intent(getContext(), CourseActivity.class);
                 it.putExtra("course_id", course.getId());
-                it.putExtra("category_id", category.getId());
+                it.putExtra("category_id", course.getField().getId());
                 startActivity(it);
             }
         });

@@ -158,18 +158,18 @@
                             android:textSize="@dimen/_12ssp"/>
                     </LinearLayout>
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
-                        style="@style/app_edit_text"
-                        android:hint="Nhập họ và tên"
-                        android:text="@={vm.request.fullName}"
-                        android:focusable="true"
-                        android:paddingEnd="@dimen/_7sdp"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:maxLength="30"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        />
+<!--                    <EditText-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/_36sdp"-->
+<!--                        style="@style/app_edit_text"-->
+<!--                        android:hint="Nhập họ và tên"-->
+<!--                        android:text="@={vm.request.fullName}"-->
+<!--                        android:focusable="true"-->
+<!--                        android:paddingEnd="@dimen/_7sdp"-->
+<!--                        android:paddingStart="@dimen/_10sdp"-->
+<!--                        android:maxLength="30"-->
+<!--                        android:layout_marginTop="@dimen/_3sdp"-->
+<!--                        />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -456,18 +456,18 @@
                             android:textSize="@dimen/_12ssp"/>
                     </LinearLayout>
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
-                        style="@style/app_edit_text"
-                        android:hint="Nhập họ và tên"
-                        android:text="@={vm.request.address}"
-                        android:focusable="true"
-                        android:paddingEnd="@dimen/_7sdp"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:maxLength="30"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        />
+<!--                    <EditText-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/_36sdp"-->
+<!--                        style="@style/app_edit_text"-->
+<!--                        android:hint="Nhập họ và tên"-->
+<!--                        android:text="@={vm.request.address}"-->
+<!--                        android:focusable="true"-->
+<!--                        android:paddingEnd="@dimen/_7sdp"-->
+<!--                        android:paddingStart="@dimen/_10sdp"-->
+<!--                        android:maxLength="30"-->
+<!--                        android:layout_marginTop="@dimen/_3sdp"-->
+<!--                        />-->
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

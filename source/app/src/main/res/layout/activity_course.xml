@@ -169,7 +169,7 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
                         <RelativeLayout
-                            view_visibility="@{vm.courseState != 2}"
+                            view_visibility="@{vm.courseState != 2 &amp;&amp; vm.courseState != 3}"
                             android:id="@+id/btn_bring_home"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -229,7 +229,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="@dimen/_14ssp"
-                                    android:text='@{vm.courseState == 0 ? "Add to cart" : vm.courseState == 1 ? "Go to cart" :vm.courseState == 2 ? "Đi đến khóa học": ""}'
+                                    android:text='@{vm.courseState == 0 ? "Add to cart" : vm.courseState == 1 ? "Go to cart" :vm.courseState == 2 ? "Đi đến khóa học": vm.courseState == 3 ? "Đang xử lí":""}'
                                     android:layout_marginStart="@dimen/_7sdp"
                                     android:layout_gravity="center_vertical"
                                     android:textColor="@color/app_color"
