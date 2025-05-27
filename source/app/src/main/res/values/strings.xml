@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProFixer</string>
+    <string name="app_name">Easy Learning</string>
     <string name="msg_loading">Xin chờ...</string>
 
     <!--Network error-->
