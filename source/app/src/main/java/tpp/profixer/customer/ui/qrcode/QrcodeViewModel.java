@@ -21,6 +21,7 @@ import tpp.profixer.customer.ProFixerApplication;
 import tpp.profixer.customer.data.Repository;
 import tpp.profixer.customer.data.model.api.request.BankInfo;
 import tpp.profixer.customer.data.model.api.request.BookingRequest;
+import tpp.profixer.customer.data.model.api.response.BookingResponse;
 import tpp.profixer.customer.data.model.api.response.DeepLink;
 import tpp.profixer.customer.data.model.api.response.PaymentInfo;
 import tpp.profixer.customer.ui.base.activity.BaseViewModel;
@@ -34,6 +35,7 @@ public class QrcodeViewModel extends BaseViewModel {
     public ObservableField<String> status = new ObservableField<>("");
     public ObservableField<List<DeepLink>> deepLinks = new ObservableField<>(new ArrayList<>());
     public ObservableField<DeepLink> cDeepLink = new ObservableField<>();
+    public ObservableField<BookingResponse> booking = new ObservableField<>();
     public QrcodeViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
         getDeepLinkBank();
@@ -140,6 +142,32 @@ public class QrcodeViewModel extends BaseViewModel {
                         response -> {
                             deepLinks.set(response.getApps());
                         }, throwable -> {
+                            Timber.e(throwable);
+                            handleException(throwable);
+                        }));
+    }
+
+    public void getBooking(){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().getBooking(paymentInfo.get().getData().getOrderCode())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap((Function<Throwable, ObservableSource<?>>) throwable1 -> {
+                            if (NetworkUtils.checkNetworkError(throwable1)) {
+                                hideLoading();
+                                return application.showDialogNoInternetAccess();
+                            }else{
+                                return Observable.error(throwable1);
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            hideLoading();
+                            booking.set(response.getData());
+                        }, throwable -> {
+                            hideLoading();
                             Timber.e(throwable);
                             handleException(throwable);
                         }));

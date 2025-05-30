@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.Observable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.google.zxing.BarcodeFormat;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -41,12 +43,14 @@ import tpp.profixer.customer.databinding.ActivityQrcodeBinding;
 import tpp.profixer.customer.di.component.ActivityComponent;
 import tpp.profixer.customer.ui.base.activity.BaseActivity;
 import tpp.profixer.customer.ui.dialog.BankDialog;
+import tpp.profixer.customer.ui.qrcode.adapter.TransactionAdapter;
 
 public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeViewModel> {
 
     Bitmap bitmap;
     BitmapDrawable bitmapDrawable;
-   public CompositeDisposable compositeDisposableA = new CompositeDisposable();
+    public CompositeDisposable compositeDisposableA = new CompositeDisposable();
+    private TransactionAdapter transactionAdapter;
 
     @Override
     public int getLayoutId() {
@@ -66,6 +70,8 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setLayoutTransaction();
 
         viewModel.paymentInfo.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
@@ -112,6 +118,22 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
 //                } catch (WriterException e) {
 //                    Timber.e(e);
 //                }
+            }
+        });
+
+        viewModel.status.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if(viewModel.status.get().equals("PAID")){
+                    viewModel.getBooking();
+                }
+            }
+        });
+
+        viewModel.booking.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                transactionAdapter.setData(viewModel.booking.get().getTransactions());
             }
         });
 
@@ -192,5 +214,11 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(deeplink));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void setLayoutTransaction(){
+        transactionAdapter = new TransactionAdapter(this, new ArrayList<>());
+        viewBinding.rvTransaction.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        viewBinding.rvTransaction.setAdapter(transactionAdapter);
     }
 }

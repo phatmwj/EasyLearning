@@ -77,6 +77,14 @@ public final class BindingUtils {
         }
         textView.setText(NumberUtils.formatCurrency(price));
     }
+    @BindingAdapter("text_currency")
+    public static void formatCurrency(TextView textView, Double price) {
+        if(price == null){
+            textView.setText("");
+            return;
+        }
+        textView.setText(NumberUtils.formatCurrency(price.intValue()));
+    }
 
     @BindingAdapter("text_datetime")
     public static void formatCurrency(TextView textView, String datetime) {

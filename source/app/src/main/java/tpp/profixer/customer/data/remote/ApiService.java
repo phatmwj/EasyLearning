@@ -26,6 +26,7 @@ import tpp.profixer.customer.data.model.api.request.SignupRequest;
 import tpp.profixer.customer.data.model.api.request.Slide;
 import tpp.profixer.customer.data.model.api.request.UpdateProfileRequest;
 import tpp.profixer.customer.data.model.api.response.AvatarPathResponse;
+import tpp.profixer.customer.data.model.api.response.BookingResponse;
 import tpp.profixer.customer.data.model.api.response.Cart;
 import tpp.profixer.customer.data.model.api.request.LoginRequest;
 import tpp.profixer.customer.data.model.api.request.RequestCourse;
@@ -148,4 +149,7 @@ public interface ApiService {
     @GET("/v2/android-app-deeplinks")
     @Headers({"isBank:1"})
     Observable<ResponseListObj<DeepLink>> getDeepLinks();
+
+    @GET("/v1/booking/client-get/{code}")
+    Observable<ResponseWrapper<BookingResponse>>  getBooking(@Path("code") String code);
 }

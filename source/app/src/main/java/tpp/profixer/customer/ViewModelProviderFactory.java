@@ -21,6 +21,7 @@ public class ViewModelProviderFactory<T extends ViewModel> extends ViewModelProv
 
     @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public <B extends ViewModel> B create(@NonNull Class<B> modelClass) {
 
         if (modelClass.isAssignableFrom(viewModelClass)) {
