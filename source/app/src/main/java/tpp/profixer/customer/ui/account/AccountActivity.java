@@ -195,9 +195,9 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                         }
                         break;
                     default:
-                        viewModel.getProvinces(1,null);
-                        viewModel.getDistricts(2, viewModel.request.getProvinceId());
-                        viewModel.getWards(3, viewModel.request.getDistrictId());
+//                        viewModel.getProvinces(1,null);
+//                        viewModel.getDistricts(2, viewModel.request.getProvinceId());
+//                        viewModel.getWards(3, viewModel.request.getDistrictId());
                         break;
                 }
             }
@@ -217,6 +217,10 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding, Accoun
                     viewModel.request.setDistrictId(userEntity.getDistrictId());
                     viewModel.request.setAddress(userEntity.getAddress());
                     viewModel.request.setAvatarPath(userEntity.getAvatar());
+
+                    viewModel.getProvinces(1,null);
+                    viewModel.getDistricts(2, viewModel.request.getProvinceId());
+                    viewModel.getWards(3, viewModel.request.getDistrictId());
                 }
             }
         });
