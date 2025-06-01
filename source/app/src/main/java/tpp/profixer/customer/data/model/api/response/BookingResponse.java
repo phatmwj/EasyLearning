@@ -22,4 +22,11 @@ public class BookingResponse {
     private String payoutStatus;
     private String code;
     private List<Transaction> transactions;
+
+    public double originalPrice(){
+        double price = totalMoney;
+        if(couponMoney != null) price = price + couponMoney;
+        if(selloffMoney != null) price = price + selloffMoney;
+        return price;
+    }
 }

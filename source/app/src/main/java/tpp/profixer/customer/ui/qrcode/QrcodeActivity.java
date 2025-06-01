@@ -126,6 +126,7 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
             public void onPropertyChanged(Observable sender, int propertyId) {
                 if(viewModel.status.get().equals("PAID")){
                     viewModel.getBooking();
+                    compositeDisposableA.clear();
                 }
             }
         });

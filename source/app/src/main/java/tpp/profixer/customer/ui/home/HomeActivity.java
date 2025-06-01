@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -124,15 +125,20 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
         viewModel.notApp.set(false);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        studyFragment = (StudyFragment) fragmentManager.findFragmentByTag("study fragment");
         if(studyFragment == null){
             studyFragment = new StudyFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.frameLayout, studyFragment, "home fragment").hide(activeFragment).commit();
+            transaction.add(R.id.frameLayout, studyFragment, "study fragment");
         }
         else{
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(activeFragment).show(studyFragment).commit();
+            transaction.show(studyFragment);
         }
+        if (activeFragment != null && activeFragment != studyFragment) {
+            transaction.hide(activeFragment);
+        }
+        transaction.commit();
         activeFragment = studyFragment;
     }
     public void replaceFragmentHome(){
@@ -141,15 +147,20 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
         viewModel.notApp.set(true);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        homeFragment = (HomeFragment) fragmentManager.findFragmentByTag("home fragment");
         if(homeFragment == null){
             homeFragment = new HomeFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.frameLayout, homeFragment, "home fragment").hide(activeFragment).commit();
+            transaction.add(R.id.frameLayout, homeFragment, "home fragment");
         }
         else{
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(activeFragment).show(homeFragment).commit();
+            transaction.show(homeFragment);
         }
+        if (activeFragment != null && activeFragment != homeFragment) {
+            transaction.hide(activeFragment);
+        }
+        transaction.commit();
         activeFragment = homeFragment;
     }
     public void replaceFragmentProfile(){
@@ -158,15 +169,20 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
         viewModel.notApp.set(false);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        profileFragment = (ProfileFragment) fragmentManager.findFragmentByTag("profile fragment");
         if(profileFragment == null){
             profileFragment = new ProfileFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.frameLayout, profileFragment, "profile fragment").hide(activeFragment).commit();
+            transaction.add(R.id.frameLayout, profileFragment, "profile fragment");
         }
         else{
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(activeFragment).show(profileFragment).commit();
+            transaction.show(profileFragment);
         }
+        if (activeFragment != null && activeFragment != profileFragment) {
+            transaction.hide(activeFragment);
+        }
+        transaction.commit();
         activeFragment = profileFragment;
     }
 
@@ -176,15 +192,20 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
 //        viewModel.textSearch.set("");
         viewModel.isSearch.set(true);
         viewModel.notApp.set(false);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        incomeFragment = (IncomeFragment) fragmentManager.findFragmentByTag("income fragment");
         if(incomeFragment == null){
             incomeFragment = new IncomeFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.frameLayout, incomeFragment, "income fragment").hide(activeFragment).commit();
+            transaction.add(R.id.frameLayout, incomeFragment, "income fragment");
         }
         else{
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(activeFragment).show(incomeFragment).commit();
+            transaction.show(incomeFragment);
         }
+        if (activeFragment != null && activeFragment != incomeFragment) {
+            transaction.hide(activeFragment);
+        }
+        transaction.commit();
         activeFragment = incomeFragment;
     }
 
@@ -194,15 +215,20 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         viewModel.textSearch.set("");
         viewModel.isSearch.set(false);
         viewModel.notApp.set(false);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        notificationFragment = (NotificationFragment) fragmentManager.findFragmentByTag("notification fragment");
         if(notificationFragment == null){
             notificationFragment = new NotificationFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.frameLayout, notificationFragment, "notification fragment").hide(activeFragment).commit();
+            transaction.add(R.id.frameLayout, notificationFragment, "notification fragment");
         }
         else{
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(activeFragment).show(notificationFragment).commit();
+            transaction.show(notificationFragment);
         }
+        if (activeFragment != null && activeFragment != notificationFragment) {
+            transaction.hide(activeFragment);
+        }
+        transaction.commit();
         activeFragment = notificationFragment;
     }
 

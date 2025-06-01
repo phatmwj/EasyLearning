@@ -80,8 +80,7 @@ public final class BindingUtils {
     @BindingAdapter("text_currency")
     public static void formatCurrency(TextView textView, Double price) {
         if(price == null){
-            textView.setText("");
-            return;
+            price = 0.0;
         }
         textView.setText(NumberUtils.formatCurrency(price.intValue()));
     }

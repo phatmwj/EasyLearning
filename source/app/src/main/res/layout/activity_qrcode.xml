@@ -129,8 +129,8 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginHorizontal="@dimen/_70sdp"
                 android:src="@drawable/ic_success"/>
             <TextView
@@ -142,154 +142,159 @@
                 style="@style/bold_text_style"
                 android:textColor="@color/text"
                 android:text="Đơn hàng đã được thanh toán thành công!" />
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/_7sdp"
+                app:cardCornerRadius="@dimen/_5sdp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/_7sdp">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_7sdp">
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14ssp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#424242"
+                            />
+                        <TextView
+                            style="@style/bold_text_style"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/_14ssp"
+                            android:text="Thông tin đơn hàng"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#424242"
+                            />
+                    </LinearLayout>
                     <TextView
-                        style="@style/bold_text_style"
+                        style="@style/medium_text_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_14ssp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:textSize="@dimen/_12ssp"
+                        android:text='@{"Mã đơn hàng: " + vm.booking.code}'
                         android:layout_gravity="center_vertical"
-                        android:textColor="#424242"
+                        android:textColor="@color/gray"
                         />
-                    <TextView
-                        style="@style/bold_text_style"
-                        android:layout_width="0dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/_14ssp"
-                        android:text="Thông tin đơn hàng"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="#424242"
-                        />
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:paddingHorizontal="@dimen/_7sdp"
+                        android:clipToPadding="false"
+                        android:id="@+id/rv_transaction"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/medium_text_style"
+                            android:text="Giá gốc"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/medium_text_style"
+                            text_currency="@{vm.booking.originalPrice}"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/medium_text_style"
+                            android:text="Giảm giá"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/medium_text_style"
+                            android:text="-"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/medium_text_style"
+                            text_currency="@{vm.booking.selloffMoney}"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_5sdp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/medium_text_style"
+                            android:text="Voucher"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/medium_text_style"
+                            android:text="-"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/medium_text_style"
+                            text_currency="@{vm.booking.couponMoney}"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:paddingHorizontal="@dimen/_5sdp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/medium_text_style"
+                            android:text="Tổng"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/text"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/medium_text_style"
+                            text_currency="@{vm.booking.totalMoney}"
+                            android:textSize="@dimen/_16sdp"
+                            android:textColor="@color/app_color"/>
+                    </LinearLayout>
                 </LinearLayout>
-                <TextView
-                    style="@style/medium_text_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_7sdp"
-                    android:textSize="@dimen/_12ssp"
-                    android:text='@{"Mã đơn hàng: " + vm.booking.code}'
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/gray"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:paddingHorizontal="@dimen/_7sdp"
-                    android:clipToPadding="false"
-                    android:id="@+id/rv_transaction"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/_5sdp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/medium_text_style"
-                        android:text="Giá gốc"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/medium_text_style"
-                        text_currency="@{vm.booking.totalMoney}"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/_5sdp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/medium_text_style"
-                        android:text="Giảm giá"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/medium_text_style"
-                        android:text="-"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/medium_text_style"
-                        text_currency="@{vm.booking.selloffMoney}"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="@dimen/_5sdp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/medium_text_style"
-                        android:text="Voucher"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/medium_text_style"
-                        android:text="-"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/medium_text_style"
-                        text_currency="@{vm.booking.couponMoney}"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/medium_text_style"
-                        android:text="Tổng"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/text"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/medium_text_style"
-                        text_currency="@{vm.booking.totalMoney}"
-                        android:textSize="@dimen/_16sdp"
-                        android:textColor="@color/app_color"/>
-                </LinearLayout>
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
         <LinearLayout
             view_visibility='@{vm.status.equals("FAILED")}'
