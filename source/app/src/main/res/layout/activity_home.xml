@@ -7,10 +7,10 @@
     <data>
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.home.HomeActivity" />
+            type="tpp.easy.learning.ui.home.HomeActivity" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.home.HomeViewModel" />
+            type="tpp.easy.learning.ui.home.HomeViewModel" />
 
     </data>
 

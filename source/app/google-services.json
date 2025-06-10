@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:781522215888:android:9bacf83d8d1d0392cf4fd5",
         "android_client_info": {
-          "package_name": "tpp.profixer.customer"
+          "package_name": "tpp.easy.learning"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "781522215888-8bdmhbfu9uao89d6g3a97uh1g0pgd6oe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "tpp.profixer.customer",
+            "package_name": "tpp.easy.learning",
             "certificate_hash": "2ec3c8ac583185a615c35fe4a07f43a6517974c8"
           }
         },

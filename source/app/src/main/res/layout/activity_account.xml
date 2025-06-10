@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.account.AccountViewModel" />
+            type="tpp.easy.learning.ui.account.AccountViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.account.AccountActivity" />
+            type="tpp.easy.learning.ui.account.AccountActivity" />
     </data>
 
     <LinearLayout

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="item"
-            type="tpp.profixer.customer.data.model.api.response.Lesson" />
+            type="tpp.easy.learning.data.model.api.response.Lesson" />
     </data>
 
     <LinearLayout

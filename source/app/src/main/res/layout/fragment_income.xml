@@ -6,10 +6,10 @@
     <data>
         <variable
             name="f"
-            type="tpp.profixer.customer.ui.fragment.income.IncomeFragment" />
+            type="tpp.easy.learning.ui.fragment.income.IncomeFragment" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.fragment.income.IncomeFragmentViewModel" />
+            type="tpp.easy.learning.ui.fragment.income.IncomeFragmentViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                     android:layout_gravity="center_vertical"
                     android:textColor="#424242"
                     />
-                <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                <tpp.easy.learning.ui.fragment.home.view.NonScrollListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"

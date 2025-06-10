@@ -6,10 +6,10 @@
     <data>
         <variable
             name="f"
-            type="tpp.profixer.customer.ui.fragment.profile.ProfileFragment" />
+            type="tpp.easy.learning.ui.fragment.profile.ProfileFragment" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.fragment.profile.ProfileFragmentViewModel" />
+            type="tpp.easy.learning.ui.fragment.profile.ProfileFragmentViewModel" />
 
     </data>
     <FrameLayout
@@ -56,7 +56,7 @@
                         android:textColor="#424242"
                         />
                 </LinearLayout>
-                <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                <tpp.easy.learning.ui.fragment.home.view.NonScrollListView
                     view_visibility="@{vm.profile != null}"
                     android:id="@+id/lv_account"
                     android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                     android:paddingHorizontal="@dimen/_15sdp"
                     android:background="@drawable/bg_button_outline"
                     />
-                <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                <tpp.easy.learning.ui.fragment.home.view.NonScrollListView
                     android:id="@+id/lv_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

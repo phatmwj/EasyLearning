@@ -6,11 +6,11 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.email.EmailViewModel" />
+            type="tpp.easy.learning.ui.email.EmailViewModel" />
 
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.email.EmailActivity" />
+            type="tpp.easy.learning.ui.email.EmailActivity" />
 
         <import type="android.text.TextUtils" />
         <import type="android.view.View"/>

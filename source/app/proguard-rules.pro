@@ -79,6 +79,6 @@
 -keep class com.pos.android.data.model.db.BaseEntity**
 -keepclassmembers class * extends com.pos.android.data.model.db.BaseEntity** { *;}
 -keep class com.pos.android.data.model.api.request.BaseRequest**
--keepclassmembers class * extends tpp.profixer.customer.data.model.api.request.BaseRequest { *;}
+-keepclassmembers class * extends tpp.easy.learning.data.model.api.request.BaseRequest { *;}
 -keep class com.pos.android.data.model.api.response.BaseResponse**
--keepclassmembers class * extends tpp.profixer.customer.data.model.api.response.BaseResponse { *;}
+-keepclassmembers class * extends tpp.easy.learning.data.model.api.response.BaseResponse { *;}

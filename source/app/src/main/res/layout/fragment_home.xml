@@ -7,10 +7,10 @@
     <data>
         <variable
             name="f"
-            type="tpp.profixer.customer.ui.fragment.home.HomeFragment" />
+            type="tpp.easy.learning.ui.fragment.home.HomeFragment" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.fragment.home.HomeFragmentViewModel" />
+            type="tpp.easy.learning.ui.fragment.home.HomeFragmentViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

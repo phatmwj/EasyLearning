@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.lesson.LessonViewModel" />
+            type="tpp.easy.learning.ui.lesson.LessonViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.lesson.LessonActivity" />
+            type="tpp.easy.learning.ui.lesson.LessonActivity" />
     </data>
 
     <LinearLayout

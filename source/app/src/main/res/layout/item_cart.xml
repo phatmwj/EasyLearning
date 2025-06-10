@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="tpp.profixer.customer.data.model.api.response.Course" />
+            type="tpp.easy.learning.data.model.api.response.Course" />
     </data>
     <com.chauthai.swipereveallayout.SwipeRevealLayout
         android:layout_marginBottom="@dimen/_5sdp"

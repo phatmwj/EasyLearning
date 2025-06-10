@@ -5,11 +5,11 @@
     <data>
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.qrcode.QrcodeActivity" />
+            type="tpp.easy.learning.ui.qrcode.QrcodeActivity" />
 
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.qrcode.QrcodeViewModel" />
+            type="tpp.easy.learning.ui.qrcode.QrcodeViewModel" />
         <import type="android.view.View"/>
 
     </data>

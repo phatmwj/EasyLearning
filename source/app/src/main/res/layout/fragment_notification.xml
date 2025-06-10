@@ -7,10 +7,10 @@
     <data>
         <variable
             name="f"
-            type="tpp.profixer.customer.ui.fragment.notification.NotificationFragment" />
+            type="tpp.easy.learning.ui.fragment.notification.NotificationFragment" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.fragment.notification.NotificationFragmentViewModel" />
+            type="tpp.easy.learning.ui.fragment.notification.NotificationFragmentViewModel" />
 
     </data>
     <LinearLayout

@@ -4,10 +4,10 @@
     <data>
         <variable
             name="f"
-            type="tpp.profixer.customer.ui.lesson.fragment.ReviewFragment" />
+            type="tpp.easy.learning.ui.lesson.fragment.ReviewFragment" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.lesson.fragment.ReviewViewModel" />
+            type="tpp.easy.learning.ui.lesson.fragment.ReviewViewModel" />
     </data>
 
     <LinearLayout

@@ -5,10 +5,10 @@
     <data>
         <variable
             name="item"
-            type="tpp.profixer.customer.data.model.api.response.Lesson" />
+            type="tpp.easy.learning.data.model.api.response.Lesson" />
         <variable
             name="itemCurrent"
-            type="tpp.profixer.customer.data.model.api.response.Lesson" />
+            type="tpp.easy.learning.data.model.api.response.Lesson" />
         <import type="android.view.View"/>
     </data>
 

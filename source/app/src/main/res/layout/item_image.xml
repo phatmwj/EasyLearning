@@ -4,7 +4,7 @@
     <data>
         <variable
             name="image"
-            type="tpp.profixer.customer.data.model.api.request.Slide" />
+            type="tpp.easy.learning.data.model.api.request.Slide" />
 
     </data>
 

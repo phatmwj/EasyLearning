@@ -5,10 +5,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.category.CategoryViewModel" />
+            type="tpp.easy.learning.ui.category.CategoryViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.category.CategoryActivity" />
+            type="tpp.easy.learning.ui.category.CategoryActivity" />
     </data>
 
     <LinearLayout

@@ -7,10 +7,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.course.CourseViewModel" />
+            type="tpp.easy.learning.ui.course.CourseViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.course.CourseActivity" />
+            type="tpp.easy.learning.ui.course.CourseActivity" />
     </data>
 
     <LinearLayout
@@ -290,7 +290,7 @@
                             android:layout_gravity="center_vertical"
                             android:textColor="#424242"
                             />
-                        <tpp.profixer.customer.ui.fragment.home.view.NonScrollExpandableListView
+                        <tpp.easy.learning.ui.fragment.home.view.NonScrollExpandableListView
                             android:id="@+id/exlv_lesson"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -343,7 +343,7 @@
                                 android:textColor="@color/gray"
                                 />
                         </LinearLayout>
-                        <tpp.profixer.customer.ui.fragment.home.view.NonScrollListView
+                        <tpp.easy.learning.ui.fragment.home.view.NonScrollListView
                             android:id="@+id/lv_review_star"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

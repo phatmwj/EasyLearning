@@ -6,11 +6,11 @@
     <data>
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.splash.SplashActivity" />
+            type="tpp.easy.learning.ui.splash.SplashActivity" />
 
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.splash.SplashViewModel" />
+            type="tpp.easy.learning.ui.splash.SplashViewModel" />
 
         <import type="android.view.View" />
     </data>

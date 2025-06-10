@@ -6,11 +6,11 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.login.LoginViewModel" />
+            type="tpp.easy.learning.ui.login.LoginViewModel" />
 
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.login.LoginActivity" />
+            type="tpp.easy.learning.ui.login.LoginActivity" />
 
         <import type="android.text.TextUtils" />
         <import type="android.view.View"/>

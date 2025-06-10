@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="tpp.profixer.customer.data.model.api.response.Transaction" />
+            type="tpp.easy.learning.data.model.api.response.Transaction" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

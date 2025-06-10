@@ -4,10 +4,10 @@
     <data>
         <variable
             name="itemMsg"
-            type="tpp.profixer.customer.data.model.api.response.Msg" />
+            type="tpp.easy.learning.data.model.api.response.Msg" />
         <variable
             name="item"
-            type="tpp.profixer.customer.data.model.api.response.Notification" />
+            type="tpp.easy.learning.data.model.api.response.Notification" />
     </data>
 
     <LinearLayout

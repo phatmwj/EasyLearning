@@ -7,10 +7,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.expert.ExpertViewModel" />
+            type="tpp.easy.learning.ui.expert.ExpertViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.expert.ExpertActivity" />
+            type="tpp.easy.learning.ui.expert.ExpertActivity" />
     </data>
 
     <LinearLayout

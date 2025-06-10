@@ -5,10 +5,10 @@
     <data>
         <variable
             name="f"
-            type="tpp.profixer.customer.ui.lesson.fragment.IntroduceFragment" />
+            type="tpp.easy.learning.ui.lesson.fragment.IntroduceFragment" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.lesson.fragment.IntroduceViewModel" />
+            type="tpp.easy.learning.ui.lesson.fragment.IntroduceViewModel" />
     </data>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

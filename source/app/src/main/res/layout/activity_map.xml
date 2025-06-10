@@ -4,10 +4,10 @@
     <data>
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.map.MapActivity" />
+            type="tpp.easy.learning.ui.map.MapActivity" />
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.map.MapViewModel" />
+            type="tpp.easy.learning.ui.map.MapViewModel" />
 
     </data>
 

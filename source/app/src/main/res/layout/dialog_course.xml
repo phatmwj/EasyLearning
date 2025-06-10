@@ -5,7 +5,7 @@
     <data>
         <variable
             name="d"
-            type="tpp.profixer.customer.ui.dialog.CourseDialog" />
+            type="tpp.easy.learning.ui.dialog.CourseDialog" />
         <import type="android.view.View" />
 
     </data>

@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.cart.CartViewModel" />
+            type="tpp.easy.learning.ui.cart.CartViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.cart.CartActivity" />
+            type="tpp.easy.learning.ui.cart.CartActivity" />
     </data>
 
     <LinearLayout

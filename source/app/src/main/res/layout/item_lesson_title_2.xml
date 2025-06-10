@@ -4,10 +4,10 @@
     <data>
         <variable
             name="item"
-            type="tpp.profixer.customer.data.model.api.response.Lesson" />
+            type="tpp.easy.learning.data.model.api.response.Lesson" />
         <variable
             name="customLesson"
-            type="tpp.profixer.customer.data.model.api.response.CustomLesson" />
+            type="tpp.easy.learning.data.model.api.response.CustomLesson" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

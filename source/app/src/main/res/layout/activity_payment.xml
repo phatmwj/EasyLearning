@@ -6,10 +6,10 @@
     <data>
         <variable
             name="vm"
-            type="tpp.profixer.customer.ui.payment.PaymentViewModel" />
+            type="tpp.easy.learning.ui.payment.PaymentViewModel" />
         <variable
             name="a"
-            type="tpp.profixer.customer.ui.payment.PaymentActivity" />
+            type="tpp.easy.learning.ui.payment.PaymentActivity" />
     </data>
 
     <LinearLayout
