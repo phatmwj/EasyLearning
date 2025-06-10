@@ -1,8 +1,6 @@
-package tpp.easy.learning.ui.email;
+package tpp.easy.learning.ui.forget;
 
 import android.content.Intent;
-
-import androidx.databinding.ObservableField;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -17,22 +15,21 @@ import tpp.easy.learning.data.Repository;
 import tpp.easy.learning.data.model.api.ApiModelUtils;
 import tpp.easy.learning.data.model.api.ResponseWrapper;
 import tpp.easy.learning.data.model.api.request.ForgetRequest;
+import tpp.easy.learning.data.model.api.request.NewPassRequest;
 import tpp.easy.learning.data.model.api.response.ForgetResponse;
 import tpp.easy.learning.ui.base.activity.BaseViewModel;
-import tpp.easy.learning.ui.forget.ForgetActivity;
+import tpp.easy.learning.ui.email.EmailActivity;
 import tpp.easy.learning.utils.NetworkUtils;
 
-public class EmailViewModel extends BaseViewModel {
-    public ObservableField<String> email = new ObservableField<>();
-    public EmailViewModel(Repository repository, ProFixerApplication application) {
+public class ForgetViewModel extends BaseViewModel {
+    public NewPassRequest request = new NewPassRequest();
+    public ForgetViewModel(Repository repository, ProFixerApplication application) {
         super(repository, application);
     }
 
-    public void requestForgetPassword(){
-        ForgetRequest request = new ForgetRequest();
-        request.setEmail(email.get());
+    public void changePassword(){
         showLoading();
-        compositeDisposable.add(repository.getApiService().requestForgetPassword(request)
+        compositeDisposable.add(repository.getApiService().newPassword(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .retryWhen(throwable ->
@@ -48,11 +45,7 @@ public class EmailViewModel extends BaseViewModel {
                 .subscribe(
                         response -> {
                             hideLoading();
-                            showSuccessMessage("Mã xác nhận đã được gửi đến email của bạn");
-                            ForgetResponse forgetResponse = response.getData();
-                            Intent intent = new Intent(application.getCurrentActivity(), ForgetActivity.class);
-                            intent.putExtra("IDHASH", forgetResponse.getIdHash());
-                            application.getCurrentActivity().startActivity(intent);
+                            showSuccessMessage("Đổi mật khẩu thành công");
                             application.getCurrentActivity().finish();
                         }, throwable -> {
                             hideLoading();
@@ -64,7 +57,7 @@ public class EmailViewModel extends BaseViewModel {
                                 }
                                 try {
                                     ResponseWrapper responseWrapper = ApiModelUtils.fromJson(httpException.response().errorBody().string(), ResponseWrapper.class);
-                                    showErrorMessage("Email không chính xác");
+                                    showErrorMessage(responseWrapper.getMessage());
                                 }catch (Throwable error){
                                     Timber.d(error);
                                 }

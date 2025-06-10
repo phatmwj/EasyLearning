@@ -9,6 +9,7 @@ import tpp.easy.learning.ui.changepassword.ChangePasswordActivity;
 import tpp.easy.learning.ui.course.CourseActivity;
 import tpp.easy.learning.ui.email.EmailActivity;
 import tpp.easy.learning.ui.expert.ExpertActivity;
+import tpp.easy.learning.ui.forget.ForgetActivity;
 import tpp.easy.learning.ui.home.HomeActivity;
 import tpp.easy.learning.ui.lesson.LessonActivity;
 import tpp.easy.learning.ui.login.LoginActivity;
@@ -50,5 +51,7 @@ public interface ActivityComponent {
     void inject(EmailActivity emailActivity);
 
     void inject(QrcodeActivity qrcodeActivity);
+
+    void inject(ForgetActivity forgetActivity);
 }
 

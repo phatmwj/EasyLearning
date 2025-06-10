@@ -17,6 +17,7 @@ import tpp.easy.learning.ui.changepassword.ChangePasswordViewModel;
 import tpp.easy.learning.ui.course.CourseViewModel;
 import tpp.easy.learning.ui.email.EmailViewModel;
 import tpp.easy.learning.ui.expert.ExpertViewModel;
+import tpp.easy.learning.ui.forget.ForgetViewModel;
 import tpp.easy.learning.ui.home.HomeViewModel;
 import tpp.easy.learning.ui.lesson.LessonViewModel;
 import tpp.easy.learning.ui.login.LoginViewModel;
@@ -174,5 +175,13 @@ public class ActivityModule {
         Supplier<QrcodeViewModel> supplier = () -> new QrcodeViewModel(repository, (ProFixerApplication) application);
         ViewModelProviderFactory<QrcodeViewModel> factory = new ViewModelProviderFactory<>(QrcodeViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(QrcodeViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    ForgetViewModel provideForgetViewModel(Repository repository, Context application) {
+        Supplier<ForgetViewModel> supplier = () -> new ForgetViewModel(repository, (ProFixerApplication) application);
+        ViewModelProviderFactory<ForgetViewModel> factory = new ViewModelProviderFactory<>(ForgetViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(ForgetViewModel.class);
     }
 }

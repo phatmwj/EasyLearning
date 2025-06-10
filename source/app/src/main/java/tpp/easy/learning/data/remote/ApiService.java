@@ -21,6 +21,7 @@ import tpp.easy.learning.data.model.api.request.BankInfo;
 import tpp.easy.learning.data.model.api.request.BookingRequest;
 import tpp.easy.learning.data.model.api.request.CompleteLessonRequest;
 import tpp.easy.learning.data.model.api.request.ForgetRequest;
+import tpp.easy.learning.data.model.api.request.NewPassRequest;
 import tpp.easy.learning.data.model.api.request.ReviewRequest;
 import tpp.easy.learning.data.model.api.request.SignupRequest;
 import tpp.easy.learning.data.model.api.request.Slide;
@@ -135,6 +136,8 @@ public interface ApiService {
 
     @POST("/v1/account/request_forget_password")
     Observable<ResponseWrapper<ForgetResponse>>  requestForgetPassword(@Body ForgetRequest request);
+    @POST("/v1/account/forget_password")
+    Observable<ResponseWrapper>  newPassword(@Body NewPassRequest request);
 
     @POST("/v1/booking/create")
     Observable<ResponseWrapper<PaymentInfo>>  createBooking(@Body BookingRequest request);

@@ -3,6 +3,7 @@ package tpp.easy.learning.ui.email;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.Observable;
 
 import io.github.glailton.expandabletextview.BR;
 import tpp.easy.learning.R;
@@ -29,9 +30,22 @@ public class EmailActivity extends BaseActivity<ActivityEmailBinding, EmailViewM
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel.email.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if(viewModel.email.get() == null || viewModel.email.get().isEmpty()){
+                    viewBinding.layoutEmail.setError("Email không được để trống");
+                }else {
+                    viewBinding.layoutEmail.setError(null);
+                }
+            }
+        });
     }
 
     public void requestForgetPassword(){
-
+        if(viewModel.email.get() == null || viewModel.email.get().isEmpty()){
+            viewBinding.layoutEmail.setError("Email không được để trống");
+        }
+        viewModel.requestForgetPassword();
     }
 }

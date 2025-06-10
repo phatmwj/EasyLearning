@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="tpp.easy.learning.ui.forget.ForgetViewModel" />
+        <variable
+            name="a"
+            type="tpp.easy.learning.ui.forget.ForgetActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            android:id="@+id/ui_header_2"
+            layout="@layout/layout_header"
+            bind:a ="@{a}"
+            bind:title='@{"Đổi mật khẩu"}'/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/_7sdp"
+                android:paddingVertical="@dimen/_20sdp"
+                android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_pass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Mã xác nhận"
+                    app:hintAnimationEnabled="false"
+                    require_field="@{Boolean.TRUE}">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.otp}"
+                        android:inputType="number"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_new_pass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Mật khẩu mới"
+                    app:hintAnimationEnabled="false"
+                    app:endIconTint="@color/gray"
+                    require_field="@{Boolean.TRUE}">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.newPassword}"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_confirm_pass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:boxBackgroundMode="outline"
+                    app:shapeAppearanceOverlay="@style/Rounded"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxStrokeColor="@color/box_stroke_color"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="#7C7C7C"
+                    app:hintEnabled="true"
+                    android:hint="Xác nhận mật khẩu"
+                    app:hintAnimationEnabled="false"
+                    app:endIconTint="@color/gray"
+                    require_field="@{Boolean.TRUE}">
+                    <EditText
+                        style="@style/medium_text_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.request.confirmPassword}"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/_12sdp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    style="@style/medium_text_style"
+                    android:id="@+id/btn_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/bg_button_filled"
+                    android:gravity="center"
+                    android:onClick="@{()-> a.hideKeyboard() | a.changePassword()}"
+                    android:text="Đổi mật khẩu"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/_14ssp"
+                    android:paddingVertical="@dimen/_10sdp"/>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

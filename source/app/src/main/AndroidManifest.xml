@@ -64,6 +64,11 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".ui.forget.ForgetActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".ui.payment.PaymentActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">

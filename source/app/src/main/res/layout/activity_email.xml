@@ -52,7 +52,7 @@
                         android:onClick="@{() -> a.hideKeyboard()}">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/layout_username"
+                            android:id="@+id/layout_email"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@={vm.email}"
-                                android:inputType="text"
+                                android:inputType="textEmailAddress"
                                 android:maxLength="100"
                                 android:textSize="@dimen/_12sdp"/>
                         </com.google.android.material.textfield.TextInputLayout>
