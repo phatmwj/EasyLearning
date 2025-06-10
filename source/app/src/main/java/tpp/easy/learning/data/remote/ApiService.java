@@ -91,7 +91,8 @@ public interface ApiService {
 
     @POST("/v1/completion/create")
     Observable<ResponseWrapper> completeLesson(@Body CompleteLessonRequest request);
-
+    @POST("/v1/completion/complete-lesson")
+    Observable<ResponseWrapper> finishedLesson(@Body CompleteLessonRequest request);
     @GET("/v1/course/client-list")
     Observable<ResponseWrapper<ResponseListObj<Course>>> getCoursesByCategory(@Query("categoryId") Long categoryId, @Query("page") Integer page, @Query("size") Integer size, @Query("isFree") Boolean isFree);
 

@@ -111,4 +111,28 @@ public class LessonViewModel extends BaseViewModel {
                             handleException(throwable);
                         }));
     }
+
+    public void finishedLesson(){
+        compositeDisposable.add(repository.getApiService().finishedLesson(new CompleteLessonRequest(courseId, currentLesson.get().getId(),null))
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                        }, throwable -> {
+                            handleException(throwable);
+                        }));
+    }
 }

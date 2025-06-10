@@ -34,6 +34,14 @@
             android:layout_gravity="center_vertical"
             android:textColor="@{itemCurrent != null &amp;&amp; itemCurrent.id.equals(item.id) ? @color/app_color : @color/text}"
             />
+
+        <ImageView
+            android:visibility="@{item.isDone != null &amp;&amp; item.isDone ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginHorizontal="@dimen/_7sdp"
+            android:src="@drawable/ic_done"
+            app:tint="#5EE82E"/>
         <TextView
             style="@style/regular_text_style"
             android:layout_width="wrap_content"
@@ -44,12 +52,5 @@
             android:layout_gravity="center_vertical"
             android:textColor="@{itemCurrent != null &amp;&amp; itemCurrent.id.equals(item.id) ? @color/app_color : @color/text}"
             />
-        <ImageView
-            android:visibility="@{item.isDone != null &amp;&amp; item.isDone ? View.VISIBLE : View.INVISIBLE}"
-            android:layout_width="@dimen/_18sdp"
-            android:layout_height="@dimen/_18sdp"
-            android:layout_marginHorizontal="@dimen/_7sdp"
-            android:src="@drawable/ic_done"
-            app:tint="@color/app_color"/>
     </LinearLayout>
 </layout>

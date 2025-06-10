@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_3sdp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +22,7 @@
                 android:padding="@dimen/_1sdp"
                 android:background="@drawable/bg_oval"
                 android:backgroundTint="@color/app_color"
-                image_url="@{item.studentInfo.account.avatar}"/>
+                avatar_url="@{item.studentInfo.account.avatar}"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

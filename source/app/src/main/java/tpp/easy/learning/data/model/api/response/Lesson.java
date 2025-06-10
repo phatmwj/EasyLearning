@@ -23,6 +23,7 @@ public class Lesson {
     private String videoUrl;
     private Integer secondProgress;
     private Course course;
+    private String content;
 
     @SuppressLint("DefaultLocale")
     public String getTimeVideo() {

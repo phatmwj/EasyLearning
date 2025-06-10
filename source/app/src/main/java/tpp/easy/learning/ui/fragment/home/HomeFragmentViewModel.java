@@ -56,6 +56,12 @@ public class HomeFragmentViewModel extends BaseFragmentViewModel {
                                 categoryCourses.setValue(response.getData().getContent());
                                 ProFixerApplication.categories.clear();
                                 for (CategoryCourse categoryCourse : response.getData().getContent()) {
+                                    if(kind == 3){
+                                        categoryCourse.getCategory().setName("Khóa học cao cấp");
+                                    }
+                                    if(kind == 4){
+                                        categoryCourse.getCategory().setName("Những kinh nghiệm mới nhất");
+                                    }
                                     ProFixerApplication.categories.add(categoryCourse.getCategory());
                                 }
                             }else {

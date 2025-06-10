@@ -1,13 +1,16 @@
 package tpp.easy.learning.ui.lesson;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowInsetsController;
+import android.webkit.WebSettings;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -51,12 +54,45 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
         buildComponent.inject(this);
     }
 
+    @SuppressLint({"ClickableViewAccessibility", "SetJavaScriptEnabled"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         viewModel.courseId = getIntent().getLongExtra("course_id", -1);
         viewModel.expertId = getIntent().getLongExtra("expert_id", -1);
+
+        WebSettings webSettings = viewBinding.webview.getSettings();
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+        webSettings.setJavaScriptEnabled(true);
+
+        viewBinding.webview.setHorizontalScrollBarEnabled(false);
+
+        viewBinding.webview.setOnTouchListener(new View.OnTouchListener() {
+            float m_downX;
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getPointerCount() > 1) {
+                    return true;
+                }
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        m_downX = event.getX();
+                        break;
+                    }
+                    case MotionEvent.ACTION_MOVE:
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP: {
+                        event.setLocation(m_downX, event.getY());
+                        break;
+                    }
+
+                }
+                return false;
+            }
+        });
 
         viewPagerAdapter = new ViewPagerAdapter(this, viewModel.courseId, viewModel.expertId);
         viewBinding.viewPager.setAdapter(viewPagerAdapter);
@@ -99,6 +135,11 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 Lesson lesson = viewModel.currentLesson.get();
+                if(lesson != null && lesson.getKind() == 1){
+                    String htmlContentWithCss = addCssToHtmlContent(lesson.getContent());
+                    viewBinding.webview.loadData(htmlContentWithCss, "text/html", "UTF-8");
+                    viewModel.finishedLesson();
+                }
                 if(lesson != null && lesson.getKind() == 2){
                     setVideoPlay(lesson.getVideoUrl());
                 }
@@ -229,4 +270,24 @@ public class LessonActivity extends BaseActivity<ActivityLessonBinding, LessonVi
             handler.postDelayed(this, 1000);
         }
     };
+
+    private String addCssToHtmlContent(String htmlContent) {
+        String css = "<style>" +
+                "img { max-width: 100%; height: auto; display: block; margin: 10px auto; }" +
+                "body { padding: 0 10px; font-family: sans-serif; font-size: 16px; }" +
+                "</style>";
+
+        String headTag = "<head>";
+        int headIndex = htmlContent.indexOf(headTag);
+
+        if (headIndex != -1) {
+            // Nếu có <head>, chèn sau nó
+            headIndex += headTag.length();
+            return htmlContent.substring(0, headIndex) + css + htmlContent.substring(headIndex);
+        } else {
+            // Nếu không có <head>, tự thêm cả <head> + CSS
+            return "<head>" + css + "</head>" + htmlContent;
+        }
+    }
+
 }

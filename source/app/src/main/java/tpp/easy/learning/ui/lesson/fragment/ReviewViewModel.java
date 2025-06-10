@@ -17,6 +17,7 @@ import tpp.easy.learning.data.model.api.request.ReviewRequest;
 import tpp.easy.learning.data.model.api.response.Review;
 import tpp.easy.learning.ui.base.fragment.BaseFragmentViewModel;
 import tpp.easy.learning.ui.dialog.ReviewDialog;
+import tpp.easy.learning.ui.lesson.LessonActivity;
 import tpp.easy.learning.utils.NetworkUtils;
 
 public class ReviewViewModel extends BaseFragmentViewModel {
@@ -96,6 +97,7 @@ public class ReviewViewModel extends BaseFragmentViewModel {
                             reviewDialog.setListener(new ReviewDialog.ReviewListener() {
                                 @Override
                                 public void onReview(Integer star, String msg) {
+                                    ((LessonActivity)application.getCurrentActivity()).hideKeyboard();
                                     review(star,msg);
                                 }
 
@@ -114,7 +116,7 @@ public class ReviewViewModel extends BaseFragmentViewModel {
 
     public void review(Integer star, String message){
         ReviewRequest request = new ReviewRequest();
-        request.setKind(1);
+        request.setKind(2);
         request.setStar(star);
         request.setMessage(message);
         request.setCourseId(courseId);
@@ -142,6 +144,7 @@ public class ReviewViewModel extends BaseFragmentViewModel {
                             hideLoading();
                             if(response.isResult()){
                                 reviewDialog.dismiss();
+                                ((LessonActivity)application.getCurrentActivity()).hideKeyboard();
                                 showSuccessMessage(response.getMessage());
                                 getReviewList(courseId);
                             }
