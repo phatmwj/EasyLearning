@@ -132,7 +132,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_20ssp"
-                            android:text="@{vm.expertInfo.totalLessonTime}"
+                            android:text="@{String.valueOf(Integer.valueOf(vm.expertInfo.lessonTime))}"
                             android:textColor="@color/black"
                             />
                     </LinearLayout>

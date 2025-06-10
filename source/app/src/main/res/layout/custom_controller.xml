@@ -60,7 +60,7 @@
             android:layout_height="@dimen/_20sdp"
             android:layout_weight="1"
             app:bar_height="@dimen/_4sdp"
-            app:played_color="@color/red"
+            app:played_color="@color/app_color"
             app:buffered_color="#66ffffff"
             app:scrubber_color="@android:color/white"
             app:unplayed_color="#33ffffff" />

@@ -19,4 +19,9 @@ public class ExpertInfo {
     private Integer ordering;
     private Boolean isOutstanding;
     private String identification;
+
+    public Integer getLessonTime(){
+        return Integer.parseInt(totalLessonTime)/60;
+    }
+
 }

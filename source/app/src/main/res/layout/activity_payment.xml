@@ -134,6 +134,7 @@
                                 android:textColor="@color/text"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -186,6 +187,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
