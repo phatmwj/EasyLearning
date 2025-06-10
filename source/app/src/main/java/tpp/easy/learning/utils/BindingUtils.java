@@ -31,11 +31,14 @@ public final class BindingUtils {
     @BindingAdapter("image_url")
     public static void setImageUrl(ImageView view, String url) {
         if (url == null){
+            view.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.banner));
             return;
         }
         if(url.contains("https:")){
             Glide.with(view.getContext())
                     .load(url)
+                    .error(R.drawable.banner)
+                    .placeholder(R.drawable.banner)
                     .into(view);
             return;
         }
@@ -45,6 +48,26 @@ public final class BindingUtils {
                 .placeholder(R.drawable.banner)
                 .into(view);
     }
+        @BindingAdapter("avatar_url")
+        public static void setAvatarUrl(ImageView view, String url) {
+            if (url == null){
+                view.setImageDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.avatar));
+                return;
+            }
+            if(url.contains("https:")){
+                Glide.with(view.getContext())
+                        .load(url)
+                        .error(R.drawable.avatar)
+                        .placeholder(R.drawable.avatar)
+                        .into(view);
+                return;
+            }
+            Glide.with(view.getContext())
+                    .load(BuildConfig.MEDIA_URL+"/v1/file/download" + url)
+                    .error(R.drawable.avatar)
+                    .placeholder(R.drawable.avatar)
+                    .into(view);
+        }
 
     @BindingAdapter("image_res")
     public static void setImageRes(ImageView view, int url) {

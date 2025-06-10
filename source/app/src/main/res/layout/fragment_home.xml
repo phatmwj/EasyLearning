@@ -46,7 +46,7 @@
                             android:background="@drawable/bg_oval"
                             android:padding="@dimen/_1sdp"
                             android:backgroundTint="@color/app_color"
-                            image_url="@{vm.profile.avatar}"/>
+                            avatar_url="@{vm.profile.avatar}"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

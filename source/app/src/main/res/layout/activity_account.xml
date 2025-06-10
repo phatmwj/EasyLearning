@@ -42,7 +42,7 @@
                         android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_120sdp"
                         android:layout_gravity="center_horizontal"
-                        image_url="@{vm.request.avatarPath}"
+                        avatar_url="@{vm.request.avatarPath}"
                         />
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="@dimen/_40sdp"
