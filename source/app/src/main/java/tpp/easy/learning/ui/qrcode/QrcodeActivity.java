@@ -27,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -43,6 +44,8 @@ import tpp.easy.learning.databinding.ActivityQrcodeBinding;
 import tpp.easy.learning.di.component.ActivityComponent;
 import tpp.easy.learning.ui.base.activity.BaseActivity;
 import tpp.easy.learning.ui.dialog.BankDialog;
+import tpp.easy.learning.ui.dialog.ConfirmDialog;
+import tpp.easy.learning.ui.home.HomeActivity;
 import tpp.easy.learning.ui.qrcode.adapter.TransactionAdapter;
 
 public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeViewModel> {
@@ -118,6 +121,8 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
 //                } catch (WriterException e) {
 //                    Timber.e(e);
 //                }
+
+                viewModel.getBooking();
             }
         });
 
@@ -125,7 +130,6 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 if(viewModel.status.get().equals("PAID")){
-                    viewModel.getBooking();
                     compositeDisposableA.clear();
                 }
             }
@@ -221,5 +225,31 @@ public class QrcodeActivity extends BaseActivity<ActivityQrcodeBinding, QrcodeVi
         transactionAdapter = new TransactionAdapter(this, new ArrayList<>());
         viewBinding.rvTransaction.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         viewBinding.rvTransaction.setAdapter(transactionAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(Objects.equals(viewModel.status.get(), "PENDING")){
+            ConfirmDialog confirmDialog = new ConfirmDialog(this);
+            confirmDialog.title.set("Xác nhận hủy đơn hàng?");
+            confirmDialog.titleRightButton.set("Xác nhận");
+            confirmDialog.setListener(new ConfirmDialog.ConfirmListener() {
+                @Override
+                public void confirm() {
+                    confirmDialog.dismiss();
+                    navigateToHome();
+                }
+            });
+            confirmDialog.show();
+        }else{
+            navigateToHome();
+        }
+    }
+
+    private void navigateToHome(){
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 }
