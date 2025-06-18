@@ -27,7 +27,6 @@ public class StudyFragmentViewModel extends BaseFragmentViewModel {
     }
 
     public void getMyCourse(){
-        showLoading();
         compositeDisposable.add(repository.getApiService().getMyCourses(isFinished.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -30,6 +30,7 @@ public class StudyFragment extends BaseFragment<FragmentStudyBinding, StudyFragm
         viewModel.courses.observe(this, courses -> {
             myCourseAdapter.setData(courses);
         });
+        viewModel.showLoading();
         viewModel.getMyCourse();
     }
 
@@ -62,7 +63,17 @@ public class StudyFragment extends BaseFragment<FragmentStudyBinding, StudyFragm
     }
     public void setIsFinished(boolean isFinished){
         viewModel.isFinished.set(isFinished);
+        viewModel.showLoading();
         viewModel.getMyCourse();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.getMyCourse();
+    }
+
+    public void getMyCourse(){
+        viewModel.getMyCourse();
+    }
 }

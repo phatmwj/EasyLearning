@@ -134,6 +134,7 @@ public class HomeActivity extends BaseActivity<ActivityHomeBinding, HomeViewMode
         }
         else{
             transaction.show(studyFragment);
+            studyFragment.getMyCourse();
         }
         if (activeFragment != null && activeFragment != studyFragment) {
             transaction.hide(activeFragment);
