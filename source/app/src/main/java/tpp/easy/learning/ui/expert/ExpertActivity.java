@@ -50,11 +50,11 @@ public class ExpertActivity extends BaseActivity<ActivityExpertBinding, ExpertVi
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 String rawHtml = viewModel.identification.get().getIntroduction();
-                String cleanedHtml = rawHtml
-                        .replaceAll("(?i)<p>(\\s|&nbsp;)*</p>", "")     // Xóa <p> chỉ có khoảng trắng hoặc &nbsp;
-                        .replaceAll("(?i)<span>(\\s|&nbsp;)*</span>", ""); // Xóa <span> tương tự
-                Spanned html = Html.fromHtml(cleanedHtml, Html.FROM_HTML_MODE_LEGACY);
-                viewBinding.expandTextView.setText(html);
+//                String cleanedHtml = rawHtml
+//                        .replaceAll("(?i)<p>(\\s|&nbsp;)*</p>", "")     // Xóa <p> chỉ có khoảng trắng hoặc &nbsp;
+//                        .replaceAll("(?i)<span>(\\s|&nbsp;)*</span>", ""); // Xóa <span> tương tự
+//                Spanned html = Html.fromHtml(rawHtml, Html.FROM_HTML_MODE_LEGACY);
+                viewBinding.expandTextView.setText(rawHtml);
             }
         });
 

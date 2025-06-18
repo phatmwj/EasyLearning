@@ -95,7 +95,7 @@
                             style="@style/bold_text_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{String.valueOf(vm.course.averageStar)}'
+                            android:text='@{vm.course.reviewStarD()}'
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:textColor="@color/yellow"
@@ -320,7 +320,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/_14ssp"
-                                android:text="@{String.valueOf(vm.reviewStar.averageStar)}"
+                                android:text="@{vm.reviewStar.reviewStarD()}"
                                 android:layout_gravity="center_vertical"
                                 android:textColor="@color/black"
                                 />

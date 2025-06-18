@@ -52,4 +52,8 @@ public class Course {
         }
         return Math.round(price - ((float) (price * saleOff) / 100));
     }
+
+    public String reviewStarD(){
+        return String.valueOf(Math.round(averageStar*10)/10.0);
+    }
 }

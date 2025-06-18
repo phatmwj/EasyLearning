@@ -14,4 +14,7 @@ public class ReviewStar {
     private Float averageStar;
     private Integer total;
     private List<AmountReview> amountReview;
+    public String reviewStarD(){
+        return String.valueOf(Math.round(averageStar*10)/10.0);
+    }
 }
