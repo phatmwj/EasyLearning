@@ -49,6 +49,7 @@
             android:textSize="@dimen/_12ssp"
             android:text="@{item.getTimeVideo()}"
             android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:layout_gravity="center_vertical"
             android:textColor="@{itemCurrent != null &amp;&amp; itemCurrent.id.equals(item.id) ? @color/app_color : @color/text}"
             />

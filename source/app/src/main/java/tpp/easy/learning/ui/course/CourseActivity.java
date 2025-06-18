@@ -161,6 +161,25 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         viewBinding.exlvLesson.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Lesson lesson = customLessons.get(groupPosition).getLessons().get(childPosition);
+                if(lesson != null && lesson.getKind() == 2 && lesson.getIsPreview() != null && lesson.getIsPreview()){
+                    viewModel.getLessonDetails(lesson.getId(), new BaseCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onFailed() {
+
+                        }
+
+                        @Override
+                        public void onError(Exception exception) {
+
+                        }
+                    });
+                }
                 return false;
             }
         });
@@ -303,5 +322,7 @@ public class CourseActivity extends BaseActivity<ActivityCourseBinding, CourseVi
         }
 
     }
+
+
 
 }

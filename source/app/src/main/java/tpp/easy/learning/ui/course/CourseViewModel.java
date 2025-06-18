@@ -22,6 +22,7 @@ import tpp.easy.learning.data.model.api.response.Review;
 import tpp.easy.learning.data.model.api.response.ReviewStar;
 import tpp.easy.learning.ui.base.BaseCallback;
 import tpp.easy.learning.ui.base.activity.BaseViewModel;
+import tpp.easy.learning.ui.dialog.VideoDialog;
 import tpp.easy.learning.ui.expert.ExpertActivity;
 import tpp.easy.learning.utils.NetworkUtils;
 
@@ -215,5 +216,38 @@ public class CourseViewModel extends BaseViewModel {
         Intent intent = new Intent(application.getCurrentActivity(), ExpertActivity.class);
         intent.putExtra("expert_id", course.get().getExpert().getId());
         application.getCurrentActivity().startActivity(intent);
+    }
+
+    public void getLessonDetails(Long lessonId, BaseCallback baseCallback){
+        showLoading();
+        compositeDisposable.add(repository.getApiService().getLessonDetails(lessonId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .retryWhen(throwable ->
+                        throwable.flatMap(new Function<Throwable, ObservableSource<?>>() {
+                            @Override
+                            public ObservableSource<?> apply(Throwable throwable) throws Throwable {
+                                if (NetworkUtils.checkNetworkError(throwable)) {
+                                    hideLoading();
+                                    return application.showDialogNoInternetAccess();
+                                }else{
+                                    return Observable.error(throwable);
+                                }
+                            }
+                        })
+                )
+                .subscribe(
+                        response -> {
+                            if(response.isResult() && response.getData() != null){
+                                VideoDialog videoDialog = new VideoDialog(application.getCurrentActivity());
+                                videoDialog.currentLesson.set(response.getData());
+                                videoDialog.show();
+                            }
+                            hideLoading();
+                        }, throwable -> {
+                            hideLoading();
+                            handleException(throwable);
+                            Timber.e(throwable);
+                        }));
     }
 }
